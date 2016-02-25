@@ -13,7 +13,7 @@ class Company(models.Model):
 	phone = models.BigIntegerField()
 	webiste = models.URLField()
 	username = models.CharField(max_length=16, unique=True)
-	password = models.CharField(validators=[RegexValidator(regex='^\w{6}$', message='Length has to be 6', code='nomatch')])	
+	password = models.CharField(validators=[RegexValidator(regex='^\w{6}$', message='Length has to be 4', code='nomatch')])	
 	slug = models.slugField()
 
 	def save(self, *args, **kwargs):
