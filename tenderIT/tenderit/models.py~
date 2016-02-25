@@ -3,7 +3,7 @@ from django.template.defaultfilters import slugify
 from django.core.validators import RegexValidator, MaxValueValidator
 
 class Company(models.Model):
-	ID = models.CharField(max_length=64, unique=True)
+	NationalID = models.CharField(max_length=64, unique=True)
 	name = models.CharField(max_length=128)
 	street = models.CharField(max_length=128)
 	city = models.CharField(max_length=128)
@@ -13,8 +13,8 @@ class Company(models.Model):
 	phone = models.BigIntegerField()
 	webiste = models.URLField()
 	username = models.CharField(max_length=16, unique=True)
-	password = models.CharField(validators=[RegexValidator(regex='^\w{6}$', message='Length has to be 4', code='nomatch')])	
-	slug = models.slugField()
+	password = models.CharField(max_length=12, validators=[RegexValidator(regex='^\w{6}$', message='Length has to be 6', code='nomatch')])	
+	slug = models.SlugField()
 
 	def save(self, *args, **kwargs):
 		if self.id is None:
@@ -34,15 +34,16 @@ class Project(models.Model):
 	EURO = 'EUR'
 	POUND = 'GBP'
 	CURRENCY_CHOICES = (
-		(DOLLAR, 'US Dollar')
-		(EURO, 'Euro')
-		(POUND, 'British Pound')
+		(DOLLAR, 'US Dollar'),
+		(EURO, 'Euro'),
+		(POUND, 'British Pound'),
+	)
 
 	currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=DOLLAR)
 	startDate = models.DateField()
 	endDate = models.DateField()
 	documents = models.FileField(upload_to='uploads/')	
-	slug = models.slugField()
+	slug = models.SlugField()
 
 	def save(self, *args, **kwargs):
 		if self.id is None:
@@ -53,8 +54,8 @@ class Project(models.Model):
 		return self.title
 
 class Rating(models.Model):
-	provider = models.ForeignKey(Company)
-	receiver = models.ForeignKey(Company)
+	provider = models.ForeignKey(Company, related_name='rating_provider')
+	receiver = models.ForeignKey(Company, related_name='rating_receiver')
 	value = models.IntegerField(validators=[MaxValueValidator(5)])
 	comment = models.TextField()	
 
