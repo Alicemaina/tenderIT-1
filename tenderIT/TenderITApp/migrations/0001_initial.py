@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                 ('endDate', models.DateField()),
                 ('documents', models.FileField(upload_to=b'uploads/')),
                 ('slug', models.SlugField()),
-                ('company', models.ForeignKey(to='tenderit.Company')),
+                ('company', models.ForeignKey(to='TenderITApp.Company')),
             ],
             options={
             },
@@ -56,8 +56,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('price', models.IntegerField()),
                 ('description', models.TextField()),
-                ('applicant', models.ForeignKey(to='tenderit.Company')),
-                ('project', models.ForeignKey(to='tenderit.Project')),
+                ('applicant', models.ForeignKey(to='TenderITApp.Company')),
+                ('project', models.ForeignKey(to='TenderITApp.Project')),
             ],
             options={
             },
@@ -69,8 +69,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('value', models.IntegerField(validators=[django.core.validators.MaxValueValidator(5)])),
                 ('comment', models.TextField()),
-                ('provider', models.ForeignKey(related_name=b'rating_provider', to='tenderit.Company')),
-                ('receiver', models.ForeignKey(related_name=b'rating_receiver', to='tenderit.Company')),
+                ('provider', models.ForeignKey(related_name=b'rating_provider', to='TenderITApp.Company')),
+                ('receiver', models.ForeignKey(related_name=b'rating_receiver', to='TenderITApp.Company')),
             ],
             options={
             },
