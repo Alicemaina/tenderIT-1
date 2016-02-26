@@ -17,8 +17,8 @@ class Company(models.Model):
 	slug = models.SlugField()
 
 	def save(self, *args, **kwargs):
-		#if self.id is None:
-		self.slug = slugify(self.name)
+		if self.id is None:
+			self.slug = slugify(self.name)
 		super(Company, self).save(*args, **kwargs)
 
 	def __unicode__(self):
