@@ -1,0 +1,15 @@
+
+.home {
+	background: #e3e3e3;
+}
+
+.home li {	
+	display: inline;
+	float: left;
+	text-decoration: 
+	font-style: sans-serif;
+	font-weight: bold;
+	margin:10px;
+	
+}
+
