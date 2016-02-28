@@ -1,11 +1,11 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.core.validators import RegexValidator, MaxValueValidator
+from django.core.validators import MinLengthValidator, MaxValueValidator
 from django_countries.fields import CountryField
 
 class Company(models.Model):
-	nationalID = models.CharField(max_length=64, validators=[RegexValidator(regex='^\w{3}$', message='Length has to be 3', code='nomatch')], unique=True)
-	name = models.CharField(max_length=128, validators=[RegexValidator(regex='^\w{3}$', message='Length has to be 3', code='nomatch')])
+	nationalID = models.CharField(max_length=64, validators=[MinLengthValidator(3)], unique=True)
+	name = models.CharField(max_length=128, validators=[MinLengthValidator(3)])
 	street = models.CharField(max_length=128)
 	city = models.CharField(max_length=128)
 	country = CountryField()
@@ -13,8 +13,8 @@ class Company(models.Model):
 	email = models.EmailField()
 	phone = models.CharField(max_length=16)
 	website = models.URLField()
-	username = models.CharField(max_length=16, validators=[RegexValidator(regex='^\w{6}$', message='Length has to be 6', code='nomatch')], unique=True)
-	password = models.CharField(max_length=12, validators=[RegexValidator(regex='^\w{6}$', message='Length has to be 6', code='nomatch')])	
+	username = models.CharField(max_length=16, validators=[MinLengthValidator(6)], unique=True)
+	password = models.CharField(max_length=12, validators=[MinLengthValidator(6)])	
 	slug = models.SlugField()
 
 	def save(self, *args, **kwargs):
@@ -60,11 +60,17 @@ class Rating(models.Model):
 	value = models.IntegerField(validators=[MaxValueValidator(5)])
 	comment = models.TextField()	
 
+	def __unicode__(self):
+		return self.receiver.name + " - " + self.provider.name
+
 class ProjectApplication(models.Model):
 	project = models.ForeignKey(Project)
 	applicant = models.ForeignKey(Company)
 	price = models.IntegerField()
 	description = models.TextField()
+
+ 	def __unicode__(self):
+ 		return self.project.title + " - " + self.applicant.name
 	
 
 
