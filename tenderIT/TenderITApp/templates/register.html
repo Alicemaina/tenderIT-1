@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<form action="/register/" method="POST">
+{% csrf token %}
+{{ form.as_ul }}
+<input type="submit" value="register"/>
+</form>
+</body>
+</html>

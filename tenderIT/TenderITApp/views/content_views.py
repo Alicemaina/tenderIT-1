@@ -18,13 +18,21 @@ def company(request, company_id):
     return (request, 'templates/company_profile', context)
 
 
-def post_project(request):
-   if request.POST:
-       form = Post_project
-       if form.is_valid():
-           form.save()
-           return HttpResponseRedirect('/projects/all')
 
+def post_project(request):
+    if request.user.is_authenticated():
+        if request.POST:
+            form = Post_project
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/projects/all')
+    else:
+        return HttpResponseRedirect('/login')
+
+    context = {
+        'form' : Post_project
+    }
+    return render(request, 'new_project.html', context)
 
 
 def apply_project(request, project_id):

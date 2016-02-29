@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>dfdsf</title>
+</head>
+<body>
+<form action="/post_project/" method="POST">
+{% csrf token %}
+{{form.as_ul}}
+<input type="submit" value="post"/>
+</form>
+</body>
+</html>
