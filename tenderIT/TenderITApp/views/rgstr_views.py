@@ -1,20 +1,20 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
-from tenderIT.TenderITApp.forms import Registration_form
+from ..forms import Registration_form
 from django.core.context_processors import csrf
+from ..models import Company
 
 def register_user(request):
     if request.method == 'POST':
         form = Registration_form(request.POST)
         if form.is_valid():
             form.save()
-            return render('/accounts/register_success')
-
+            return HttpResponseRedirect('/accounts/register_success')
     context = {
         'form' : Registration_form
     }
-    context.update(csrf)
-    return render(request, 'templates/register.html', context)
+    context.update(csrf(request))
+    return render(request, 'register.html', context)
 
 def login(request):
     c = {}

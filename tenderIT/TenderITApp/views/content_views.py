@@ -1,7 +1,12 @@
 from django.shortcuts import render, HttpResponseRedirect
-from tenderIT.TenderITApp.models import (Project,Company, ProjectApplication, Rating)
-from tenderIT.TenderITApp.forms import Post_project
+from ..models import (Project,Company, ProjectApplication, Rating)
+from ..forms import Post_project
 # Create your views here.
+
+
+def index(request):
+    c = {}
+    return render(request, '../templates/index.html', c)
 
 def project_view(request):
     lists = Project.objects.all()

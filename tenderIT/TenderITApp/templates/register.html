@@ -5,7 +5,7 @@
 </head>
 <body>
 <form action="/register/" method="POST">
-{% csrf token %}
+{% csrf_token %}
 {{ form.as_ul }}
 <input type="submit" value="register"/>
 </form>
