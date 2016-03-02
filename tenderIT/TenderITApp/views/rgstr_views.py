@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
+#from django.contrib.auth import authenticate,login
 from ..forms import Registration_form
 from django.core.context_processors import csrf
 from ..models import Company
@@ -24,7 +25,9 @@ def login(request):
 def auth_view(request):
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
-    user = auth.authenticate(username = username, password = password)
+    user = auth.authenticate(username=username, password=password)
+    print (username, password)
+    print(user)
     if user is not None:
         auth.login(request, user)
         return HttpResponseRedirect('/accounts/loggedin')
