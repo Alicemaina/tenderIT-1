@@ -1,0 +1,8 @@
+Django==1.9.3
+django-countries==3.4.1
+pbr==1.8.1
+stevedore==1.10.0
+virtualenv==14.0.2
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.7.1
+wheel==0.26.0
