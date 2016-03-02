@@ -38,11 +38,11 @@ def register_user(request):
 	user_form = UserForm()
 	company_form = CompanyForm()        
       
-    context = {'user_form' : user_form,
-	       'company_form' : company_form,
-	       'registered': registered,}
+    context = { 'user_form' : user_form,
+		'company_form' : company_form,
+		'registered': registered,}
    
-    return render(request,'register.html',context)
+    return render(request, 'register.html', context)
 
 def login(request):
     c = {}

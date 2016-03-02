@@ -14,7 +14,7 @@ class UserForm(forms.ModelForm):
 class CompanyForm(forms.ModelForm):
 	class Meta:
 		model = Company
-		fields = ('name', 'nationalID', 'street','city','country','postcode', 'email', 'phone', 'website')	
+		fields = ('nationalID','name','street','city','country','postcode', 'email', 'phone', 'website')	
 	
 #class Registration_form(UserCreationForm):
  #   class Meta:

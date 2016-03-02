@@ -4,11 +4,12 @@
 	<title>Registration</title>
 </head>
 <body>
-	
+	<h2>Please register</h2>
 	{% if registered %}
 	<h3>Thank you for registration</h3>
 	{% else %}
-	<h2>Please register</h2>	
+	
+	<h3>Test</h3>
 	<form id="user_form" method="post" action="/register/">
 
 	{% csrf_token %}
