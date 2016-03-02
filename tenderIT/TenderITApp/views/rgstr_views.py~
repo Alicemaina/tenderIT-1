@@ -1,11 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
-<<<<<<< HEAD
-#from django.contrib.auth import authenticate,login
-from ..forms import Registration_form
-=======
 from ..forms import UserForm,CompanyForm
->>>>>>> de4f4bf708b96bede91b92a4cce5ff5cb428ac5c
 from django.core.context_processors import csrf
 from ..models import Company
 
@@ -43,11 +38,11 @@ def register_user(request):
 	user_form = UserForm()
 	company_form = CompanyForm()        
       
-    context = {'user_form' : user_form,
-	       'company_form' : company_form,
-	       'registered': registered,}
+    context = { 'user_form' : user_form,
+		'company_form' : company_form,
+		'registered': registered,}
    
-    return render(request,'register.html',context)
+    return render(request, 'register.html', context)
 
 def login(request):
     c = {}
@@ -57,9 +52,7 @@ def login(request):
 def auth_view(request):
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
-    user = auth.authenticate(username=username, password=password)
-    print (username, password)
-    print(user)
+    user = auth.authenticate(username = username, password = password)
     if user is not None:
         auth.login(request, user)
         return HttpResponseRedirect('/accounts/loggedin')

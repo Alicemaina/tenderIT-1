@@ -18,6 +18,9 @@ class CompanyForm(forms.ModelForm):
 	class Meta:
 		model = Company
 		fields = ('name', 'nationalID', 'street','city','country','postcode', 'email', 'phone', 'website')	
+	
+
+	
 
 
 # form to add new project

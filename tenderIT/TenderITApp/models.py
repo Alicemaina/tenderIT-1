@@ -2,8 +2,10 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.validators import MinLengthValidator, MaxValueValidator
 from django_countries.fields import CountryField
+from django.contrib.auth.models import User
 
 class Company(models.Model):
+	user = models.OneToOneField(User)
 	nationalID = models.CharField(max_length=64, validators=[MinLengthValidator(3)], unique=True)
 	name = models.CharField(max_length=128, validators=[MinLengthValidator(3)])
 	street = models.CharField(max_length=128)
@@ -13,8 +15,8 @@ class Company(models.Model):
 	email = models.EmailField()
 	phone = models.CharField(max_length=16)
 	website = models.URLField()
-	username = models.CharField(max_length=16, validators=[MinLengthValidator(6)], unique=True)
-	password = models.CharField(max_length=12, validators=[MinLengthValidator(6)])	
+	#username = models.CharField(max_length=16, validators=[MinLengthValidator(6)], unique=True)
+	#password = models.CharField(max_length=12, validators=[MinLengthValidator(6)])	
 	slug = models.SlugField()
 
 	def save(self, *args, **kwargs):
