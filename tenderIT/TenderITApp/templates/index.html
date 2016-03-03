@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>TenderIT Home</title>
-	<link rel="stylesheet"  href="css/style.css">
+	<link rel="stylesheet" href="{% static "css/javadoc.css" %}" />
 </head>
 <body>
 <div>
@@ -16,8 +19,8 @@
 				<input type="button" value="Search"/>
 			</form>
 		</li>
-		<li><a href="login.html">Login</a></li>
-		<li><a href="register.html">Register</a></li>
+		<li><a href="/login/">Login</a></li>
+		<li><a href="/register/">Register</a></li>
 	</ul>
 </div>
 <a href="/post_project/"> Post Project</a>
