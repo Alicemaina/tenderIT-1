@@ -5,9 +5,10 @@
 </head>
 <body>
 <form action="/post_project/" method="POST">
-{% csrf token %}
+{% csrf_token %}
 {{form.as_ul}}
 <input type="submit" value="post"/>
 </form>
+<a href="/logout/">logout</a>
 </body>
 </html>

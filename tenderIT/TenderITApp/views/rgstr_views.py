@@ -1,13 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
-<<<<<<< HEAD
-#from django.contrib.auth import authenticate,login
-from ..forms import Registration_form
-=======
 from ..forms import UserForm,CompanyForm
->>>>>>> de4f4bf708b96bede91b92a4cce5ff5cb428ac5c
+
 from django.core.context_processors import csrf
 from ..models import Company
+
 
 def register_user(request):
     # A boolean value for telling the template whether the registration was successful.  

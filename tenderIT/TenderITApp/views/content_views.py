@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from ..models import (Project,Company, ProjectApplication, Rating)
 from ..forms import Post_project
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -23,7 +24,7 @@ def company(request, company_id):
     return (request, 'templates/company_profile', context)
 
 
-
+@login_required
 def post_project(request):
     if request.user.is_authenticated():
         if request.POST:
@@ -39,7 +40,7 @@ def post_project(request):
     }
     return render(request, 'new_project.html', context)
 
-
+@login_required
 def apply_project(request, project_id):
 
     if request.user.is_authenticated():
@@ -57,7 +58,7 @@ def apply_project(request, project_id):
     }
     return render(request, 'apply.html', context)
 
-
+@login_required
 def rate_project(request, project_id):
 
         ## I will implement this with ajax

@@ -54,6 +54,10 @@ ROOT_URLCONF = 'tenderIT.urls'
 
 WSGI_APPLICATION = 'tenderIT.wsgi.application'
 
+LOGIN_URL = '/login/'
+
+print LOGIN_URL
+print "base dir path", BASE_DIR
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

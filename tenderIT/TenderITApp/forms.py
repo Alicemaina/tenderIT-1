@@ -8,7 +8,7 @@ class UserForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())
 	
 	class Meta:
-		model = User
+ 		model = User
 		fields = ('username','password')
 
 class CompanyForm(forms.ModelForm):
@@ -17,7 +17,7 @@ class CompanyForm(forms.ModelForm):
 
 	class Meta:
 		model = Company
-		fields = ('name', 'nationalID', 'street','city','country','postcode', 'email', 'phone', 'website')	
+		fields = ('country','name', 'nationalID', 'street','city','postcode', 'email', 'phone', 'website')
 
 
 # form to add new project
