@@ -1,15 +1,18 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html>
 <head>
 	<title>Registration</title>
+	<link rel="stylesheet" href="{% static "css/javadoc.css" %}" />
 </head>
 <body>
-	<h2>Please register</h2>
+	
 	{% if registered %}
 	<h3>Thank you for registration</h3>
 	{% else %}
-	
-	<h3>Test</h3>
+	<h2>Please register</h2>	
 	<form id="user_form" method="post" action="/register/">
 
 	{% csrf_token %}
