@@ -1,6 +1,7 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib import auth
-from ..forms import UserForm,CompanyForm
+from ..forms import UserForm, CompanyForm, Login_form
 
 from django.core.context_processors import csrf
 from ..models import Company
@@ -46,22 +47,29 @@ def register_user(request):
    
     return render(request,'register.html',context)
 
-def login(request):
-    c = {}
-    c.update(csrf(request))
-    return render(request, 'login.html', c)
 
-def auth_view(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-    user = auth.authenticate(username=username, password=password)
-    print (username, password)
-    print(user)
-    if user is not None:
-        auth.login(request, user)
-        return HttpResponseRedirect('/accounts/loggedin')
+def login(request):
+    if request.method == 'POST':
+        form = Login_form(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            print cd['username']
+            user = auth.authenticate(username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    auth.login(request, user)
+                    return redirect('/accounts/loggedin')
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return redirect('/accounts/invalid')
     else:
-        return HttpResponseRedirect('/accounts/invalid')
+        form = Login_form()
+        context = {
+            'form': form
+        }
+        return render(request, 'login.html', context )
+
 
 def loggedin(request):
     context = {'full_name' : request.user.username}

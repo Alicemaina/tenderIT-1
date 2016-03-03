@@ -4,13 +4,10 @@
 	<title></title>
 </head>
 <body>
-<form action="/auth/" method="POST">
+<form action="/login/" method="POST">
 {% csrf_token %}
-<label>username</label>
-<input type="text" name="username" id="username"></input> <br/><br/>
-<label>password</label>
-<input type="text" name="password" id="password" ></input>
-<input type="submit" value="login"></input>
+{{form.as_ul}}
+<input type="submit" value="login">
 </form>
 <a href="/post_project/"> Post Project</a>
 </body>

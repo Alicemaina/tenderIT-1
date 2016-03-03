@@ -10,7 +10,6 @@ urlpatterns = patterns('',
     url(r'^login/$', rgstr_views.login, name="login"),
    ##  url(r'^company'),
     url(r'^logout/$', rgstr_views.logout, name="logout"),
-    url(r'^auth/$', rgstr_views.auth_view, name="auth"),
     url(r'^post_project/$', content_views.post_project, name="post_project "),
     url(r'^(?P<project_id>[0-9]+)/$', content_views.apply_project, name="apply_project"),
 

@@ -26,3 +26,8 @@ class Post_project(forms.ModelForm):
         model = Project
         fields = ('title', 'description', 'budget', 'currency', 'startDate', 'endDate', 'documents', 'slug')
 
+
+class Login_form(forms.Form):
+	username = forms.CharField()
+	password = forms.CharField(widget=forms.PasswordInput)
+
