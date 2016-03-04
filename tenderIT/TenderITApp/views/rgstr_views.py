@@ -45,7 +45,7 @@ def register_user(request):
 	       'company_form' : company_form,
 	       'registered': registered,}
    
-    return render(request,'register.html',context)
+    return render(request,'registration/register.html',context)
 
 
 def login(request):
@@ -68,18 +68,18 @@ def login(request):
         context = {
             'form': form
         }
-        return render(request, 'login.html', context )
+        return render(request, 'registration/login.html', context )
 
 
 def loggedin(request):
     context = {'full_name' : request.user.username}
-    return render(request, 'loggedin.html', context)
+    return render(request, 'registration/loggedin.html', context)
 
 def invalid_login(request):
-    return render(request, 'invalid_login.html')
+    return render(request, 'registration/invalid_login.html')
 
 
 def logout(request):
     auth.logout(request)
-    render(request, 'logout.html')
+    render(request, 'registration/logout.html')
 

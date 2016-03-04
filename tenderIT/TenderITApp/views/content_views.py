@@ -73,5 +73,5 @@ def apply_project(request, project_id):
 @login_required
 def rate_project(request, project_id):
 
-        ## I will implement this with ajax
+     ## Almin as we discussed before you can write this method if you want
     return ()
