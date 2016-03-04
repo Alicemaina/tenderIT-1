@@ -10,7 +10,7 @@ class Company(models.Model):
 	name = models.CharField(max_length=128, validators=[MinLengthValidator(3)])
 	street = models.CharField(max_length=128)
 	city = models.CharField(max_length=128)
-	country = CountryField()
+	country = CountryField(countries_flag_url='flags/{code}.png')
 	postcode = models.CharField(max_length=16)
 	email = models.EmailField()
 	phone = models.CharField(max_length=16)

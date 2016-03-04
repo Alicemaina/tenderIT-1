@@ -17,11 +17,17 @@ def project_view(request):
     return render(request, 'templates/project_view.html', context)
 
 def company(request, company_id):
-    company = Company.objects.get(pk = company_id)
-    context = {
-    'company': company
-    }
-    return (request, 'templates/company_profile', context)
+    context_dict = {}
+    try:
+	company = Company.objects.get(nationalID=company_id)
+    	context_dict['company'] = company
+	projects = Project.objects.filter(company=company)
+	context_dict['projects'] = projects
+	
+    except Company.DoesNotExist:
+	pass
+    
+    return render(request, 'company_profile.html', context_dict)
 
 
 @login_required
@@ -39,6 +45,12 @@ def post_project(request):
         'form' : Post_project
     }
     return render(request, 'new_project.html', context)
+
+def companies(request):
+    company_list = Company.objects.order_by('name')	
+    context_dict = {'companies' : company_list}
+
+    return render(request, 'companies.html', context_dict)
 
 @login_required
 def apply_project(request, project_id):
