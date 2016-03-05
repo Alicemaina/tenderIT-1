@@ -16,15 +16,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(
-            model_name='company',
+            model_name='company_templates',
             name='password',
         ),
         migrations.RemoveField(
-            model_name='company',
+            model_name='company_templates',
             name='username',
         ),
         migrations.AddField(
-            model_name='company',
+            model_name='company_templates',
             name='user',
             field=models.OneToOneField(default='', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
             preserve_default=False,

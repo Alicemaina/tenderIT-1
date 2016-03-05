@@ -8,7 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# Build paths inside the project_templates like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
@@ -78,6 +78,7 @@ ROOT_URLCONF = 'tenderIT.urls'
 WSGI_APPLICATION = 'tenderIT.wsgi.application'
 
 LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
 
 
 # Database
@@ -113,3 +114,8 @@ STATICFILES_DIRS = (
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'TenderITApp.authentication.EmailAuthBackend',
+)

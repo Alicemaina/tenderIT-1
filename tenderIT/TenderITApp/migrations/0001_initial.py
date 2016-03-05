@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                 ('endDate', models.DateField()),
                 ('documents', models.FileField(upload_to=b'uploads/')),
                 ('slug', models.SlugField()),
-                ('company', models.ForeignKey(to='TenderITApp.Company')),
+                ('company_templates', models.ForeignKey(to='TenderITApp.Company')),
             ],
             options={
             },
@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
                 ('price', models.IntegerField()),
                 ('description', models.TextField()),
                 ('applicant', models.ForeignKey(to='TenderITApp.Company')),
-                ('project', models.ForeignKey(to='TenderITApp.Project')),
+                ('project_templates', models.ForeignKey(to='TenderITApp.Project')),
             ],
             options={
             },

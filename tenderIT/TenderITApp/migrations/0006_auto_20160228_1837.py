@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='project',
+            model_name='project_templates',
             name='budget',
             field=models.IntegerField(null=True, blank=True),
         ),

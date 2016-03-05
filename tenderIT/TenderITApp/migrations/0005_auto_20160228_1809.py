@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='company',
+            model_name='company_templates',
             name='country',
             field=django_countries.fields.CountryField(max_length=2),
         ),

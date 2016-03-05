@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='company',
+            model_name='company_templates',
             name='name',
             field=models.CharField(max_length=128, validators=[django.core.validators.MinLengthValidator(3)]),
         ),

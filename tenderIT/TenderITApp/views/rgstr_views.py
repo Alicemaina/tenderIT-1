@@ -24,7 +24,7 @@ def register_user(request):
 		user.set_password(user.password)
 		user.save()
 		
-		# Create the company object and save it to a database
+		# Create the company_templates object and save it to a database
 		company = company_form.save(commit=False)
 		company.user = user
 		company.save()
@@ -47,39 +47,4 @@ def register_user(request):
    
     return render(request,'registration/register.html',context)
 
-
-def login(request):
-    if request.method == 'POST':
-        form = Login_form(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            print cd['username']
-            user = auth.authenticate(username=cd['username'], password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    auth.login(request, user)
-                    return redirect('/accounts/loggedin')
-                else:
-                    return HttpResponse('Disabled account')
-            else:
-                return redirect('/accounts/invalid')
-    else:
-        form = Login_form()
-        context = {
-            'form': form
-        }
-        return render(request, 'registration/login.html', context )
-
-
-def loggedin(request):
-    context = {'full_name' : request.user.username}
-    return render(request, 'registration/loggedin.html', context)
-
-def invalid_login(request):
-    return render(request, 'registration/invalid_login.html')
-
-
-def logout(request):
-    auth.logout(request)
-    render(request, 'registration/logout.html')
 

@@ -13,17 +13,17 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='company',
+            model_name='company_templates',
             name='nationalID',
             field=models.CharField(unique=True, max_length=64, validators=[django.core.validators.MinLengthValidator(3)]),
         ),
         migrations.AlterField(
-            model_name='company',
+            model_name='company_templates',
             name='password',
             field=models.CharField(max_length=12, validators=[django.core.validators.MinLengthValidator(6)]),
         ),
         migrations.AlterField(
-            model_name='company',
+            model_name='company_templates',
             name='username',
             field=models.CharField(unique=True, max_length=16, validators=[django.core.validators.MinLengthValidator(6)]),
         ),

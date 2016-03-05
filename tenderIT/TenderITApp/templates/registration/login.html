@@ -1,14 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-<form action="/login/" method="POST">
-{% csrf_token %}
-{{form.as_ul}}
-<input type="submit" value="login">
-</form>
-<a href="/post_project/"> Post Project</a>
-</body>
-</html>
+{% extends "account_base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+	<h1>Login</h1>
+	{% if form.errors %}
+		<p>Your username and password did not match</p>
+		<p>Please try again!</p>
+	{% else %}
+		<p>Enter your username and password to log in</p>
+		<p>You can enter your e-mail as username</p>
+	{% endif %}
+	<div class="login-form">
+		<form action="." method="POST">
+			{% csrf_token %}
+			{{ form.as_ul }}
+			<input type="hidden" name="next" value="{{ next }}">
+			<input type="submit" value="Log in"/>
+		</form>
+	</div>
+{% endblock %}

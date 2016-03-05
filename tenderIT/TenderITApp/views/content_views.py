@@ -20,7 +20,7 @@ def company(request, company_id):
     context_dict = {}
     try:
 	company = Company.objects.get(nationalID=company_id)
-    	context_dict['company'] = company
+    	context_dict['company_templates'] = company
 	projects = Project.objects.filter(company=company)
 	context_dict['projects'] = projects
 	
