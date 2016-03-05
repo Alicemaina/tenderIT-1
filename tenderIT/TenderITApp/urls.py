@@ -6,10 +6,10 @@ from .views import (content_views, rgstr_views)
 
 
 # content related urls
-urlpatterns = patterns('content_views',
+urlpatterns = patterns('',
     url(r'^$', content_views.index, name="index"),
     url(r'^project_view/$', content_views.project_view, name="project_view"),
-    url(r'^company_templates/(?P<company_id>[\w\-]+)/$', content_views.company, name="company_templates"),
+    url(r'^company/(?P<company_id>[\w\-]+)/$', content_views.company, name="company"),
     url(r'^companies/$', content_views.companies, name="companies"),
     url(r'^post_project/$', content_views.post_project, name="post_project "),
     url(r'^(?P<project_id>[0-9]+)/$', content_views.apply_project, name="apply_project")
@@ -21,6 +21,7 @@ urlpatterns = patterns('content_views',
 urlpatterns += (
     url(r'^register/$', rgstr_views.register_user, name="register"),
     url(r'^login/$', login, {'template_name': 'registration/login.html'}, name="login"),
+    url(r'^logged_in/$', rgstr_views.logged_in, name="logged_in"),
     url(r'^logout/$', logout,{'template_name': 'registration/log_out.html'}, name="logout"),
     url(r'^password-change/$', password_change,
         {'template_name': 'registration/password_change.html'}, name='password_change'),

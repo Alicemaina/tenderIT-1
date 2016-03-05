@@ -78,6 +78,7 @@ ROOT_URLCONF = 'tenderIT.urls'
 WSGI_APPLICATION = 'tenderIT.wsgi.application'
 
 LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/logged_in/'
 LOGOUT_URL = '/logout/'
 
 
