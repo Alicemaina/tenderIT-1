@@ -43,6 +43,7 @@ class Project(models.Model):
 	)
 
 	currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=DOLLAR)
+	publish = models.DateField()
 	startDate = models.DateField()
 	endDate = models.DateField()
 	documents = models.FileField(upload_to='uploads/')	
