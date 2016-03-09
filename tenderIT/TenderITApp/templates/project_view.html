@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+
+{% load static %}
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<meta charset="UTF-8">
+	<title>Project</title>
+	<link rel="stylesheet" href="{% static "css/style.css" %}" />
 </head>
 <body>
-
+<div>
+	<ul class=home>
+		<li><img src="" alt="TenderIT logo"></li>
+		<li><a href="/companies">Companies</a></li>
+		<li>
+			<form>
+				<input type="text" placeholder="Search..."/>
+				<input type="button" value="Search"/>
+			</form>
+		</li>
+		<li><a href="/login/">Login</a></li>
+		<li><a href="/register/">Register</a></li>
+	</ul>
+</div>
+<br>
+<br>
+<div>
+{% if project %}
+	   <h2>{{ project.name }}</h2>
+	   	<ul>
+			<li> Company: {{ project.company.name }}</li>
+			<li> Title: {{ project.title }}</li>
+			<li> Description: {{ project.description }}</li>
+			<li> Budget: {{ project.budget }} {{ project.currency}}</li>
+			<li> Start: {{ project.startDate }} </li>
+			<li> End: {{project.endDate }} </li>
+			<li> Documents: <a href = '{{ project.documents }} '> Download </a> </li>
+		</ul>
+{% else %}
+	<strong>Specified project does not exist.</strong>			
+{% endif %}
+</div>
+<a href="/post_project/"> Post Project</a>
 </body>
+
 </html>

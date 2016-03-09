@@ -20,7 +20,7 @@ def company(request, company_id):
     context_dict = {}
     try:
 	company = Company.objects.get(nationalID=company_id)
-    	context_dict['company_templates'] = company
+    	context_dict['company'] = company
 	projects = Project.objects.filter(company=company)
 	context_dict['projects'] = projects
 	
@@ -28,6 +28,16 @@ def company(request, company_id):
 	pass
     
     return render(request, 'company_profile.html', context_dict)
+	
+def project(request, project_pk):
+	context_dict = {}
+	try:
+	 project = Project.objects.get(pk = project_pk)
+	 context_dict['project'] = project
+	except Project.DoesNotExist:
+	 pass
+	
+	return render(request, 'project_view.html', context_dict)
 
 
 @login_required

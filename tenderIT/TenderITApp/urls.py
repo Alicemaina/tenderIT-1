@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^$', content_views.index, name="index"),
     url(r'^project_view/$', content_views.project_view, name="project_view"),
     url(r'^company/(?P<company_id>[\w\-]+)/$', content_views.company, name="company"),
+	url(r'^project/(?P<project_pk>[\w\-]+)/$', content_views.project, name="project"),
     url(r'^companies/$', content_views.companies, name="companies"),
     url(r'^post_project/$', content_views.post_project, name="post_project "),
     url(r'^(?P<project_id>[0-9]+)/$', content_views.apply_project, name="apply_project")
