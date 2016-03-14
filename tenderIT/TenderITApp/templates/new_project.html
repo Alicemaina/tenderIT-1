@@ -4,11 +4,11 @@
 	<title>dfdsf</title>
 </head>
 <body>
-<form action="tenderit/post_project/" method="POST">
+<form action="/post_project/" method="POST">
 {% csrf_token %}
 {{form.as_ul}}
 <input type="submit" value="post"/>
 </form>
-<a href="tenderit/logout/">logout</a>
+<a href="/logout/">logout</a>
 </body>
 </html>
