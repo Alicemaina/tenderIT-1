@@ -1,15 +1,15 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import (Company, Project)
-<<<<<<< HEAD
+
 # from phonenumber_field.modelfields import PhoneNumberField
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 # from phonenumber_field.widgets import PhoneNumberPrefixWidget
-=======
+
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
->>>>>>> 2609b4e14acad9d7e26a79d9143a6cb9699e8c15
+
 import datetime
 from django.forms.extras.widgets import SelectDateWidget
 
@@ -33,24 +33,23 @@ class CompanyForm(forms.ModelForm):
 	city = forms.CharField(max_length=128, error_messages={'required': 'Please enter city.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter city...'}))
 	postcode = forms.CharField(max_length=16, error_messages={'required': 'Please enter postcode.', 'max_length':'Postcode cannot have more than 16 characters'}, widget=forms.TextInput(attrs={'placeholder': 'Enter city...'}))
 	email = forms.EmailField(error_messages={'required': 'Please enter email.', 'invalid':'Email address not in correct format.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter email...'}))
-<<<<<<< HEAD
+
 	# phone = PhoneNumberField()
-=======
 	phone = forms.CharField()
->>>>>>> 2609b4e14acad9d7e26a79d9143a6cb9699e8c15
+
 	website = forms.URLField(initial='http://', error_messages={'required': 'Please enter website.', 'invalid':'Website not in correct format.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter website...'}) )
 
 	class Meta:
 		model = Company
-<<<<<<< HEAD
+
 		fields = ('country', 'nationalID','name', 'street','city','postcode', 'email', 'phone', 'website')
-		widgets = {'country':CountrySelectWidget(),
-			   # 'phone': PhoneNumberPrefixWidget()}
-=======
+		widgets = {'country':CountrySelectWidget()}
+		# 'phone': PhoneNumberPrefixWidget()
+
 		fields = ('country', 'nationalID','name', 'street','city','postcode', 'email','website')
 		widgets = {'country':CountrySelectWidget()}
 			   
->>>>>>> 2609b4e14acad9d7e26a79d9143a6cb9699e8c15
+
 
 
 # form to add new project_templates
