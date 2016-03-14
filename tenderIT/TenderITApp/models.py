@@ -3,7 +3,11 @@ from django.template.defaultfilters import slugify
 from django.core.validators import MinLengthValidator, MaxValueValidator
 from django_countries.fields import CountryField
 from django.contrib.auth.models import User
+<<<<<<< HEAD
 # from phonenumber_field.modelfields import PhoneNumberField
+=======
+
+>>>>>>> 2609b4e14acad9d7e26a79d9143a6cb9699e8c15
 
 class Company(models.Model):
 	user = models.OneToOneField(User)
@@ -14,7 +18,11 @@ class Company(models.Model):
 	country = CountryField(countries_flag_url='flags/{ code }.png')
 	postcode = models.CharField(max_length=16)
 	email = models.EmailField()
+<<<<<<< HEAD
 	phone = models.CharField()
+=======
+	phone = models.CharField(max_length=16)
+>>>>>>> 2609b4e14acad9d7e26a79d9143a6cb9699e8c15
 	website = models.URLField()
 	
 	def __unicode__(self):
