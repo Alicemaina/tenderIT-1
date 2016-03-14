@@ -27,7 +27,17 @@ def company(request, company_id):
     except Company.DoesNotExist:
 	pass
     
-    return (request, 'company_profile.html', context_dict)
+    return render(request, 'company_profile.html', context_dict)
+	
+def project(request, project_pk):
+	context_dict = {}
+	try:
+	 project = Project.objects.get(pk = project_pk)
+	 context_dict['project'] = project
+	except Project.DoesNotExist:
+	 pass
+	
+	return render(request, 'project_view.html', context_dict)
 
 
 @login_required
@@ -73,5 +83,5 @@ def apply_project(request, project_id):
 @login_required
 def rate_project(request, project_id):
 
-        ## I will implement this with ajax
-    return ()
+     ## Almin as we discussed before you can write this method if you want
+    return null

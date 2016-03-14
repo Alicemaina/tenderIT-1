@@ -19,8 +19,13 @@ def project_view(request):
 def company(request, company_id):
     context_dict = {}
     try:
+<<<<<<< HEAD
 	company = Company.objects.get(pk=company_id)
     	context_dict['company_templates'] = company
+=======
+	company = Company.objects.get(nationalID=company_id)
+    	context_dict['company'] = company
+>>>>>>> 3fda3e77197c63c293b20d80a71f2fa1db2573b7
 	projects = Project.objects.filter(company=company)
 	context_dict['projects'] = projects
 	
@@ -28,6 +33,16 @@ def company(request, company_id):
 	pass
     
     return render(request, 'company_profile.html', context_dict)
+	
+def project(request, project_pk):
+	context_dict = {}
+	try:
+	 project = Project.objects.get(pk = project_pk)
+	 context_dict['project'] = project
+	except Project.DoesNotExist:
+	 pass
+	
+	return render(request, 'project_view.html', context_dict)
 
 
 @login_required
@@ -74,4 +89,4 @@ def apply_project(request, project_id):
 def rate_project(request, project_id):
 
      ## Almin as we discussed before you can write this method if you want
-    return ()
+    return 
