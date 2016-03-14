@@ -84,4 +84,4 @@ def apply_project(request, project_id):
 def rate_project(request, project_id):
 
      ## Almin as we discussed before you can write this method if you want
-    return ()
+    return 
