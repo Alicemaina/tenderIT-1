@@ -12,15 +12,15 @@
 <div>
 	<ul class=home>
 		<li><img src="" alt="TenderIT logo"></li>
-		<li><a href="/companies">Companies</a></li>
+		<li><a href="tenderit/companies">Companies</a></li>
 		<li>
 			<form>
 				<input type="text" placeholder="Search..."/>
 				<input type="button" value="Search"/>
 			</form>
 		</li>
-		<li><a href="/login/">Login</a></li>
-		<li><a href="/register/">Register</a></li>
+		<li><a href="tenderit/login/">Login</a></li>
+		<li><a href="tenderit/register/">Register</a></li>
 	</ul>
 </div>
 <br>
@@ -32,17 +32,17 @@
 			<li> ID: {{ company.nationalID }}</li>
 			<li> Street: {{ company.street }}</li>
 			<li> City: {{ company.city }}</li>
-			<li> Country: {{ company.country }}</li>
+			<li> Country: {{ company.country.name }}</li>
 			<li> Postcode: {{ company.postcode }}</li>
 			<li> Phone: {{ company.phone }}</li>
 			<li> Email: {{ company.email }}</li>
-			<li> <a href="{{ company.website }}"> {{ company.website }}</a>
+			<li> Website: <a href="{{ company.website }}"> {{ company.website }}</a>
 		</ul>
 	   <h4> Projects </h4>
 		{% if projects %}			
 			<ul>
 			{% for project in projects %}
-				<li> {{ project.title }}</li>
+				<li> <a href = "tenderit/project/{{ project.pk }}">{{ project.title }} </a></li>
 			{% endfor %}
 			</ul>
 		{% else %}
@@ -52,7 +52,7 @@
 	<strong>Specified company does not exist.</strong>			
 {% endif %}
 </div>
-<a href="/post_project/"> Post Project</a>
+<a href="tenderit/post_project/"> Post Project</a>
 </body>
 
 </html>
