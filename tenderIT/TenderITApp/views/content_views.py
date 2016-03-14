@@ -19,7 +19,7 @@ def project_view(request):
 def company(request, company_id):
     context_dict = {}
     try:
-	company = Company.objects.get(nationalID=company_id)
+	company = Company.objects.get(pk=company_id)
     	context_dict['company_templates'] = company
 	projects = Project.objects.filter(company=company)
 	context_dict['projects'] = projects
