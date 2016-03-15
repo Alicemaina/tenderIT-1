@@ -4,6 +4,7 @@ from django.core.validators import MinLengthValidator, MaxValueValidator
 from django_countries.fields import CountryField
 from django.contrib.auth.models import User
 
+# from phonenumber_field.modelfields import PhoneNumberField
 
 class Company(models.Model):
 	user = models.OneToOneField(User)
@@ -14,7 +15,11 @@ class Company(models.Model):
 	country = CountryField(countries_flag_url='flags/{ code }.png')
 	postcode = models.CharField(max_length=16)
 	email = models.EmailField()
+
+	phone = models.CharField()
+
 	phone = models.CharField(max_length=16)
+
 	website = models.URLField()
 	
 	def __unicode__(self):
