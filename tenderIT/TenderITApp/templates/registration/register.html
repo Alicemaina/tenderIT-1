@@ -1,13 +1,11 @@
-<!DOCTYPE html>
 
-{% load static %}
+{% extends "account_base.html" %}
 
-<html>
-<head>
-	<title>Registration</title>
-	<link rel="stylesheet" href="{% static "css/javadoc.css" %}" />
-</head>
-<body>
+
+	{% block title %}Registration{% endblock %}
+
+
+{% block content %}
 	{% if registered %}
 	<h3>Thank you for registration</h3>
 
@@ -18,10 +16,10 @@
 	{% csrf_token %}
 	
 	{{ company_form.as_p }}
-	{{ user_form.as_p }}
+	{{ user_form.as_ul }}
 	
 	<input type="submit" value="register"/>
 	</form>
 	{% endif %}	
-</body>
-</html>
+{% endblock %}
+

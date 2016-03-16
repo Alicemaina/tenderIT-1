@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
-{% load static %}
-
+{% load bootstrap3 %}
+{% bootstrap_css %}
 <html>
 <head>
 	<title>Registration</title>
@@ -11,17 +11,20 @@
 	
 	{% if registered %}
 	<h3>Thank you for registration</h3>
+
 	{% else %}
 	<h2>Please register</h2>	
-	<form id="user_form" method="post" action="/register/">
-
+	<div class="row">
+		<div class="clearfix col-lg-10">
+			<form class="text-center" method="post" action="/register/">
 	{% csrf_token %}
-	
-	{{ company_form.as_p }}
-	{{ user_form.as_p }}
-	
+	<!-- {% bootstrap_form company_form layout='inline' %} -->
+	<!-- {% bootstrap_form user_form layout='inline' %} -->
 	<input type="submit" value="register"/>
 	</form>
+		</div>
+	</div>
+	
 	{% endif %}	
 </body>
 </html>
