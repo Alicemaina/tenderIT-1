@@ -1,37 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f94773f-d32d-42ef-b5cd-ea9d8fd4eae6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tenderIT/TenderITApp/migrations/0002_auto_20160315_2357.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tenderIT/TenderITApp/migrations/0003_auto_20160315_2359.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/Babel-2.2.0-py2.py3-none-any.whl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/Django-1.9.3-py2.py3-none-any.whl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/argparse-1.4.0-py2.py3-none-any.whl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/django-phonenumber-field-1.0.0.tar.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/django_countries-3.4.1-py2.py3-none-any.whl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/pbr-1.8.1-py2.py3-none-any.whl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/phonenumbers-7.2.7.tar.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/pytz-2016.1-py2.py3-none-any.whl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/six-1.10.0-py2.py3-none-any.whl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/stevedore-1.10.0-py2.py3-none-any.whl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/virtualenv-14.0.2-py2.py3-none-any.whl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/virtualenv-clone-0.2.6.tar.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/virtualenvwrapper-4.7.1-py2.py3-none-any.whl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tenderIT/wheel-0.26.0-py2.py3-none-any.whl" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tenderIT/static/uploads/main.class" afterPath="$PROJECT_DIR$/tenderIT/uploads/main.class" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tenderIT/static/uploads/main.java" afterPath="$PROJECT_DIR$/tenderIT/uploads/main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tenderIT/db.sqlite3" afterPath="$PROJECT_DIR$/tenderIT/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tenderIT/TenderITApp/forms.py" afterPath="$PROJECT_DIR$/tenderIT/TenderITApp/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tenderIT/TenderITApp/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/tenderIT/TenderITApp/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tenderIT/TenderITApp/models.py" afterPath="$PROJECT_DIR$/tenderIT/TenderITApp/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tenderIT/TenderITApp/templates/new_project.html" afterPath="$PROJECT_DIR$/tenderIT/TenderITApp/templates/new_project.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tenderIT/TenderITApp/urls.py" afterPath="$PROJECT_DIR$/tenderIT/TenderITApp/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tenderIT/TenderITApp/views/content_views.py" afterPath="$PROJECT_DIR$/tenderIT/TenderITApp/views/content_views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tenderIT/TenderITApp/views/rgstr_views.py" afterPath="$PROJECT_DIR$/tenderIT/TenderITApp/views/rgstr_views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tenderIT/requirements.txt" afterPath="$PROJECT_DIR$/tenderIT/requirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tenderIT/tenderIT/settings.py" afterPath="$PROJECT_DIR$/tenderIT/tenderIT/settings.py" />
-    </list>
+    <list default="true" id="1f94773f-d32d-42ef-b5cd-ea9d8fd4eae6" name="Default" comment="" />
     <ignored path="tenderIT.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -657,10 +627,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1364" height="726" extended-state="0" />
-    <editor active="true" />
+    <frame x="1" y="1" width="1364" height="726" extended-state="1" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19658753" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19658753" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
