@@ -51,7 +51,7 @@ def post_project(request):
 		project_form = Post_project(request.POST)
         	if project_form.is_valid():
 				project=project_form.save(commit=False)
-				project.company = Company.objects.fiter(user=request.user)
+				project.company = Company.objects.get(user=request.user)
 				project.save()
 				project_added=True				               
 	    	else:

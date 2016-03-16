@@ -29,12 +29,12 @@
 {% if companies %}
 	   {% for company in companies %}
 	   <p>
-	   <a href="/company/{{ company.nationalID }}"> {{ company.name }} </a>
+	   <a href="/company/{{ company.id }}"> {{ company.name }} </a>
 		<ul>
 			<li>{{ company.nationalID }}</li>
 			<li>{{ company.country.name }}</li>
 			<li>{{ company.email }}</li>
-			<li>{{ company.website }}</li>
+			<li><a href="{{ company.website }}"> {{ company.website }} </a></li>
 		</ul>
 	   </p>
 	   {% endfor %}
