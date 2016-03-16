@@ -34,8 +34,8 @@
 			<li> Description: {{ project.description }}</li>
 			<li> Budget: {{ project.budget }} {{ project.currency}}</li>
 			<li> Start: {{ project.startDate }} </li>
-			<li> End: {{project.endDate }} </li>
-			<li> Documents: <a href = '{% static %}''{{ project.documents }}' download> Download </a> </li>
+			<li> End: {{ project.endDate }} </li>
+			<li> Publis date: {{ project.publish_date }} </li> 
 		</ul>
 {% else %}
 	<strong>Specified project does not exist.</strong>			
