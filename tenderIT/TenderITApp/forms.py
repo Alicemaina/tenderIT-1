@@ -2,10 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import (Company, Project)
 
-# from phonenumber_field.modelfields import PhoneNumberField
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-# from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
@@ -59,12 +57,12 @@ class Post_project(forms.ModelForm):
 	budget = forms.IntegerField(min_value = 1, error_messages={'required': 'Please enter project budget.', 'min_value':'Projest budget cannot be less than one.'})
 	startDate = forms.DateField(widget=SelectDateWidget)
 	endDate =  forms.DateField(widget=SelectDateWidget)
-	documents = forms.FileField(required=False)
 	
 
 	class Meta:
 		model = Project
-		fields = ('title', 'description', 'budget', 'currency', 'startDate', 'endDate', 'documents')
+		fields = ('title', 'description', 'budget', 'currency', 'startDate', 'endDate')
+		
 
 
 class Login_form(forms.Form):

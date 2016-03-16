@@ -1,5 +1,4 @@
 from django.db import models
-from django.template.defaultfilters import slugify
 from django.core.validators import MinLengthValidator, MaxValueValidator
 from django_countries.fields import CountryField
 from django.contrib.auth.models import User
@@ -39,9 +38,8 @@ class Project(models.Model):
 	currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=DOLLAR)
 	startDate = models.DateField()
 	endDate = models.DateField()
-	publishDate = models.DateField()
-	documents = models.FileField(upload_to='uploads/')	
-	
+	publishDate = models.DateField(auto_now_add=True)
+		
 	def __unicode__(self):
 		return self.title
 

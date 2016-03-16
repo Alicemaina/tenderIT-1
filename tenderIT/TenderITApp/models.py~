@@ -39,13 +39,10 @@ class Project(models.Model):
 	currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=DOLLAR)
 	startDate = models.DateField()
 	endDate = models.DateField()
-	publishDate = models.DateField()
-	documents = models.FileField(upload_to='uploads/')	
-	
+	publishDate = models.DateField(auto_now_add=True)
+		
 	def __unicode__(self):
 		return self.title
-	class Meta:
-        	managed = True
 
 class Rating(models.Model):
 	provider = models.ForeignKey(Company, related_name='rating_provider')
