@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'TenderITApp',
     'django_countries',
+    'bootstrap3'
 )
 
 MIDDLEWARE_CLASSES = (

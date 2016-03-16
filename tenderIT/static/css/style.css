@@ -1,15 +1,36 @@
+.box{
+    padding-top: 50px;
 
-.home {
-	background: #e3e3e3;
 }
 
-.home li {	
-	display: inline;
-	float: left;
-	text-decoration: 
-	font-style: sans-serif;
-	font-weight: bold;
-	margin:10px;
-	
+.background{
+    background-color: #e3e3e3;
 }
+
+.loginbutton{
+	color: white;
+    background-color: #00a994
+    
+}
+.loginbutton:hover{
+	color: white;
+    background-color: #006a5d
+    
+}
+.panel{
+	 border-radius: 10px;
+}
+
+.logintxt p{
+	font-size: 13px
+
+}
+
+.login hr{
+	background-color: black;
+	margin-top: 5px;
+	margin-bottom: 10px; 
+}
+
+
 
