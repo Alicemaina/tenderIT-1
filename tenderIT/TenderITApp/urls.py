@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.contrib.auth.views import (login, logout, password_change, password_change_done, password_reset,
                                        password_reset_done, password_reset_confirm, password_reset_complete)
 
@@ -6,7 +6,7 @@ from .views import (content_views, rgstr_views)
 
 
 # content related urls
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', content_views.index, name="index"),
     url(r'^project_view/$', content_views.project_view, name="project_view"),
     url(r'^company/(?P<company_id>[\w\-]+)/$', content_views.company, name="company"),
@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^companies/$', content_views.companies, name="companies"),
     url(r'^post_project/$', content_views.post_project, name="post_project "),
     url(r'^(?P<project_id>[0-9]+)/$', content_views.apply_project, name="apply_project")
-    )
+    ]
 
 
 

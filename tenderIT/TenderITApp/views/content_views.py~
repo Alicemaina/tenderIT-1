@@ -19,8 +19,13 @@ def project_view(request):
 def company(request, company_id):
     context_dict = {}
     try:
+
+	company = Company.objects.get(pk=company_id)
+    	context_dict['company_templates'] = company
+
 	company = Company.objects.get(nationalID=company_id)
     	context_dict['company'] = company
+
 	projects = Project.objects.filter(company=company)
 	context_dict['projects'] = projects
 	
@@ -42,19 +47,22 @@ def project(request, project_pk):
 
 @login_required
 def post_project(request):
-    if request.user.is_authenticated():
-        if request.POST:
-            form = Post_project
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/projects/all')
-    else:
-        return HttpResponseRedirect('/login')
+	project_added = False
+   	if request.method == 'POST':
+		project_form = Post_project(request.POST, request.FILES)
+        	if project_form.is_valid():
+				project_form.save()
+				project_added=True				               
+	    	else:
+				print project_form.errors
+	else:
+         project_form = Post_project()
 
-    context = {
-        'form' : Post_project
+	context = {
+        'form' : project_form,
+		'project_added' : project_added
     }
-    return render(request, 'new_project.html', context)
+	return render(request, 'new_project.html', context)
 
 def companies(request):
     company_list = Company.objects.order_by('name')	
@@ -84,4 +92,4 @@ def apply_project(request, project_id):
 def rate_project(request, project_id):
 
      ## Almin as we discussed before you can write this method if you want
-    return null
+    return 

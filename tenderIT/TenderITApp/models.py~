@@ -4,6 +4,7 @@ from django.core.validators import MinLengthValidator, MaxValueValidator
 from django_countries.fields import CountryField
 from django.contrib.auth.models import User
 
+# from phonenumber_field.modelfields import PhoneNumberField
 
 class Company(models.Model):
 	user = models.OneToOneField(User)
@@ -15,6 +16,7 @@ class Company(models.Model):
 	postcode = models.CharField(max_length=16)
 	email = models.EmailField()
 	phone = models.CharField()
+	phone = models.CharField(max_length=16)
 	website = models.URLField()
 	
 	def __unicode__(self):
@@ -24,8 +26,7 @@ class Project(models.Model):
 	company = models.ForeignKey(Company)
 	title = models.CharField(max_length=128)
 	description = models.TextField()
-	budget = models.IntegerField()
-	
+	budget = models.IntegerField()	
 	DOLLAR = 'USD'
 	EURO = 'EUR'
 	POUND = 'GBP'
@@ -43,6 +44,8 @@ class Project(models.Model):
 	
 	def __unicode__(self):
 		return self.title
+	class Meta:
+        	managed = True
 
 class Rating(models.Model):
 	provider = models.ForeignKey(Company, related_name='rating_provider')

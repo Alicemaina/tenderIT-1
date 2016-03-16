@@ -13,6 +13,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
 print ("base dir" + BASE_DIR)
+
+DEBUG = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -20,7 +22,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'TederITApp/templates')
         ],
         'APP_DIRS': True,
-        'OPTIONS': {
+        'OPTIONS': {'debug' : DEBUG,
             'context_processors': [
                 # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
                 # list if you haven't customized them:
@@ -43,9 +45,7 @@ TEMPLATES = [
 SECRET_KEY = '&hp@36s2=hl0c$st(49$kw=_x68$2s3&ess6+=u@-!mt0dg0*@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -58,9 +58,9 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'TenderITApp',
+    'django.contrib.staticfiles',    
     'django_countries',
+    'TenderITApp',
 )
 
 MIDDLEWARE_CLASSES = (
