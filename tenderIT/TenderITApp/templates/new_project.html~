@@ -13,7 +13,7 @@
 
 	{% else %}
 	<h2>Please fill project details</h2>	
-	<form id="project_form" method="post" action="/register/">
+	<form id="project_form" method="post" action="/post_project/">
 
 	{% csrf_token %}
 	

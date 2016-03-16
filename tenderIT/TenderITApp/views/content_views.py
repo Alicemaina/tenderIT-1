@@ -2,7 +2,6 @@ from django.shortcuts import render, HttpResponseRedirect
 from ..models import (Project,Company, ProjectApplication, Rating)
 from ..forms import Post_project
 from django.contrib.auth.decorators import login_required
-# Create your views here.
 
 
 def index(request):
@@ -49,9 +48,11 @@ def project(request, project_pk):
 def post_project(request):
 	project_added = False
    	if request.method == 'POST':
-		project_form = Post_project(request.POST, request.FILES)
+		project_form = Post_project(request.POST)
         	if project_form.is_valid():
-				project_form.save()
+				project=project_form.save(commit=False)
+				project.company = Company.objects.get(user=request.user)
+				project.save()
 				project_added=True				               
 	    	else:
 				print project_form.errors
