@@ -1,14 +1,26 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html>
 <head>
-	<title>dfdsf</title>
+	<title>Add project</title>
+	<link rel="stylesheet" href="{% static "css/javadoc.css" %}" />
 </head>
 <body>
-<form action="/post_project/" method="POST">
-{% csrf_token %}
-{{form.as_ul}}
-<input type="submit" value="post"/>
-</form>
-<a href="/logout/">logout</a>
+	{% if project_added %}
+	<h3>Project added.</h3>
+
+	{% else %}
+	<h2>Please fill project details</h2>	
+	<form id="project_form" method="post" action="/post_project/">
+
+	{% csrf_token %}
+	
+	{{ form.as_p }}
+		
+	<input type="submit" value="Add"/>
+	</form>
+	{% endif %}	
 </body>
 </html>

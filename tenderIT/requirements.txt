@@ -1,12 +1,14 @@
 Django==1.9.3
 django-bootstrap3==7.0.0
 django-countries==3.4.1
-django-phonenumber-field==1.0.0
 pbr==1.8.1
+<<<<<<< HEAD
 Pillow==3.1.0
 pytz==2016.1
 six==1.10.0
 South==1.0.2
+=======
+>>>>>>> 95c1ffce0960d55a8659b31e9f8f2bb5d1b9a6c0
 stevedore==1.10.0
 virtualenv==14.0.2
 virtualenv-clone==0.2.6

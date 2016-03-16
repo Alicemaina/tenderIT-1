@@ -31,7 +31,7 @@ class CompanyForm(forms.ModelForm):
 	nationalID = forms.CharField(label = 'National ID', max_length=64, min_length=3, error_messages={'required': 'Please enter company ID.', 'min_length': 'National ID must contain at least three characters.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter company ID...'}))
 	street = forms.CharField(max_length=128, error_messages={'required': 'Please enter street and number.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter street and number...'}))
 	city = forms.CharField(max_length=128, error_messages={'required': 'Please enter city.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter city...'}))
-	postcode = forms.CharField(max_length=16, error_messages={'required': 'Please enter postcode.', 'max_length':'Postcode cannot have more than 16 characters'}, widget=forms.TextInput(attrs={'placeholder': 'Enter city...'}))
+	postcode = forms.CharField(max_length=16, error_messages={'required': 'Please enter postcode.', 'max_length':'Postcode cannot have more than 16 characters'}, widget=forms.TextInput(attrs={'placeholder': 'Enter postcode...'}))
 	email = forms.EmailField(error_messages={'required': 'Please enter email.', 'invalid':'Email address not in correct format.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter email...'}))
 
 	# phone = PhoneNumberField()
@@ -44,7 +44,7 @@ class CompanyForm(forms.ModelForm):
 
 		fields = ('country', 'nationalID','name', 'street','city','postcode', 'email', 'phone', 'website')
 		widgets = {'country':CountrySelectWidget()}
-		# 'phone': PhoneNumberPrefixWidget()
+		
 
 		fields = ('country', 'nationalID','name', 'street','city','postcode', 'email','website')
 		widgets = {'country':CountrySelectWidget()}
@@ -59,7 +59,7 @@ class Post_project(forms.ModelForm):
 	budget = forms.IntegerField(min_value = 1, error_messages={'required': 'Please enter project budget.', 'min_value':'Projest budget cannot be less than one.'})
 	startDate = forms.DateField(widget=SelectDateWidget)
 	endDate =  forms.DateField(widget=SelectDateWidget)
-	documents = forms.FileField()
+	documents = forms.FileField(required=False)
 	
 
 	class Meta:

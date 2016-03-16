@@ -1,8 +1,11 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib import auth
-from ..forms import UserForm,CompanyForm
+from ..forms import UserForm, CompanyForm, Login_form
+
 from django.core.context_processors import csrf
 from ..models import Company
+
 
 def register_user(request):
     # A boolean value for telling the template whether the registration was successful.  
@@ -21,7 +24,7 @@ def register_user(request):
 		user.set_password(user.password)
 		user.save()
 		
-		# Create the company object and save it to a database
+		# Create the company_templates object and save it to a database
 		company = company_form.save(commit=False)
 		company.user = user
 		company.save()
@@ -38,36 +41,18 @@ def register_user(request):
 	user_form = UserForm()
 	company_form = CompanyForm()        
       
-    context = { 'user_form' : user_form,
-		'company_form' : company_form,
-		'registered': registered,}
+    context = {'user_form' : user_form,
+	       'company_form' : company_form,
+	       'registered': registered,}
    
-    return render(request, 'register.html', context)
-
-def login(request):
-    c = {}
-    c.update(csrf(request))
-    return render(request, 'login.html', c)
-
-def auth_view(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-    user = auth.authenticate(username = username, password = password)
-    if user is not None:
-        auth.login(request, user)
-        return HttpResponseRedirect('/accounts/loggedin')
-    else:
-        return HttpResponseRedirect('/accounts/invalid')
-
-def loggedin(request):
-    context = {'full_name' : request.user.username}
-    return render(request, 'loggedin.html', context)
-
-def invalid_login(request):
-    return render(request, 'invalid_login.html')
+    return render(request,'registration/register.html',context)
 
 
-def logout(request):
-    auth.logout(request)
-    render(request, 'logout.html')
+
+def logged_in(request):
+	user = request.user
+	company = user.company
+	company_id = user.company.pk
+	return redirect('/company/%d/' %company_id,{'company':company})
+
 

@@ -15,11 +15,8 @@ class Company(models.Model):
 	country = CountryField(countries_flag_url='flags/{ code }.png')
 	postcode = models.CharField(max_length=16)
 	email = models.EmailField()
-
 	phone = models.CharField()
-
 	phone = models.CharField(max_length=16)
-
 	website = models.URLField()
 	
 	def __unicode__(self):
@@ -29,8 +26,7 @@ class Project(models.Model):
 	company = models.ForeignKey(Company)
 	title = models.CharField(max_length=128)
 	description = models.TextField()
-	budget = models.IntegerField()
-	
+	budget = models.IntegerField()	
 	DOLLAR = 'USD'
 	EURO = 'EUR'
 	POUND = 'GBP'
