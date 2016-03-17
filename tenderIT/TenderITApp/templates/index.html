@@ -1,51 +1,5 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block body_block %}
+<h1> This is index page. </h1>
+{% endblock %}
 
-{% load staticfiles %}
-
-<html>
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
-	<link rel="stylesheet" href="{% static "css/style.css" %}" />
-	<title>TenderIT Home</title>
-</head>
-
-<body>
-
-<div class="container-fluid">
-	<p>Lorem ipsum dolor sit amet, nam vitae, neque pede mi faucibus pharetra tellus integer, vitae maiores.
-		Consectetuer fusce. Lacus vestibulum metus, ac in, lobortis mi congue, at senectus, consequat arcu risus
-		turpis ut aliquam. Suspendisse sagittis, in turpis magna quis. Ullamcorper duis venenatis,</p>
-</div>
-
-
-<nav  class="navbar navbar-default navbar-static-top">
-	<ul class="list-inline">
-		<li><img src="" alt="TenderIT logo"></li>
-		<li><a href="/companies">Companies</a></li>
-		<li>
-			<form>
-				<input type="text" placeholder="Search..."/>
-				<input type="button" value="Search"/>
-			</form>
-		</li>
-		{% if user.is_authenticated %}
-			<li>Welcome, {{ user }}</li>
-            <li><a href="/logout/">Logout</a></li>
-		{% else %}
-			<li><a href="/login/">Login</a></li>
-			<li><a href="/register/">Register</a></li>
-		{% endif %}
-	</ul>
-</nav>
-<a href="/post_project/"> Post Project</a>
-
-<script src="{% static "js/bootstrap.miin.js" %}"></script>
-<script src="{% static "js/jquery-2.2.1.min.js" %}"></script>
-<script src="{% static "js/script.js" %}"></script>
-
-</body>
-
-</html>

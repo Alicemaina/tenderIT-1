@@ -32,17 +32,17 @@
 			<li> ID: {{ company.nationalID }}</li>
 			<li> Street: {{ company.street }}</li>
 			<li> City: {{ company.city }}</li>
-			<li> Country: {{ company.country }}</li>
+			<li> Country: {{ company.country.name }}</li>
 			<li> Postcode: {{ company.postcode }}</li>
 			<li> Phone: {{ company.phone }}</li>
 			<li> Email: {{ company.email }}</li>
-			<li> <a href="{{ company.website }}"> {{ company.website }}</a>
+			<li> Website: <a href="{{ company.website }}"> {{ company.website }}</a>
 		</ul>
 	   <h4> Projects </h4>
 		{% if projects %}			
 			<ul>
 			{% for project in projects %}
-				<li> {{ project.title }}</li>
+				<li> <a href = "/project/{{ project.pk }}">{{ project.title }} </a></li>
 			{% endfor %}
 			</ul>
 		{% else %}

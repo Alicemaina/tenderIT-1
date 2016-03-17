@@ -70,6 +70,12 @@ def companies(request):
 
     return render(request, 'companies.html', context_dict)
 
+def projects(request):
+	project_list = Project.objects.order_by('publishDate')
+	context_dict = {'projects' : project_list}
+	
+	return render(request, 'projects.html', context_dict)
+
 @login_required
 def apply_project(request, project_id):
 

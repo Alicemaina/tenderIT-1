@@ -22,8 +22,7 @@ def company(request, company_id):
 	company = Company.objects.get(pk=company_id)
     	context_dict['company_templates'] = company
 
-	company = Company.objects.get(nationalID=company_id)
-    	context_dict['company'] = company
+	context_dict['company'] = company
 
 	projects = Project.objects.filter(company=company)
 	context_dict['projects'] = projects
@@ -70,6 +69,9 @@ def companies(request):
     context_dict = {'companies' : company_list}
 
     return render(request, 'companies.html', context_dict)
+
+def projects(request):
+	project_list = Project.objects.order_by('publishDate')
 
 @login_required
 def apply_project(request, project_id):

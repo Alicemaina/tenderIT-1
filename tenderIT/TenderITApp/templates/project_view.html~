@@ -35,7 +35,7 @@
 			<li> Budget: {{ project.budget }} {{ project.currency}}</li>
 			<li> Start: {{ project.startDate }} </li>
 			<li> End: {{ project.endDate }} </li>
-			<li> Publis date: {{ project.publish_date }} </li> 
+			<li> Publish date: {{ project.publishDate }} </li> 
 		</ul>
 {% else %}
 	<strong>Specified project does not exist.</strong>			
