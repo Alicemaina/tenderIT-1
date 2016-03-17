@@ -1,5 +1,5 @@
 {% extends "account_base.html" %}
-<!--{% load bootstrap3 %}-->
+{% load bootstrap3 %}
 {% load crispy_forms_tags %}
 {% block title %}Login{% endblock %}
 
@@ -28,9 +28,9 @@
 						<div class="clearfix col-lg-10 col-lg-offset-1 ">
 							<form class="text-center" action="." method="POST">
 								{% csrf_token %}
-								{{ form|crispy }}
+								{% bootstrap_form form layout='inline' %}
 								<input type="hidden"  name="next" value="{{ next }}">
-								<input type="submit" class="loginbutton btn btn-block" role"button" value="Log in"/>
+								<input type="submit" class="loginbutton btn btn-block" role="button" value="Log in"/>
 							</form>
 						</div>
 					</div>

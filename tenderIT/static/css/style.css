@@ -38,5 +38,17 @@
 }
 
 .country{
-	margin-top: 50px
+}
+
+
+.registerbtn{
+	border: none;
+	margin-top: 20px;
+	color: white;
+    background-color: #00a994
+}
+
+.registerbtn:hover{
+	color: white;
+    background-color: #006a5d
 }

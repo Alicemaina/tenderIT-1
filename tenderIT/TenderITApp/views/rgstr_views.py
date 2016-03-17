@@ -12,7 +12,7 @@ def register_user(request):
     # A boolean value for telling the template whether the registration was successful.  
     registered = False
     if request.method == 'POST':
-	
+
 	# Take information from forms
 	user_form = UserForm(data=request.POST)
 	company_form = CompanyForm(data=request.POST)
@@ -21,27 +21,27 @@ def register_user(request):
 	if user_form.is_valid() and company_form.is_valid():
 		#Save the user's form data to the database.
 		user = user_form.save()
-		# Hash the password with the set_password method and update the user Object.              
+		# Hash the password with the set_password method and update the user Object.
 		user.set_password(user.password)
 		user.save()
-		
+
 		# Create the company_templates object and save it to a database
 		company = company_form.save(commit=False)
 		company.user = user
 		company.save()
-	
+
 		# Update boolean value
 		registered = True
-	
-	# Forms not valid, print errors	
+
+	# Forms not valid, print errors
 	else:
 		print user_form.errors, company_form.errors
 
      # Not POST, show forms
     else:
 	user_form = UserForm()
-	company_form = CompanyForm()        
-      
+	company_form = CompanyForm()
+
     context = {'user_form' : user_form,
 	       'company_form' : company_form,
 	       'registered': registered,}
@@ -55,5 +55,10 @@ def logged_in(request):
 	company = user.company
 	company_id = user.company.pk
 	return redirect('/company/%d/' %company_id,{'company':company})
+
+
+def inactive_user(request):
+	user = request.user
+	return render(request, 'registration/deativated.html', {'user':user})
 
 

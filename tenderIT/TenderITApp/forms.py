@@ -17,13 +17,22 @@ from django.forms.extras.widgets import SelectDateWidget
 
 # form used to register a new user
 class UserForm(forms.ModelForm):
-	username = forms.CharField(min_length = 4, max_length = 16, error_messages={'required': 'Please enter username.', 'min_length':'Username must have at least four charachters.'})
-
-	password = forms.CharField(min_length = 4, max_length = 16, widget=forms.PasswordInput(), error_messages={'required': 'Please enter password.', 'min_length':'Password must have at least four charachters.'})
-	
+	username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter your username'}))
+	password = forms.CharField(widget=forms.PasswordInput(render_value= False, attrs={'placeholder':'Enter your password'}))
 	class Meta:
  		model = User
+		widgets = {
+			'password': forms.PasswordInput
+		}
 		fields = ('username','password')
+
+	def __init__(self, *args, **kwargs):
+		super(UserForm, self).__init__(*args, **kwargs)
+		self.helper = FormHelper(self)
+		self.helper.layout.append(Submit('Register', 'Register', css_class='registerbtn btn-block'))
+		self.helper.form_show_labels= False
+		self.helper.render_required_fields = True
+
 
 class CompanyForm(forms.ModelForm):
 	website = forms.URLField(initial='http://', widget=forms.TextInput(attrs={'placeholder': 'Enter website...'}) )
@@ -35,14 +44,10 @@ class CompanyForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(CompanyForm, self).__init__(*args, **kwargs)
 		self.helper = FormHelper(self)
-		self.helper.layout.append(Submit('save', 'save'))
-		self.helper.layout = Layout(
-			MultiField(
+		# self.helper.form_show_labels= False
+		self.helper.form_class= 'form-horizontal form-group'
+		self.helper.labels_uppercase= True
 
-
-			)
-
-		)
 
 
 # form to add new project_templates
@@ -76,5 +81,3 @@ class Post_project(forms.ModelForm):
 		model = Project
 		fields = ('title', 'description', 'budget', 'currency', 'startDate', 'endDate')
 		
-
-
