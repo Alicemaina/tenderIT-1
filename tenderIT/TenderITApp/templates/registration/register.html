@@ -1,25 +1,38 @@
-
 {% extends "account_base.html" %}
 
-
+<!-- {% load bootstrap3 %} -->
+<!-- {% bootstrap_css %} -->
+{% load crispy_forms_tags %}
 	{% block title %}Registration{% endblock %}
-
+}
 
 {% block content %}
-	{% if registered %}
-	<h3>Thank you for registration</h3>
+<div class=" box col-lg-10 col-lg-offset-1">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			{% if registered %}
+			<h3>Thank you for registration</h3>
 
-	{% else %}
-	<h2>Please register</h2>	
-	<form id="user_form" method="post" action="/register/">
-
-	{% csrf_token %}
-	
-	{{ company_form.as_p }}
-	{{ user_form.as_ul }}
-	
-	<input type="submit" value="register"/>
-	</form>
-	{% endif %}	
+			{% else %}
+				<h2 class="text-center">Register</h2>	
+				<div class="row">
+					<div class="clearfix col-lg-6 ">
+					<form class="text-center" method="POST" action=".">							
+					{% csrf_token %}
+	 				{% crispy company_form %}
+	 				</form>
+	 				</div>
+	 				<div class="clearfix col-lg-6 ">
+					<form class="text-center" method="POST" action=".">	
+					{% csrf_token %}
+	 				{{ user_form|crispy }}
+					<input type="submit" class="btn btn-primary btn-block" value="register"/>
+					</form>
+				</div>
+				</div>
+				
+			{% endif %}
+		</div>
+	</div>
+</div>			
 {% endblock %}
-

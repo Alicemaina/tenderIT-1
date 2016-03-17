@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
-print ("base dir" + BASE_DIR)
 
 DEBUG = True
 TEMPLATES = [
@@ -60,7 +59,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',    
     'django_countries',
-    'bootstrap3'
+    'bootstrap3',
+    'crispy_forms',
     'TenderITApp',
 
 )
@@ -122,3 +122,5 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'TenderITApp.authentication.EmailAuthBackend',
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

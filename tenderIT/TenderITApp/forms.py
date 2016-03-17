@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import (Company, Project)
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, MultiField, Div, Field
 
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
@@ -24,30 +26,23 @@ class UserForm(forms.ModelForm):
 		fields = ('username','password')
 
 class CompanyForm(forms.ModelForm):
-	country = CountryField()	
-	name = forms.CharField(label = 'Company Name', max_length=128, error_messages={'required': 'Please enter company name.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter company name...'}))
-	nationalID = forms.CharField(label = 'National ID', max_length=64, min_length=3, error_messages={'required': 'Please enter company ID.', 'min_length': 'National ID must contain at least three characters.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter company ID...'}))
-	street = forms.CharField(max_length=128, error_messages={'required': 'Please enter street and number.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter street and number...'}))
-	city = forms.CharField(max_length=128, error_messages={'required': 'Please enter city.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter city...'}))
-	postcode = forms.CharField(max_length=16, error_messages={'required': 'Please enter postcode.', 'max_length':'Postcode cannot have more than 16 characters'}, widget=forms.TextInput(attrs={'placeholder': 'Enter postcode...'}))
-	email = forms.EmailField(error_messages={'required': 'Please enter email.', 'invalid':'Email address not in correct format.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter email...'}))
-
-	# phone = PhoneNumberField()
-	phone = forms.CharField()
-
-	website = forms.URLField(initial='http://', error_messages={'required': 'Please enter website.', 'invalid':'Website not in correct format.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter website...'}) )
-
+	website = forms.URLField(initial='http://', widget=forms.TextInput(attrs={'placeholder': 'Enter website...'}) )
 	class Meta:
 		model = Company
 
 		fields = ('country', 'nationalID','name', 'street','city','postcode', 'email', 'phone', 'website')
 		widgets = {'country':CountrySelectWidget()}
-		
+	def __init__(self, *args, **kwargs):
+		super(CompanyForm, self).__init__(*args, **kwargs)
+		self.helper = FormHelper(self)
+		self.helper.layout.append(Submit('save', 'save'))
+		self.helper.layout = Layout(
+			MultiField(
 
-		fields = ('country', 'nationalID','name', 'street','city','postcode', 'email','website')
-		widgets = {'country':CountrySelectWidget()}
-			   
 
+			)
+
+		)
 
 
 # form to add new project_templates
@@ -64,8 +59,4 @@ class Post_project(forms.ModelForm):
 		fields = ('title', 'description', 'budget', 'currency', 'startDate', 'endDate')
 		
 
-
-class Login_form(forms.Form):
-	username = forms.CharField()
-	password = forms.CharField(widget=forms.PasswordInput)
 
