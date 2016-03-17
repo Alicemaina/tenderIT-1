@@ -1,13 +1,6 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block body_block %}
 
-{% load static %}
-
-<html>
-<head>
-	<title>Add project</title>
-	<link rel="stylesheet" href="{% static "css/javadoc.css" %}" />
-</head>
-<body>
 	{% if project_added %}
 	<h3>Project added.</h3>
 
@@ -22,5 +15,4 @@
 	<input type="submit" value="Add"/>
 	</form>
 	{% endif %}	
-</body>
-</html>
+{% endblock %}

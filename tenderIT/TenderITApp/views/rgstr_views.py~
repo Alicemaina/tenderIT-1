@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from ..forms import UserForm, CompanyForm, Login_form
 
-from django.core.context_processors import csrf
+from django.template.context_processors import csrf
 from ..models import Company
 
 

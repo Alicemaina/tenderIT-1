@@ -60,7 +60,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',    
     'django_countries',
-	'TenderITApp',
+    'bootstrap3'
+    'TenderITApp',
+
 )
 
 MIDDLEWARE_CLASSES = (

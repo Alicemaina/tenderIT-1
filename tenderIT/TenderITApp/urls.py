@@ -12,8 +12,11 @@ urlpatterns = [
     url(r'^company/(?P<company_id>[\w\-]+)/$', content_views.company, name="company"),
 	url(r'^project/(?P<project_pk>[\w\-]+)/$', content_views.project, name="project"),
     url(r'^companies/$', content_views.companies, name="companies"),
+	url(r'^projects/$', content_views.projects, name="projects"),
     url(r'^post_project/$', content_views.post_project, name="post_project "),
-    url(r'^(?P<project_id>[0-9]+)/$', content_views.apply_project, name="apply_project")
+    url(r'^(?P<project_id>[0-9]+)/$', content_views.apply_project, name="apply_project"),
+	url(r'^my_projects/$', content_views.my_projects, name="my_projects"),
+	url(r'^my_applications/$', content_views.my_applications, name="my_applications"),
     ]
 
 

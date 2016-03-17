@@ -60,7 +60,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',    
     'django_countries',
     'bootstrap3',
+<<<<<<< HEAD
     'crispy_forms',
+=======
+>>>>>>> 365e2505a5585363a46591a3c91576407623c96e
     'TenderITApp',
 
 )
