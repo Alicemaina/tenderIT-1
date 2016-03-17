@@ -12,6 +12,11 @@
 			<li> Email: {{ company.email }}</li>
 			<li> Website: <a href="{{ company.website }}"> {{ company.website }}</a>
 		</ul>
+		{% if user.is_authenticated %}
+			{% if user.company.id = company.id %}
+			<button type="button">Edit</button>
+			{% endif %}
+		{% endif %}
 	   <h4> Projects </h4>
 		{% if projects %}			
 			<ul>

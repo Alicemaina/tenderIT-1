@@ -53,7 +53,7 @@ class CompanyForm(forms.ModelForm):
 # form to add new project_templates
 class Post_project(forms.ModelForm):
 	title = forms.CharField(min_length=8, max_length=128, error_messages={'required': 'Please enter project title.', 'min_length':'Project title must contain at least eight charachters.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter project title...', }))
-	description = forms.CharField(min_length=32, max_length=2048, error_messages={'required': 'Please enter project description.', 'min_length':'Project title must contain at least 32 charachters.'}, widget=forms.Textarea(attrs={'placeholder': 'Enter project description...'}))
+	description = forms.CharField(min_length=32, max_length=2048, error_messages={'required': 'Please enter project description.', 'min_length':'Project description must contain at least 32 charachters.'}, widget=forms.Textarea(attrs={'placeholder': 'Enter project description...'}))
 	budget = forms.IntegerField(min_value = 1, error_messages={'required': 'Please enter project budget.', 'min_value':'Projest budget cannot be less than one.'})
 	startDate = forms.DateField(initial = datetime.datetime.now().date(),widget=SelectDateWidget)
 	endDate =  forms.DateField(initial = datetime.datetime.now().date(),widget=SelectDateWidget)

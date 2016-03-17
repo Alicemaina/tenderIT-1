@@ -77,6 +77,18 @@ def projects(request):
 	return render(request, 'projects.html', context_dict)
 
 @login_required
+def my_projects(request):
+	project_list = Project.objects.filter(company=request.user.company)
+	context_dict = {'projects' : project_list}
+	return render(request, 'projects.html', context_dict)
+
+@login_required
+def my_applications(request):
+	application_list = ProjectApplication.objects.filter(applicant=request.user.company)
+	context_dict = {'applications' : application_list}
+	return render(request, 'applications.html', context_dict)
+
+@login_required
 def apply_project(request, project_id):
 
     if request.user.is_authenticated():

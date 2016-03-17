@@ -72,6 +72,21 @@ def companies(request):
 
 def projects(request):
 	project_list = Project.objects.order_by('publishDate')
+	context_dict = {'projects' : project_list}
+	
+	return render(request, 'projects.html', context_dict)
+
+@login_required
+def my_projects(request):
+	project_list = Project.objects.filter(company=request.user.company)
+	context_dict = {'projects' : project_list}
+	return render(request, 'projects.html', context_dict)
+
+@login_required
+def my_applications(request):
+	application_list = Application.objects.filter(company=request.user.company)
+	context_dict = {'applications' : application_list}
+	return render(request, 'projects.html', context_dict)
 
 @login_required
 def apply_project(request, project_id):
