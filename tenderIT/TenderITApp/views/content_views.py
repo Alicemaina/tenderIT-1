@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from ..models import (Project,Company, ProjectApplication, Rating)
 from ..forms import Post_project, Apply_project
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 def index(request):
@@ -34,9 +35,21 @@ def company(request, company_id):
 	
 def project(request, project_pk):
 	context_dict = {}
+	own_project = False
+		
 	try:
 	 project = Project.objects.get(pk = project_pk)
+	 if request.user.is_authenticated(): 
+		company = Company.objects.get(user=request.user)
+		if company == project.company:
+			own_project = True
+		try:
+			apply_exist = ProjectApplication.objects.get(applicant=company, project=project)
+		except ProjectApplication.DoesNotExist:
+			apply_exist = None	
 	 context_dict['project'] = project
+	 context_dict['own_project'] = own_project
+	 context_dict['apply_exist'] = apply_exist
 	except Project.DoesNotExist:
 	 pass
 	
@@ -100,7 +113,8 @@ def apply_project(request, project_id):
 				application.applicant = Company.objects.get(user=request.user)
 				application.save()				
 				application_added=True	
-				project = application.project			               
+				project = application.project	
+	               
 	    	else:
 				print apply_form.errors
 	else:
