@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import (Company, Project)
+from .models import (Company, Project, ProjectApplication)
 
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
@@ -80,7 +80,15 @@ class Post_project(forms.ModelForm):
 	class Meta:
 		model = Project
 		fields = ('title', 'description', 'budget', 'currency', 'startDate', 'endDate')
-		
+
+# Apply for a project		
+class Apply_project(forms.ModelForm):
+	price = forms.IntegerField(min_value = 1, error_messages={'required': 'Please enter offered price.', 'min_value':'Price cannot be less than one.'})
+	description = forms.CharField(min_length=32, max_length=2048, error_messages={'required': 'Please enter project description.', 'min_length':'Project description must contain at least 32 charachters.'}, widget=forms.Textarea(attrs={'placeholder': 'Enter project description...'}))
+
+	class Meta:
+		model = ProjectApplication
+		fields = ('price','description')
 
 
 class Login_form(forms.Form):

@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from ..models import (Project,Company, ProjectApplication, Rating)
-from ..forms import Post_project
+from ..forms import Post_project, Apply_project
 from django.contrib.auth.decorators import login_required
 
 
@@ -90,21 +90,29 @@ def my_applications(request):
 
 @login_required
 def apply_project(request, project_id):
+	application_added = False
+	project	= Project.objects.get(id=project_id)
+   	if request.method == 'POST':
+		apply_form = Apply_project(request.POST)
+        	if apply_form.is_valid():
+				application = apply_form.save(commit=False)
+				application.project = Project.objects.get(id=project_id)
+				application.applicant = Company.objects.get(user=request.user)
+				application.save()				
+				application_added=True	
+				project = application.project			               
+	    	else:
+				print apply_form.errors
+	else:
+         	apply_form = Apply_project()
 
-    if request.user.is_authenticated():
-        if request.POST:
-            price = request.get.POST('price', '')
-            description = request.get.POST('description', '')
-            application = ProjectApplication(Project = project_id, applicant = request.user,
-                                             price = price, description = description)
-
-    else:
-        return HttpResponseRedirect('login.html')
-    project = Project.objects.get(pk = project_id)
-    context = {
-        'projects' : project
+	context = {
+        'form' : apply_form,
+	'application_added' : application_added,
+	'project' : project,
+	'project_id' : project_id,
     }
-    return render(request, 'apply.html', context)
+	return render(request, 'application.html', context)
 
 @login_required
 def rate_project(request, project_id):

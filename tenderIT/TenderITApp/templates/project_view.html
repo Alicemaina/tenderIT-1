@@ -11,6 +11,11 @@
 			<li> End: {{ project.endDate }} </li>
 			<li> Publish date: {{ project.publishDate }} </li> 
 		</ul>
+		{% if user.is_authenticated %}
+			<form action="/project/{{ project.id }}/apply">
+   				<input type="submit" value="Apply">
+			</form>			
+		{% endif %}
 {% else %}
 	<strong>Specified project does not exist.</strong>			
 {% endif %}
