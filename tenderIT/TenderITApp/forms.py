@@ -1,8 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
+<<<<<<< HEAD
 from .models import (Company, Project)
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, MultiField, Div, Field
+=======
+from .models import (Company, Project, ProjectApplication)
+>>>>>>> 27ad52eb056c3c1a06cf2735939286219a2f67a2
 
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
@@ -80,4 +84,22 @@ class Post_project(forms.ModelForm):
 	class Meta:
 		model = Project
 		fields = ('title', 'description', 'budget', 'currency', 'startDate', 'endDate')
+<<<<<<< HEAD
 		
+=======
+
+# Apply for a project		
+class Apply_project(forms.ModelForm):
+	price = forms.IntegerField(min_value = 1, error_messages={'required': 'Please enter offered price.', 'min_value':'Price cannot be less than one.'})
+	description = forms.CharField(min_length=32, max_length=2048, error_messages={'required': 'Please enter project description.', 'min_length':'Project description must contain at least 32 charachters.'}, widget=forms.Textarea(attrs={'placeholder': 'Enter project description...'}))
+
+	class Meta:
+		model = ProjectApplication
+		fields = ('price','description')
+
+
+class Login_form(forms.Form):
+	username = forms.CharField()
+	password = forms.CharField(widget=forms.PasswordInput)
+
+>>>>>>> 27ad52eb056c3c1a06cf2735939286219a2f67a2

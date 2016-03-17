@@ -6,8 +6,8 @@
 	   <p>
 	   <a href="/project/{{ application.project.id }}">Project: {{ application.project.title }} </a>
 		<ul>
-			<li>{{ application.price }}</li>
-			<li>{{ application.description }}</li>
+			<li>Offered price: {{ application.price }} {{ application.project.currency }}</li>
+			<li>Description: {{ application.description }}</li>
 		</ul>
 	   </p>
 	   {% endfor %}

@@ -11,6 +11,25 @@
 			<li> End: {{ project.endDate }} </li>
 			<li> Publish date: {{ project.publishDate }} </li> 
 		</ul>
+		{% if user.is_authenticated %}
+			{% if own_project %}
+				<button type="button">Edit</button>
+			{% else %}
+				{% if apply_exist %}
+				<form action="/my_applications/">
+   					<input type="submit" value="Apply">
+				</form>	
+				{% else %}
+				<form action="/project/{{ project.id }}/apply">
+   					<input type="submit" value="Apply">
+				</form>	
+				{% endif %}
+			{% endif %}
+		{% else %}
+			<form action="/login">
+   				<input type="submit" value="Apply">
+			</form>			
+		{% endif %}
 {% else %}
 	<strong>Specified project does not exist.</strong>			
 {% endif %}
