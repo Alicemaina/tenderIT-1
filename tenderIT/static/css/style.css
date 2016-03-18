@@ -7,12 +7,12 @@
     background-color: #e3e3e3;
 }
 
-.loginbutton{
+.greenbtn{
 	color: white;
     background-color: #00a994
     
 }
-.loginbutton:hover{
+.greenbtn:hover{
 	color: white;
     background-color: #006a5d
     
@@ -27,11 +27,15 @@
 }
 
 .login hr{
-	background-color: black;
 	margin-top: 5px;
 	margin-bottom: 10px; 
 }
 
+.password-change hr{
+	margin-top: 5px;
+	margin-bottom: 10px; 
+}
+}
 
 .register {
 	position: 
@@ -40,15 +44,3 @@
 .country{
 }
 
-
-.registerbtn{
-	border: none;
-	margin-top: 20px;
-	color: white;
-    background-color: #00a994
-}
-
-.registerbtn:hover{
-	color: white;
-    background-color: #006a5d
-}

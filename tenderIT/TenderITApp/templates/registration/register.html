@@ -1,8 +1,8 @@
 {% extends "account_base.html" %}
 
-<!-- {% load bootstrap3 %} -->
+{% load bootstrap3 %}
 <!-- {% bootstrap_css %} -->
-{% load crispy_forms_tags %}
+<!-- {% load crispy_forms_tags %} -->
 	{% block title %}Registration{% endblock %}
 }
 
@@ -10,22 +10,26 @@
 <div class=" box col-lg-10 col-lg-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-body">
+			<div class="row">
 			{% if registered %}
 			<h3>Thank you for registration</h3>
 
 			{% else %}
 				<h2 class="text-center">Register</h2>	
-				<div class="row">
+				
 					<div class="col-lg-11 col-lg-offset-1">
 						<form class="text-center" method="POST" action=".">	
 							<div class="clearfix col-lg-5">
 												
 							{% csrf_token %}
-	 						{% crispy company_form %}
+	 						<!-- {% crispy company_form %} -->
+	 						{% bootstrap_form company_form layout="inline" %}
 	 						</div>
 	 						<div class="clearfix col-lg-5 col-lg-offset-1">
 							{% csrf_token %}
-	 						{% crispy user_form %}
+							{% bootstrap_form user_form layout="inline" %}
+	 						<!-- {% crispy user_form %} -->
+
 							</div>
 						</form>
 					</div>
