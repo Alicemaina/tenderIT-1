@@ -66,8 +66,6 @@ def post_project(request):
 				project.company = Company.objects.get(user=request.user)
 				project.save()
 				project_added=True				               
-	    	else:
-				print project_form.errors
 	else:
          project_form = Post_project()
 

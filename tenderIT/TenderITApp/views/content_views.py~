@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from ..models import (Project,Company, ProjectApplication, Rating)
 from ..forms import Post_project, Apply_project
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.contrib import messages
 
 
 def index(request):
@@ -67,7 +67,7 @@ def post_project(request):
 				project.save()
 				project_added=True				               
 	    	else:
-				print project_form.errors
+			messages.error(request, "Error")	
 	else:
          project_form = Post_project()
 
