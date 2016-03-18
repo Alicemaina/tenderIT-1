@@ -6,6 +6,10 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, MultiField, Div, Field
 
 from .models import (Company, Project, ProjectApplication)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7430ee709604560b10937f8ecfaa90cc6f741d13
 
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
@@ -83,6 +87,13 @@ class Post_project(forms.ModelForm):
 	class Meta:
 		model = Project
 		fields = ('title', 'description', 'budget', 'currency', 'startDate', 'endDate')
+<<<<<<< HEAD
+=======
+
+		
+
+
+>>>>>>> 7430ee709604560b10937f8ecfaa90cc6f741d13
 # Apply for a project		
 class Apply_project(forms.ModelForm):
 	price = forms.IntegerField(min_value = 1, error_messages={'required': 'Please enter offered price.', 'min_value':'Price cannot be less than one.'})
@@ -97,3 +108,7 @@ class Login_form(forms.Form):
 	username = forms.CharField()
 	password = forms.CharField(widget=forms.PasswordInput)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7430ee709604560b10937f8ecfaa90cc6f741d13

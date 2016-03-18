@@ -1,18 +1,37 @@
 {% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
 {% block body_block %}
+<div class=" box col-lg-10 col-lg-offset-1">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			{% if project_added %}
+			<h3>Project added.</h3>
 
-	{% if project_added %}
-	<h3>Project added.</h3>
+			{% else %}
+				<h2 class="text-center">Please fill project details.</h2>	
+				<div class="row">
+					<div class="col-lg-11 col-lg-offset-1">
+						<form class="text-center" method="POST" action="/post_project/">	
+							<div class="clearfix col-lg-5">
+												
+							{% csrf_token %}
+	 						{% crispy form %}
+							<input type="submit" value="Add"/>
+	 						</div>
+				
+						</form>
+					</div>
+				</div>
+				
+			{% endif %}
+		</div>
+	</div>
+</div>			
 
-	{% else %}
-	<h2>Please fill project details</h2>	
-	<form id="project_form" method="post" action="/post_project/">
-
-	{% csrf_token %}
-	
-	{{ form.as_p }}
 		
-	<input type="submit" value="Add"/>
-	</form>
-	{% endif %}	
+		
+
+
 {% endblock %}
