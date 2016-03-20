@@ -46,7 +46,9 @@ def project(request, project_pk):
 		try:
 			apply_exist = ProjectApplication.objects.get(applicant=company, project=project)
 		except ProjectApplication.DoesNotExist:
-			apply_exist = None	
+			apply_exist = None
+		application_list = ProjectApplication.objects.filter(project=project)
+	 context_dict['application_list'] = application_list	
 	 context_dict['project'] = project
 	 context_dict['own_project'] = own_project
 	 context_dict['apply_exist'] = apply_exist
@@ -64,7 +66,6 @@ def post_project(request):
         	if project_form.is_valid():
 				project=project_form.save(commit=False)
 				project.company = Company.objects.get(user=request.user)
-				project.avatar = request.FILES['avatar']
 				project.save()
 				project_added=True				               
 	else:

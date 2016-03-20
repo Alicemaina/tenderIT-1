@@ -51,7 +51,6 @@ class Rating(models.Model):
 	provider = models.ForeignKey(Company, related_name='rating_provider')
 	receiver = models.ForeignKey(Company, related_name='rating_receiver')
 	value = models.IntegerField(validators=[MaxValueValidator(5)])
-	comment = models.TextField()	
 	ratingDate = models.DateField(auto_now_add=True, null = True)
 
 	def __unicode__(self):

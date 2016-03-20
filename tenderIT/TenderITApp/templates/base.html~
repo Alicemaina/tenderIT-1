@@ -9,18 +9,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
 	<link rel="stylesheet" href="{% static "css/style.css" %}" />
+	<link rel="stylesheet" href="{% static "css/JQuery UI/jquery-ui.min.css" %}" />
 	<title>TenderIT</title>
+
 </head>
 
 <body>
 
 <div class="container-fluid">
-	<p>Lorem ipsum dolor sit amet, nam vitae, neque pede mi faucibus pharetra tellus integer, vitae maiores.
-		Consectetuer fusce. Lacus vestibulum metus, ac in, lobortis mi congue, at senectus, consequat arcu risus
-		turpis ut aliquam. Suspendisse sagittis, in turpis magna quis. Ullamcorper duis venenatis,</p>
-</div>
-
-<nav  class="navbar navbar-default navbar-static-top">
+	<nav  class="nav navbar-inverse navbar-static-top">
 	<ul class="list-inline">
 		<li><img src="" alt="TenderIT logo"></li>
 		<li><a href="/companies">Companies</a></li>
@@ -36,21 +33,23 @@
             <li><a href="/logout/">Logout</a></li>
 		<div>
 		<a href="/post_project/"> Post Project</a>
-		<a href="/company/ {{ user.company.id }}"> My profile</a>
+		<a href="/company/{{ user.company.id }}"> My profile</a>
 		<a href="/my_projects">My projects</a>
 		<a href="/my_applications">My applications</a>
-		
+
 		{% else %}
 			<li><a href="/login/">Login</a></li>
 			<li><a href="/register/">Register</a></li>
 		{% endif %}
 	</ul>
 </nav>
-
-<script src="{% static "js/bootstrap.miin.js" %}"></script>
+</div>
 <script src="{% static "js/jquery-2.2.1.min.js" %}"></script>
+<script src="{% static "js/jquery-ui.min.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 <script src="{% static "js/script.js" %}"></script>
-<div>
+<script src="{% static "js/bootstrap-rating-input.min.js" %} type="text/javascript"></script>
+<div class="container-fluid">
 	{% block body_block %}{% endblock %}
 </div>
 

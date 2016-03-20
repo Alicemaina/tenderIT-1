@@ -99,6 +99,7 @@ class Post_project(forms.ModelForm):
 				Field('startDate', wrapper_class="project_jumbo jumbotron row project_container", css_class="project_container"),
 				Field('endDate', wrapper_class="project_jumbo jumbotron row project_container",css_class="project_container"),
 				Field('avatar', css_class="greenbtn btn-block project_container"),
+				Field('document', css_class="greenbtn btn-block project_container"),
 
 				Submit('Post Project', 'Post project', css_class="greenbtn btn-block project_container"),
 				css_class= "project_container col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1"
