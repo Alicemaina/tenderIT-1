@@ -40,10 +40,11 @@ class UserForm(forms.ModelForm):
 
 class CompanyForm(forms.ModelForm):
 	website = forms.URLField(initial='http://', widget=forms.TextInput(attrs={'placeholder': 'Enter website...'}) )
+	logo = forms.FileField(label= 'Select company logo.')
 	class Meta:
 		model = Company
 
-		fields = ('country', 'nationalID','name', 'street','city','postcode', 'email', 'phone', 'website')
+		fields = ('country', 'nationalID','name', 'logo', 'street','city','postcode', 'email', 'phone', 'website')
 		widgets = {'country':CountrySelectWidget()}
 	def __init__(self, *args, **kwargs):
 		super(CompanyForm, self).__init__(*args, **kwargs)
@@ -52,8 +53,6 @@ class CompanyForm(forms.ModelForm):
 		self.helper.form_class= 'form-horizontal form-group'
 		self.helper.labels_uppercase= True
 
-
-
 # form to add new project_templates
 class Post_project(forms.ModelForm):
 	title = forms.CharField(min_length=8, max_length=128, error_messages={'required': 'Please enter project title.', 'min_length':'Project title must contain at least eight charachters.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter project title...', }))
@@ -61,7 +60,9 @@ class Post_project(forms.ModelForm):
 	budget = forms.IntegerField(min_value = 1, error_messages={'required': 'Please enter project budget.', 'min_value':'Projest budget cannot be less than one.'})
 	startDate = forms.DateField(initial = datetime.datetime.now().date())
 	endDate =  forms.DateField(initial = datetime.datetime.now().date())
-	
+	avatar = forms.FileField(label = 'Select project logo.')
+	document = forms.FileField(label = 'Select project documentation.')
+
 	def clean(self):
 		cleaned_data = super(Post_project, self).clean()
 		startDate = cleaned_data.get('startDate')
@@ -97,8 +98,10 @@ class Post_project(forms.ModelForm):
 			Div(
 				Field('startDate', wrapper_class="project_jumbo jumbotron row project_container", css_class="project_container"),
 				Field('endDate', wrapper_class="project_jumbo jumbotron row project_container",css_class="project_container"),
+				Field('avatar', css_class="greenbtn btn-block project_container"),
+				Field('document', css_class="greenbtn btn-block project_container"),
 
-				Submit('Post Project', 'Postproject', css_class="greenbtn btn-block project_container"),
+				Submit('Post Project', 'Post project', css_class="greenbtn btn-block project_container"),
 				css_class= "project_container col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1"
 
 
@@ -110,7 +113,7 @@ class Post_project(forms.ModelForm):
 
 	class Meta:
 		model = Project
-		fields = ('title', 'description', 'budget', 'currency', 'startDate', 'endDate')
+		fields = ('avatar','title', 'description', 'budget', 'currency', 'startDate', 'endDate', 'document')
 
 
 # Apply for a project		

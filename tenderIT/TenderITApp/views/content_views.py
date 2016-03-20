@@ -60,7 +60,7 @@ def project(request, project_pk):
 def post_project(request):
 	project_added = False
    	if request.method == 'POST':
-		project_form = Post_project(request.POST)
+		project_form = Post_project(request.POST, request.FILES)
         	if project_form.is_valid():
 				project=project_form.save(commit=False)
 				project.company = Company.objects.get(user=request.user)
