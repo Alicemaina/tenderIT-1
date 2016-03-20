@@ -15,13 +15,15 @@ def populate():
 	user4 = add_user("ismayil", "ismayil")
 	user5 = add_user("devlogic", "dev1234")
 	
-	company1 = add_company("leifos","06382444", "IT SOLUTIONS LTD", "Canal View 2a", "Chester", "United Kingdom", "CH3 6AN", "itsolutions@gmail.com","48853124568", "www.itsolutions.co.uk")
+	company1 = add_company(user1,"06382444", "IT SOLUTIONS LTD", "Canal View 2a", "Chester", "United Kingdom", "CH3 6AN", "itsolutions@gmail.com","48853124568", "www.itsolutions.co.uk")
 
-	company2 = add_company("skyscanner","04217916", "SKYSCANNER LIMITED", "Fore Street","London", "United Kingdom", "EC2Y 5EJ", "info@scyscanner.co.uk","44882156785", "www.skyscanner.co.uk")
+	company2 = add_company(user2,"04217916", "SKYSCANNER LIMITED", "Fore Street","London", "United Kingdom", "EC2Y 5EJ", "info@scyscanner.co.uk","44882156785", "www.skyscanner.co.uk")
 
-	company3 = add_company("bankofscotland","SC327000", "Bank of Scotland", "The Mound", "Edinburgh","United Kingdom", "EH1 1YZ", "info@bankofscotland.co.uk", "48573554897", "www.bankofscotland.co.uk")
+	company3 = add_company(user3,"SC327000", "Bank of Scotland", "The Mound", "Edinburgh","United Kingdom", "EH1 1YZ", "info@bankofscotland.co.uk", "48573554897", "www.bankofscotland.co.uk")
 
-	company4 = add_company("devlogic","4201193140009", "Devlogic D.O.O", "Kolodvorska 11a", "Sarajevo","Bosnia and Herzegovina", "71000", "info@devlogic.ba", "003873312346", "www.devlogic.ba")
+	company4 = add_company(user5,"4201193140009", "Devlogic D.O.O", "Kolodvorska 11a", "Sarajevo","Bosnia and Herzegovina", "71000", "info@devlogic.ba", "003873312346", "www.devlogic.ba")
+	
+	company5 = add_company(user4,"4474972921883", "Azerfon LLC", "H.Aliyev ave 106A", "Baku","Azerbaijan", "AZ1029", "info@nar.az", "00994124440777", "www.nar.az")
 
 	project1 = add_project(company3, "Web page development", "Develop a web page for our company_templates", 500000, 'USD', '2016-03-01', '2016-09-01', '2016-03-19' )
 
