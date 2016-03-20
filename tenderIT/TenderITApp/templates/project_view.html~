@@ -13,7 +13,7 @@
 		</ul>
 		{% if user.is_authenticated %}
 			{% if own_project %}
-			<button type="button">Edit</button>
+			<a class="btn btn-default" href="/project/{{ project.pk }}/edit/"><span class="glyphicon glyphicon-pencil"></span></a>
 				{% if applications %}
 					<h5> Applications </h5>
 					{% for application in applications %}
@@ -21,7 +21,7 @@
 	  					
 						<ul>
 							<li>Applicant: <a href="/company/{{ application.applicant.id }}"> {{ application.applicant.name }} </a></li>
-							<li>Price: {{ application.price }}</li>
+							<li>Price: {{ application.price }} {{ project.currency }}</li>
 							<li>Description: {{ application.description }}</li>
 							<li>Date: {{ application.applicationDate }}</li>
 							

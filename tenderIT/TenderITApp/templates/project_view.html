@@ -13,7 +13,9 @@
 		</ul>
 		{% if user.is_authenticated %}
 			{% if own_project %}
-			<button type="button">Edit</button>
+			<form action="/project/{{ project.pk }}/edit/">
+   					<input type="submit" value="Edit">
+				</form>	
 				{% if applications %}
 					<h5> Applications </h5>
 					{% for application in applications %}

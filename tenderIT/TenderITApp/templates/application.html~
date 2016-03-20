@@ -17,7 +17,7 @@
 	</ul>
 
 	<h2>Please fill application details</h2>	
-	<form id="apply_form" method="post" action="/{{ project_id }}/apply/">
+	<form id="apply_form" method="post" action="/project/{{ project_id }}/apply/">
 
 	{% csrf_token %}
 	
