@@ -49,7 +49,7 @@ def project(request, project_pk):
 			apply_exist = None
 
 		applications = ProjectApplication.objects.filter(project=project)
-	 context_dict['applications'] = applications	
+	 context_dict['applications'] = applications
 	 context_dict['project'] = project
 	 context_dict['own_project'] = own_project
 	 context_dict['apply_exist'] = apply_exist
