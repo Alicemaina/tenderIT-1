@@ -6,8 +6,9 @@ from crispy_forms.bootstrap import AppendedText
 from .models import (Company, Project, ProjectApplication)
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-import datetime
 from django.forms.extras.widgets import SelectDateWidget
+import datetime
+
 
 
 

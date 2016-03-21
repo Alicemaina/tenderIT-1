@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block body_block %}
-
 {% if companies %}
 	   {% for company in companies %}
 	   <p>
@@ -12,8 +11,7 @@
 			<li><a href="{{ company.website }}"> {{ company.website }} </a></li>
 		</ul>
 	   </p>
-	   {% endfor %}
-	
+	   {% endfor %}	
 {% else %}
 	No registered companies.
 {% endif %}

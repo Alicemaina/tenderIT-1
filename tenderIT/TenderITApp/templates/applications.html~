@@ -9,7 +9,7 @@
 			<li>Offered price: {{ application.price }} {{ application.project.currency }}</li>
 			<li>Description: {{ application.description }}</li>
 		</ul>
-		<form action="/my_applications/{{ application.pk }}/edit/">
+		<form action="/my_applications/{{ application.id }}/edit/">
    					<input type="submit" value="Edit">
 				</form>	
 	   </p>

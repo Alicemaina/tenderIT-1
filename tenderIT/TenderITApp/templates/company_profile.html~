@@ -12,12 +12,13 @@
 			<li> Email: {{ company.email }}</li>
 			<li> Website: <a href="{{ company.website }}"> {{ company.website }}</a>
 		</ul>
+		<!-- If user is authenticated and user=company.user show edit button -->
 		{% if user.is_authenticated %}
 			{% if user.company.id = company.id %}
-			<a class="btn btn-default" href="{% url 'company_edit' pk=company.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-			
+			<button type="button">Edit</button>
 			{% endif %}
 		{% endif %}
+	   <!-- Show company projects -->
 	   <h4> Projects </h4>
 		{% if projects %}			
 			<ul>

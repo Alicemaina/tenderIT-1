@@ -1,3 +1,4 @@
+
 {% load staticfiles %}
 {% load projects_tags %}
 {% show_latest_projects as latest_projects %}

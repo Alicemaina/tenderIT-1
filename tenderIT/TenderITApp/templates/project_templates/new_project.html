@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
-
 {% load crispy_forms_tags %}
-
 {% block body_block %}
 <div class=" project_container col-lg-12 col-md-12">
 <div class="row">
 			{% if project_added %}
 			<h3>Project added.</h3>
-
 			{% else %}
 				<h2 class="text-center">Please fill project details.</h2>	
 				

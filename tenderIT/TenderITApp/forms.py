@@ -9,9 +9,6 @@ from django_countries.widgets import CountrySelectWidget
 from django.forms.extras.widgets import SelectDateWidget
 import datetime
 
-
-
-
 # New user form
 class UserForm(forms.ModelForm):
 	username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter your username'}))
