@@ -1,28 +1,22 @@
 from django import forms
 from django.contrib.auth.models import User
-
-from .models import (Company, Project)
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, MultiField, Div, Field
 from crispy_forms.bootstrap import AppendedText
-
 from .models import (Company, Project, ProjectApplication)
-
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-
-from django_countries.fields import CountryField
-from django_countries.widgets import CountrySelectWidget
-
-import datetime
 from django.forms.extras.widgets import SelectDateWidget
+import datetime
 
 
 
-# form used to register a new user
+
+# New user form
 class UserForm(forms.ModelForm):
 	username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter your username'}))
 	password = forms.CharField(widget=forms.PasswordInput(render_value= False, attrs={'placeholder':'Enter your password'}))
+
 	class Meta:
  		model = User
 		widgets = {
@@ -38,22 +32,23 @@ class UserForm(forms.ModelForm):
 		self.helper.render_required_fields = True
 
 
+# New company form
 class CompanyForm(forms.ModelForm):
 	website = forms.URLField(initial='http://', widget=forms.TextInput(attrs={'placeholder': 'Enter website...'}) )
 	logo = forms.FileField(label= 'Select company logo.')
+
 	class Meta:
 		model = Company
-
 		fields = ('country', 'nationalID','name', 'logo', 'street','city','postcode', 'email', 'phone', 'website')
 		widgets = {'country':CountrySelectWidget()}
+
 	def __init__(self, *args, **kwargs):
 		super(CompanyForm, self).__init__(*args, **kwargs)
 		self.helper = FormHelper(self)
-		# self.helper.form_show_labels= False
 		self.helper.form_class= 'form-horizontal form-group'
 		self.helper.labels_uppercase= True
 
-# form to add new project_templates
+# New project form
 class Post_project(forms.ModelForm):
 	title = forms.CharField(min_length=8, max_length=128, error_messages={'required': 'Please enter project title.', 'min_length':'Project title must contain at least eight charachters.'}, widget=forms.TextInput(attrs={'placeholder': 'Enter project title...', }))
 	description = forms.CharField(min_length=32, max_length=2048, error_messages={'required': 'Please enter project description.', 'min_length':'Project description must contain at least 32 charachters.'}, widget=forms.Textarea(attrs={'placeholder': 'Enter project description...','rows': 6, 'cols': 10}))
@@ -62,7 +57,8 @@ class Post_project(forms.ModelForm):
 	endDate =  forms.DateField(initial = datetime.datetime.now().date())
 	avatar = forms.FileField(label = 'Select project logo.')
 	document = forms.FileField(label = 'Select project documentation.')
-
+	
+	# Validate the dates
 	def clean(self):
 		cleaned_data = super(Post_project, self).clean()
 		startDate = cleaned_data.get('startDate')
@@ -116,7 +112,7 @@ class Post_project(forms.ModelForm):
 		fields = ('avatar','title', 'description', 'budget', 'currency', 'startDate', 'endDate', 'document')
 
 
-# Apply for a project		
+# Project application form		
 class Apply_project(forms.ModelForm):
 	price = forms.IntegerField(min_value = 1, error_messages={'required': 'Please enter offered price.', 'min_value':'Price cannot be less than one.'})
 	description = forms.CharField(min_length=32, max_length=2048, error_messages={'required': 'Please enter project description.', 'min_length':'Project description must contain at least 32 charachters.'}, widget=forms.Textarea(attrs={'placeholder': 'Enter project description...'}))
@@ -125,10 +121,6 @@ class Apply_project(forms.ModelForm):
 		model = ProjectApplication
 		fields = ('price','description')
 
-
-class Login_form(forms.Form):
-	username = forms.CharField()
-	password = forms.CharField(widget=forms.PasswordInput)
 
 
 

@@ -4,6 +4,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tenderIT.settings')
 import django
 django.setup()
 
+from django.contrib import auth
 from django.contrib.auth.models import User
 from TenderITApp.models import Company, Project, Rating, ProjectApplication
 
@@ -35,11 +36,11 @@ def populate():
 	add_application(project2, company4, 95960, "This project_templates looks really interesting. We will dedicate our best programmers to this project_templates and make sure we finish the necessary work in time.")
 	add_application(project1, company1, 460000, "We will deliver the best solution.")
 
-	add_rating(company1, company4, 5, "Great experience.")
-	add_rating(company2, company4, 4, "Very good job.")
-	add_rating(company4, company1, 5, "Excellent employer.")
-	add_rating(company3, company2, 2, "Poor job, had a lot of problems on our project_templates.")
-	add_rating(company3, company4, 5, "Very professional. Great people and great company_templates. Highly recommended to work with.")
+	add_rating(company1, company4, 5)
+	add_rating(company2, company4, 4)
+	add_rating(company4, company1, 5)
+	add_rating(company3, company2, 2)
+	add_rating(company3, company4, 5)
 
 	for u in User.objects.all():
 		print u
@@ -55,7 +56,7 @@ def populate():
 def add_user(username, password):
 	u = User.objects.get_or_create(username=username)[0]
 	u.username = username
-	u.password = password
+	u.set_password(password)
 	u.save()
 	return u
 		
@@ -86,8 +87,8 @@ def add_application(project, applicant, price, description):
     a.save()
     return a;
 
-def add_rating(provider, receiver, value, comment):
-    r = Rating.objects.get_or_create(provider=provider, receiver=receiver, value=value, comment=comment)[0]
+def add_rating(provider, receiver, value):
+    r = Rating.objects.get_or_create(provider=provider, receiver=receiver, value=value)[0]
     r.save()
     return r
 

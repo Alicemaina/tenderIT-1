@@ -4,8 +4,6 @@ from django_countries.fields import CountryField
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-# from phonenumber_field.modelfields import PhoneNumberField
-
 class Company(models.Model):
 	user = models.OneToOneField(User)
 	nationalID = models.CharField(max_length=64, validators=[MinLengthValidator(3)], unique=True)
@@ -27,7 +25,9 @@ class Project(models.Model):
 	company = models.ForeignKey(Company)
 	title = models.CharField(max_length=128)
 	description = models.TextField()
-	budget = models.IntegerField()	
+	budget = models.IntegerField()
+
+	# Set available currency choices	
 	DOLLAR = 'USD'
 	EURO = 'EUR'
 	POUND = 'GBP'
@@ -36,8 +36,8 @@ class Project(models.Model):
 		(EURO, 'Euro'),
 		(POUND, 'British Pound'),
 	)
-
 	currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=DOLLAR)
+
 	startDate = models.DateField()
 	endDate = models.DateField()
 	publishDate = models.DateField(auto_now_add=True, null=True)
@@ -62,7 +62,8 @@ class ProjectApplication(models.Model):
 	price = models.IntegerField()
 	description = models.TextField()
 	applicationDate = models.DateField(auto_now_add=True, null=True)
-
+	
+	# One company can have only one application for one project
 	class Meta:
 		unique_together = ('project','applicant')
 
