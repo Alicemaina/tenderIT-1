@@ -15,7 +15,7 @@ def register_user(request):
 
 	# Take information from forms
 	user_form = UserForm(data=request.POST)
-	company_form = CompanyForm(data=request.POST)
+	company_form = CompanyForm(request.POST, request.FILES)
 
 	# If two forms are valid...
 	if user_form.is_valid() and company_form.is_valid():
@@ -28,6 +28,7 @@ def register_user(request):
 		# Create the company_templates object and save it to a database
 		company = company_form.save(commit=False)
 		company.user = user
+		company.logo = request.FILES['logo']
 		company.save()
 
 		# Update boolean value

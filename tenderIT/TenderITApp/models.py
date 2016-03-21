@@ -18,7 +18,7 @@ class Company(models.Model):
 	phone = models.CharField()
 	phone = models.CharField(max_length=16)
 	website = models.URLField()
-	logo = models.ImageField(upload_to='company_logo/%Y/%m/%d')
+	logo = models.ImageField(upload_to='company_logo/%Y/%m/%d', blank=True, null=True)
 
 	def __unicode__(self):
 		return self.name
@@ -41,8 +41,8 @@ class Project(models.Model):
 	startDate = models.DateField()
 	endDate = models.DateField()
 	publishDate = models.DateField(auto_now_add=True, null=True)
-	avatar = models.ImageField(upload_to='project_avatar/%Y/%m/%d')
-	document = models.FileField(upload_to='project_document/%Y/%m/%d')
+	avatar = models.ImageField(upload_to='project_avatar/%Y/%m/%d',blank=True, null=True)
+	document = models.FileField(upload_to='project_document/%Y/%m/%d',blank=True, null=True)
 
 	def __unicode__(self):
 		return self.title
@@ -62,6 +62,9 @@ class ProjectApplication(models.Model):
 	price = models.IntegerField()
 	description = models.TextField()
 	applicationDate = models.DateField(auto_now_add=True, null=True)
+
+	class Meta:
+		unique_together = ('project','applicant')
 
  	def __unicode__(self):
  		return self.project.title + " - " + self.applicant.name
