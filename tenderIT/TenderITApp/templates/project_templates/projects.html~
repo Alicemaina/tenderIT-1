@@ -4,7 +4,7 @@
 {% if projects %}
     <div class="clearfix pt-container comtainer-fluid">
 
-	{% for project in projects %}
+	   {% for project in projects %}
 	<div class="clearfix project col-lg-5 col-md-5 col-sm-5 col-xs-5">
 		<div class="row">
 			<div class=" clearfix pt-panel panel col-lg-12 col-md-12 col-sm-12">

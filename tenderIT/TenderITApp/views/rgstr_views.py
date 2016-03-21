@@ -2,12 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from ..forms import UserForm, CompanyForm
-	# Login_form
-
 from django.template.context_processors import csrf
 from ..models import Company
 
-
+# Add new user and company
 def register_user(request):
     # A boolean value for telling the template whether the registration was successful.  
     registered = False
@@ -50,14 +48,14 @@ def register_user(request):
     return render(request,'registration/register.html',context)
 
 
-
+# After login get user details and redirect user to his company page
 def logged_in(request):
 	user = request.user
 	company = user.company
 	company_id = company.pk
 	return redirect('/company/%d/' %company_id,{'company':company})
 
-
+# After inactive period log out user
 def inactive_user(request):
 	user = request.user
 	return render(request, 'registration/deativated.html', {'user':user})

@@ -1,7 +1,5 @@
 from django.conf.urls import url
-from django.contrib.auth.views import (login, logout, password_change, password_change_done, password_reset,
-                                       password_reset_done, password_reset_confirm, password_reset_complete)
-
+from django.contrib.auth.views import (login, logout, password_change, password_change_done, password_reset, password_reset_done, password_reset_confirm, password_reset_complete)
 from .views import (content_views, rgstr_views)
 
 
@@ -10,20 +8,16 @@ urlpatterns = [
     url(r'^$', content_views.index, name="index"),
     url(r'^project_view/$', content_views.project_view, name="project_view"),
     url(r'^company/(?P<company_id>[\w\-]+)/$', content_views.company, name="company"),
-	#url(r'^company/(?P<company_id>[\w\-]+)/edit/$', content_views.company_edit, name="company_edit"),
 	url(r'^project/(?P<project_pk>[\w\-]+)/$', content_views.project, name="project"),
 	url(r'^project/(?P<project_pk>[\w\-]+)/edit/$', content_views.project_edit, name="project"),
     url(r'^companies/$', content_views.companies, name="companies"),
 	url(r'^projects/$', content_views.projects, name="projects"),
-    url(r'^post_project/$', content_views.post_project, name="post_project "),
+    url(r'^post_project/$', content_views.post_project, name="post_project"),
     url(r'^project/(?P<project_id>[0-9]+)/apply/$', content_views.apply_project, name="apply_project"),
 	url(r'^my_projects/$', content_views.my_projects, name="my_projects"),
 	url(r'^my_applications/$', content_views.my_applications, name="my_applications"),
 	url(r'^my_applications/(?P<application_id>[0-9]+)/edit/$', content_views.application_edit, name="application_edit"),
-	
-    ]
-
-
+	]
 
 # account related urls
 urlpatterns += (

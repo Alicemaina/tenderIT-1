@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 
-
-=======
->>>>>>> fa05701e708b13ee444371b9a747f6b980fd68d0
 {% load staticfiles %}
-
 {% load projects_tags %}
 {% show_latest_projects as latest_projects %}
+
+
 {% for project in latest_projects %}
 	<div class=" project col-lg-5 col-md-5 col-sm-12 col-xs-12">
 			<div class="row">
@@ -15,7 +12,7 @@
 						<div class="row">
 							<!--Thecolumn for holding project image-->
 							<div class="col-lg-5 col-md-5">
-								<p class="small">Posted by: <strong class="text-capitalize">{{ project.company }}</strong></p>
+								<p class="small">Posted by: <strong class="text-capitalize">{{project.company}}</strong></p>
 								<hr>
 								<img class="project-image" src="{% static "img/3-grey.jpg" %}" alt="">
 								<hr>
