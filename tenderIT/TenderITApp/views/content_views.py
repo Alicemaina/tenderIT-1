@@ -76,7 +76,7 @@ def post_project(request):
         'form' : project_form,
 		'project_added' : project_added
     }
-	return render(request, 'new_project.html', context)
+	return render(request, 'project_templates/new_project.html', context)
 
 @login_required
 def project_edit(request, project_pk):
