@@ -18,7 +18,8 @@ class Company(models.Model):
 	phone = models.CharField()
 	phone = models.CharField(max_length=16)
 	website = models.URLField()
-	
+	logo = models.ImageField(upload_to='company_logo/%Y/%m/%d')
+
 	def __unicode__(self):
 		return self.name
 
@@ -39,16 +40,9 @@ class Project(models.Model):
 	currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=DOLLAR)
 	startDate = models.DateField()
 	endDate = models.DateField()
-	publishDate = models.DateField(auto_now_add=True)
-	
-	def clean(self):
-		cleaned_data = super(Project, self).clean()
-		startDate = cleaned_data.get['startDate']
-		endDate = cleaned_data.get['endDate']
-		
-		if endDate <= startDate:
-			raise forms.ValidationError(u'End date must be after start date.')
-		return cleaned_data
+	publishDate = models.DateField(auto_now_add=True, null=True)
+	avatar = models.ImageField(upload_to='project_avatar/%Y/%m/%d')
+	document = models.FileField(upload_to='project_document/%Y/%m/%d')
 
 	def __unicode__(self):
 		return self.title
@@ -57,7 +51,7 @@ class Rating(models.Model):
 	provider = models.ForeignKey(Company, related_name='rating_provider')
 	receiver = models.ForeignKey(Company, related_name='rating_receiver')
 	value = models.IntegerField(validators=[MaxValueValidator(5)])
-	comment = models.TextField()	
+	ratingDate = models.DateField(auto_now_add=True, null = True)
 
 	def __unicode__(self):
 		return self.receiver.name + " - " + self.provider.name
@@ -67,6 +61,7 @@ class ProjectApplication(models.Model):
 	applicant = models.ForeignKey(Company)
 	price = models.IntegerField()
 	description = models.TextField()
+	applicationDate = models.DateField(auto_now_add=True, null=True)
 
  	def __unicode__(self):
  		return self.project.title + " - " + self.applicant.name

@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from ..models import (Project,Company, ProjectApplication, Rating)
 from ..forms import Post_project, Apply_project
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 
 def index(request):
@@ -47,7 +47,12 @@ def project(request, project_pk):
 			apply_exist = ProjectApplication.objects.get(applicant=company, project=project)
 		except ProjectApplication.DoesNotExist:
 			apply_exist = None
+<<<<<<< HEAD
 
+=======
+		applications = ProjectApplication.objects.filter(project=project)
+	 context_dict['applications'] = applications	
+>>>>>>> 44fd741cb8d9e7c90e90ad0c6b10c2040cabb228
 	 context_dict['project'] = project
 	 context_dict['own_project'] = own_project
 	 context_dict['apply_exist'] = apply_exist
@@ -61,7 +66,7 @@ def project(request, project_pk):
 def post_project(request):
 	project_added = False
    	if request.method == 'POST':
-		project_form = Post_project(request.POST)
+		project_form = Post_project(request.POST, request.FILES)
         	if project_form.is_valid():
 				project=project_form.save(commit=False)
 				project.company = Company.objects.get(user=request.user)
@@ -76,6 +81,19 @@ def post_project(request):
     }
 	return render(request, 'new_project.html', context)
 
+@login_required
+def project_edit(request, project_pk):
+	project = get_object_or_404(Project, pk = project_pk)
+	if request.method == 'POST':
+		project_form = Post_project(request.POST, instance = project)
+		if project_form.is_valid():
+			project = project_form.save()
+	else:
+		project_form = Post_project(instance=project)
+	context = {'form': project_form,}
+	return render(request, 'new_project.html', context)
+			
+    
 def companies(request):
     company_list = Company.objects.order_by('name')	
     context_dict = {'companies' : company_list}
@@ -123,8 +141,23 @@ def apply_project(request, project_id):
         'form' : apply_form,
 	'application_added' : application_added,
 	'project' : project,
-	'project_id' : project_id,
+	
     }
+	return render(request, 'application.html', context)
+
+@login_required
+def application_edit(request, application_id):
+	application = get_object_or_404(ProjectApplication, pk = application_id)
+	project = application.project
+	if request.method == 'POST':
+		apply_form = Apply_project(request.POST, instance = application)
+		if apply_form.is_valid():
+			application = apply_form.save()
+	else:
+		apply_form = Apply_project(instance=application)
+	context = {'form': apply_form,
+		'project': project,
+		}
 	return render(request, 'application.html', context)
 
 @login_required
@@ -132,3 +165,5 @@ def rate_project(request, project_id):
 
      ## Almin as we discussed before you can write this method if you want
     return 
+
+

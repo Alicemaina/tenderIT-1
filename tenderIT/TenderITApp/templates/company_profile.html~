@@ -14,7 +14,10 @@
 		</ul>
 		{% if user.is_authenticated %}
 			{% if user.company.id = company.id %}
-			<button type="button">Edit</button>
+			<a class="btn btn-default" href="{% url 'company_edit' pk=company.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+			
+			{% endif %}
+		{% endif %}
 	   <h4> Projects </h4>
 		{% if projects %}			
 			<ul>

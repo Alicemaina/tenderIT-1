@@ -9,6 +9,9 @@
 			<li>Offered price: {{ application.price }} {{ application.project.currency }}</li>
 			<li>Description: {{ application.description }}</li>
 		</ul>
+		<form action="/my_applications/{{ application.pk }}/edit/">
+   					<input type="submit" value="Edit">
+				</form>	
 	   </p>
 	   {% endfor %}
 	

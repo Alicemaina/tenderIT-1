@@ -13,7 +13,25 @@
 		</ul>
 		{% if user.is_authenticated %}
 			{% if own_project %}
-				<button type="button">Edit</button>
+			<form action="/project/{{ project.pk }}/edit/">
+   					<input type="submit" value="Edit">
+				</form>	
+				{% if applications %}
+					<h5> Applications </h5>
+					{% for application in applications %}
+						<p>
+	  					
+						<ul>
+							<li>Applicant: <a href="/company/{{ application.applicant.id }}"> {{ application.applicant.name }} </a></li>
+							<li>Price: {{ application.price }} {{ project.currency }}</li>
+							<li>Description: {{ application.description }}</li>
+							<li>Date: {{ application.applicationDate }}</li>
+							
+			
+						</ul>
+	 					 </p>
+					{% endfor %}
+				{% endif %}
 			{% else %}
 				{% if apply_exist %}
 				<form action="/my_applications/">
