@@ -47,8 +47,9 @@ def project(request, project_pk):
 			apply_exist = ProjectApplication.objects.get(applicant=company, project=project)
 		except ProjectApplication.DoesNotExist:
 			apply_exist = None
+
 		applications = ProjectApplication.objects.filter(project=project)
-	 context_dict['applications'] = applications	
+	 context_dict['applications'] = applications
 	 context_dict['project'] = project
 	 context_dict['own_project'] = own_project
 	 context_dict['apply_exist'] = apply_exist
@@ -77,7 +78,7 @@ def post_project(request):
         'form' : project_form,
 		'project_added' : project_added
     }
-	return render(request, 'new_project.html', context)
+	return render(request, 'project_templates/new_project.html', context)
 
 @login_required
 def project_edit(request, project_pk):

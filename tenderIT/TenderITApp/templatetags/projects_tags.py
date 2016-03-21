@@ -8,8 +8,9 @@ def project_count():
     
 
 
-@register.inclusion_tag('project_templates/latest_projects.html')
-def latest_projets(count = 5):
-    latest_projects = Project.objects.order_by('-publish')[:count]
-    return {'latest_projects': latest_projects}
+@register.assignment_tag
+def show_latest_projects(count = 5):
+    latest_projects = Project.objects.order_by('-publishDate')[:count]
+    return latest_projects
+
 
