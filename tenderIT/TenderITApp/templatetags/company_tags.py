@@ -9,3 +9,9 @@ def total_companies():
     return Company.objects.count()
 
 
+@register.simple_tag
+def get_company_id(user):
+    company = user.company
+    company_id = company.pk
+    return company_id
+

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from ..models import (Project,Company, ProjectApplication, Rating)
 from ..forms import Post_project, Apply_project
 from django.contrib.auth.decorators import login_required
@@ -19,8 +19,7 @@ def project_view(request):
 def company(request, company_id):
     context_dict = {}
     try:
-
-	company = Company.objects.get(pk=company_id)
+	company = get_object_or_404(Company, pk=company_id)
     	context_dict['company_templates'] = company
 
 	context_dict['company'] = company
@@ -32,7 +31,7 @@ def company(request, company_id):
 	pass
     
     return render(request, 'company_profile.html', context_dict)
-	
+
 def project(request, project_pk):
 	context_dict = {}
 	own_project = False

@@ -54,7 +54,7 @@ def register_user(request):
 def logged_in(request):
 	user = request.user
 	company = user.company
-	company_id = user.company.pk
+	company_id = company.pk
 	return redirect('/company/%d/' %company_id,{'company':company})
 
 

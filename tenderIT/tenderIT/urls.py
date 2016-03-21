@@ -5,4 +5,5 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('TenderITApp.urls')),
+    url(r'^inplaceeditform/', include('inplaceeditform.urls'))
  ]

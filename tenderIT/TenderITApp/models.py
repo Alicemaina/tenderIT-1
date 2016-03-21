@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 # from phonenumber_field.modelfields import PhoneNumberField
 
 class Company(models.Model):
-	user = models.OneToOneField(User)
+	user = models.OneToOneField(User, related_name='company')
 	nationalID = models.CharField(max_length=64, validators=[MinLengthValidator(3)], unique=True)
 	name = models.CharField(max_length=128, validators=[MinLengthValidator(3)])
 	street = models.CharField(max_length=128)
