@@ -67,6 +67,8 @@ def post_project(request):
         	if project_form.is_valid():
 				project=project_form.save(commit=False)
 				project.company = Company.objects.get(user=request.user)
+				project.avatar = request.FILES['avatar']
+				project.document = request.FILES['document']
 				project.save()
 				project_added=True				               
 	else:
@@ -160,7 +162,7 @@ def application_edit(request, application_id):
 @login_required
 def rate_project(request, project_id):
 
-     ## Almin as we discussed before you can write this method if you want
+     ## Left for better days.
     return 
 
 
