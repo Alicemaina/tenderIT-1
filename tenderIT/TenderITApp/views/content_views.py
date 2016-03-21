@@ -83,9 +83,13 @@ def post_project(request):
 def project_edit(request, project_pk):
 	project = get_object_or_404(Project, pk = project_pk)
 	if request.method == 'POST':
-		project_form = Post_project(request.POST, instance = project)
+		project_form = Post_project(request.POST, request.FILES, instance = project)
 		if project_form.is_valid():
-			project = project_form.save()
+			project = project_form.save(commit=False)
+			project.company = Company.objects.get(user=request.user)
+			project.avatar = request.FILES['avatar']
+			project.document = request.FILES['document']
+			project.save()
 	else:
 		project_form = Post_project(instance=project)
 	context = {'form': project_form,}
