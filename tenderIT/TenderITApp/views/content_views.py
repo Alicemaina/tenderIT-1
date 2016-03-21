@@ -43,14 +43,6 @@ def projects(request):
 	return render(request, 'projects.html', context_dict)
 
 
-	projects = Project.objects.filter(company=company)
-	context_dict['projects'] = projects
-
-    except Company.DoesNotExist:
-	pass
-
-    return render(request, 'company_profile.html', context_dict)
-
 
 # Single project view, handles request for a project based on projects primary key
 
