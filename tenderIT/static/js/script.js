@@ -20,3 +20,9 @@ $(function() {
     	}
     });
   });
+
+
+$(document).ready(function() {
+	$(".project-desc-text").dotdotdot();
+});
+
