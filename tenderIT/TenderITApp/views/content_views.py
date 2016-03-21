@@ -47,12 +47,9 @@ def project(request, project_pk):
 			apply_exist = ProjectApplication.objects.get(applicant=company, project=project)
 		except ProjectApplication.DoesNotExist:
 			apply_exist = None
-<<<<<<< HEAD
 
-=======
 		applications = ProjectApplication.objects.filter(project=project)
 	 context_dict['applications'] = applications	
->>>>>>> 44fd741cb8d9e7c90e90ad0c6b10c2040cabb228
 	 context_dict['project'] = project
 	 context_dict['own_project'] = own_project
 	 context_dict['apply_exist'] = apply_exist
