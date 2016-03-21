@@ -17,12 +17,12 @@ def companies(request):
 
 # Single company view, handles request for a company based on company id (primary key)
 def company(request, company_id):
-<<<<<<< HEAD
+
     context_dict = {}
     try:
 	company = get_object_or_404(Company, pk=company_id)
     	context_dict['company_templates'] = company
-=======
+
 	context_dict = {}	
 	try:
 		company = Company.objects.get(pk=company_id) 		# Get company by company id
@@ -34,7 +34,7 @@ def company(request, company_id):
 		pass
     
 	return render(request, 'company_profile.html', context_dict)
->>>>>>> fa05701e708b13ee444371b9a747f6b980fd68d0
+
 
 # All projects view, handels request for all projects, orders projects by publish date.
 def projects(request):
@@ -42,18 +42,18 @@ def projects(request):
 	context_dict = {'projects' : project_list}	
 	return render(request, 'projects.html', context_dict)
 
-<<<<<<< HEAD
+
 	projects = Project.objects.filter(company=company)
 	context_dict['projects'] = projects
-	
+
     except Company.DoesNotExist:
 	pass
-    
+
     return render(request, 'company_profile.html', context_dict)
 
-=======
+
 # Single project view, handles request for a project based on projects primary key
->>>>>>> fa05701e708b13ee444371b9a747f6b980fd68d0
+
 def project(request, project_pk):
 	context_dict = {}
 	own_project = False		# Variable to show does the project belong to authenticated user
