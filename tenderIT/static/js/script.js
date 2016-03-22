@@ -26,3 +26,16 @@ $(document).ready(function() {
 	$(".project-desc-text").dotdotdot();
 });
 
+//for company-profile tabs
+$(document).ready(function(){
+    $("#myTab a").click(function(e){
+    	e.preventDefault();
+    	$(this).tab('show');
+    });
+});
+
+//function imgError(image){
+//    image.onerror = "";
+//    image.src = "{% static "img/3-grey.jpg" %}";
+//    return true;
+//}

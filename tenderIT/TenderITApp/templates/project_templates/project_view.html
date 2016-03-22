@@ -1,55 +1,236 @@
-{% extends 'base.html' %}
-{% block body_block %}
-{% if project %}
-	   <h2>{{ project.name }}</h2>
-	   	<ul>
-			<li> Company: {{ project.company.name }}</li>
-			<li> Title: {{ project.title }}</li>
-			<li> Description: {{ project.description }}</li>
-			<li> Budget: {{ project.budget }} {{ project.currency}}</li>
-			<li> Start: {{ project.startDate }} </li>
-			<li> End: {{ project.endDate }} </li>
-			<li> Publish date: {{ project.publishDate }} </li> 
-		</ul>
-		<!-- If user is authenticated and user=project.company.user show edit button, and project applications-->
-		{% if user.is_authenticated %}
-			{% if own_project %}
-			<form action="/project/{{ project.pk }}/edit/">
-   					<input type="submit" value="Edit">
-				</form>	
-				<!-- Show project applications -->
-				{% if applications %}
-					<h5> Applications </h5>
-					{% for application in applications %}
-						<p>
-	  					
-						<ul>
-							<li>Applicant: <a href="/company/{{ application.applicant.id }}"> {{ application.applicant.name }} </a></li>
-							<li>Price: {{ application.price }} {{ project.currency }}</li>
-							<li>Description: {{ application.description }}</li>
-							<li>Date: {{ application.applicationDate }}</li>
-						</ul>
-	 					 </p>
-					{% endfor %}
-				{% endif %}
+
+{% load staticfiles %}
+{% load projects_tags %}
+{% show_latest_projects as latest_projects %}
+{% for project in latest_projects %}
+	<div class="project col-lg-3" >
+	<div class="pt-panel panel">
+		<div class="panel-header">
+			<p class="text-center">Posted by: <strong class="navy text-capitalize">{{ project.company }}</strong></p>
+		</div>
+		<div class="panel-body">
+			
+			{% if project.avatar %}
+			<img class="project-image" src="{{project.avatar.url}}" alt="" style="max-height: 200px;">
 			{% else %}
-				{% if apply_exist %}
-				<form action="/my_applications/">
-   					<input type="submit" value="Apply">
-				</form>	
-				{% else %}
-				<form action="/project/{{ project.id }}/apply">
-   					<input type="submit" value="Apply">
-				</form>	
-				{% endif %}
+			<img src="{% static "img/3-grey.jpg" %}" alt="">
 			{% endif %}
-		{% else %}
-			<form action="/login">
-   				<input type="submit" value="Apply">
-			</form>			
-		{% endif %}
-{% else %}
-	<strong>Specified project does not exist.</strong>			
-{% endif %}
-{% endblock %}
+
+			<h3 class="navy text-center">
+				<p class="project-title text-capitalize "><a data-toggle="modal" data-target="#Modal{{ forloop.counter }}" class="navy" href="#">{{project.title}}</a></p>
+			</h3>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+
+	<!--<div class=" project col-lg-5 col-md-5 col-sm-10 col-xs-10">-->
+		<!--<div class="row">-->
+			<!--<div class="  pt-panel panel col-lg-12 col-md-12 col-sm-12">-->
+				<!--<div class="panel-body">-->
+					<!--<div class="row">-->
+						<!--&lt;!&ndash;Thecolumn for holding project image&ndash;&gt;-->
+						<!--<div class="col-lg-5 col-md-5">-->
+							<!--<p class="small">Posted by: <strong class="text-capitalize">{{ project.company }}</strong></p>-->
+							<!--<hr>-->
+							<!--<div  id="project-thumbnail" class="thumbnail">-->
+								<!--<img class="project-image" src="{{project.avatar.url}}" alt="" style="max-height: 125px;">-->
+							<!--</div>-->
+
+							<!--<hr>-->
+							<!--<p class="navy"><strong>Budget: </strong>{{ project.budget }} {{project.currency}}</p>-->
+							<!--<p class="navy"><strong>Deadline: </strong>{{ project.endDate }}</p>-->
+
+						<!--</div>-->
+							<!--<div class="col-lg-7 col-md-7 " >-->
+								<!--<ul class="list-inline">-->
+									<!--<li><p class="small text-muted">Posted: {{project.publishDate}}</p></li>-->
+									<!--<li><p class="small text-muted"> Rating:  </p></li>-->
+								<!--</ul>-->
+
+								<!--<h3 class="project-title" >-->
+									<!--<p class="text-capitalize "><a data-toggle="modal" data-target="#Modal{{ forloop.counter }}" class="navy" href="#">{{project.title}}</a></p>-->
+								<!--</h3>-->
+								<!--<hr>-->
+								<!--<div class=" project-desc-panel panel">-->
+									<!--<div class="panel-body">-->
+										<!--<p class="project-desc-text navy">-->
+											<!--{{project.description}}-->
+								        <!--</p>-->
+
+									<!--</div>-->
+								<!--</div>-->
+
+
+
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+
+			<!--</div>-->
+	<!--</div>-->
+
+
+<!-- Modal -->
+<div class="project-modal modal fade" id="Modal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-capitalize" id="myModalLabel"><strong>{{ project.title }}</strong> <small class="text-lowercase">by</small>
+			<a  href="#">{{ project.company.name }}</a></h4>
+      </div>
+      <div class="modal-body">
+		 <div class="row">
+			 <div class="col-lg-4">
+				 <a data-toggle="modal" data-target="#image-modal{{ forloop.counter }}" href="#" class=" thumbnail">
+					 {% if company.avatar %}
+					 <img class="project-image" src="{{project.avatar.url}}" alt="project image">
+					 {% else %}
+					 <img src="{% static "img/3-grey.jpg" %}" alt="">
+					 {% endif %}
+				 </a>
+				 <p class= "navy"><strong class="text-left">Budget: </strong><em>{{ project.budget }}</em> {{project.currency}}</p>
+				 <p class=" navy"><strong class="text-left">Start date: </strong>{{ project.startDate }}</p>
+				 <p class=" navy"><strong class="text-left">Deadline: </strong>{{ project.endDate }}</p>
+
+			 </div>
+			 <div class="col-lg-7">
+				<div class="vertical-line">
+					<h3>Project Description</h3>
+					<div class="panel">
+						<div class="panel-body">
+							<p class="description">{{project.description}}</p>
+						</div>
+					</div>
+
+
+				</div>
+			 </div>
+		 </div>
+		</ul>
+
+				<!--&lt;!&ndash; Show project applications &ndash;&gt;-->
+				<!--{% if applications %}-->
+					<!--<h5> Applications </h5>-->
+					<!--{% for application in applications %}-->
+						<!--<p>-->
+
+						<!--<ul>-->
+							<!--<li>Applicant: <a href="/company/{{ application.applicant.id }}"> {{ application.applicant.name }} </a></li>-->
+							<!--<li>Price: {{ application.price }} {{ project.currency }}</li>-->
+							<!--<li>Description: {{ application.description }}</li>-->
+							<!--<li>Date: {{ application.applicationDate }}</li>-->
+						<!--</ul>-->
+	 					 <!--</p>-->
+					<!--{% endfor %}-->
+				<!--{% endif %}-->
+      </div>
+      <div class="modal-footer">
+        <ul class="list-inline">
+			<li><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></li>
+			{% if own_project %}
+				<li>
+					<form action="/project/{{ project.pk }}/edit/">
+   						<input class="btn btn-primary" type="submit" value="Edit">
+					</form>
+				</li>
+			{% else %}
+
+				<li>
+					<form action="/project/{{ project.pk }}/apply">
+   						<input class="btn btn-primary" type="submit" value="Apply">
+					</form>
+
+				</li>
+
+
+			{% endif %}
+		</ul>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--image modal-->
+<div class="image-modal modal fade" id="image-modal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="myimageModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-capitalize" id="myimageModalLabel">Project photo</h4>
+      	<div class="modal-body">
+			{% if company.avatar %}
+			<img class="project-big-image" src="{{project.avatar.url}}" alt="">
+			{% else %}
+			<img src="{% static "img/3-grey.jpg" %}" alt="">
+			{% endif %}
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>
+
+{% endfor %}
+
+
+<!--{% if project %}-->
+	   <!--<h2>{{ project.name }}</h2>-->
+	   	<!--<ul>-->
+			<!--<li> Company: {{ project.company.name }}</li>-->
+			<!--<li> Title: {{ project.title }}</li>-->
+			<!--<li> Description: {{ project.description }}</li>-->
+			<!--<li> Budget: {{ project.budget }} {{ project.currency}}</li>-->
+			<!--<li> Start: {{ project.startDate }} </li>-->
+			<!--<li> End: {{ project.endDate }} </li>-->
+			<!--<li> Publish date: {{ project.publishDate }} </li> -->
+		<!--</ul>-->
+		<!--&lt;!&ndash; If user is authenticated and user=project.company.user show edit button, and project applications&ndash;&gt;-->
+		<!--{% if user.is_authenticated %}-->
+			<!--{% if own_project %}-->
+			<!--<form action="/project/{{ project.pk }}/edit/">-->
+   					<!--<input type="submit" value="Edit">-->
+				<!--</form>	-->
+				<!--&lt;!&ndash; Show project applications &ndash;&gt;-->
+				<!--{% if applications %}-->
+					<!--<h5> Applications </h5>-->
+					<!--{% for application in applications %}-->
+						<!--<p>-->
+	  					<!---->
+						<!--<ul>-->
+							<!--<li>Applicant: <a href="/company/{{ application.applicant.id }}"> {{ application.applicant.name }} </a></li>-->
+							<!--<li>Price: {{ application.price }} {{ project.currency }}</li>-->
+							<!--<li>Description: {{ application.description }}</li>-->
+							<!--<li>Date: {{ application.applicationDate }}</li>-->
+						<!--</ul>-->
+	 					 <!--</p>-->
+					<!--{% endfor %}-->
+				<!--{% endif %}-->
+			<!--{% else %}-->
+				<!--{% if apply_exist %}-->
+				<!--<form action="/my_applications/">-->
+   					<!--<input type="submit" value="Apply">-->
+				<!--</form>	-->
+				<!--{% else %}-->
+				<!--<form action="/project/{{ project.id }}/apply">-->
+   					<!--<input type="submit" value="Apply">-->
+				<!--</form>	-->
+				<!--{% endif %}-->
+			<!--{% endif %}-->
+		<!--{% else %}-->
+			<!--<form action="/login">-->
+   				<!--<input type="submit" value="Apply">-->
+			<!--</form>			-->
+		<!--{% endif %}-->
+<!--{% else %}-->
+	<!--<strong>Specified project does not exist.</strong>			-->
+<!--{% endif %}-->
+
 

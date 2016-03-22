@@ -1,36 +1,117 @@
 {% extends 'base.html' %}
 {% block body_block %}
-{% if company %}
-	   <h2>{{ company.name }}</h2>
-	   	<ul>
-			<li> ID: {{ company.nationalID }}</li>
-			<li> Street: {{ company.street }}</li>
-			<li> City: {{ company.city }}</li>
-			<li> Country: {{ company.country.name }}</li>
-			<li> Postcode: {{ company.postcode }}</li>
-			<li> Phone: {{ company.phone }}</li>
-			<li> Email: {{ company.email }}</li>
-			<li> Website: <a href="{{ company.website }}"> {{ company.website }}</a>
-		</ul>
-		<!-- If user is authenticated and user=company.user show edit button -->
-		{% if user.is_authenticated %}
-			{% if user.company.id = company.id %}
-			<button type="button">Edit</button>
-			{% endif %}
-		{% endif %}
-	   <!-- Show company projects -->
-	   <h4> Projects </h4>
-		{% if projects %}			
-			<ul>
-			{% for project in projects %}
-				<li> <a href = "/project/{{ project.pk }}">{{ project.title }} </a></li>
-			{% endfor %}
-			</ul>
-		{% else %}
-			<strong> No projects </strong>
-		{% endif %}
-{% else %}
-	<strong>Specified company does not exist.</strong>			
-{% endif %}
+{% load staticfiles %}
+<div id="company-profile">
+	<div  class="container">
+		<div class="row">
+			<div class="profile-tabs">
+    			<ul class="nav nav-tabs" id="myTab">
+        			<li class="active"><a href="#Profile">Profile</a></li>
+        			<li><a href="#Info">Details</a></li>
+        			<!--<li class="dropdown">-->
+            			<!--<a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>-->
+           				 <!--<ul class="dropdown-menu">-->
+							 <!--<li><a href="#dropdown1">Dropdown1</a></li>-->
+							 <!--<li><a href="#dropdown2">Dropdown2</a></li>-->
+            			<!--</ul>-->
+					<!--</li>-->
+    			</ul>
+    			<div class="tab-content">
+        			<div id="Profile" class="tab-pane fade in active">
+						<div class="row">
+			<div class="profile-main">
+				<div class="col-lg-3">
+					<div class="panel">
+						<div class="panel-body">
+							<div class="thumbnail">
+								{% if company.logo %}
+								<img src="{{ company.logo.url }}" alt=""/>
+								{% else %}
+								<img src="{% static "img/3-grey.jpg" %}" alt=""/>
+								{% endif %}
+
+								<div class="info">
+										<div class="info-panel panel">
+											<div class="panel-body">
+												<p><span class="glyphicon glyphicon-envelope"></span> <strong>Email</strong></p>
+											</div>
+										</div>
+										<div class="info-panel panel">
+											<div class="panel-body">
+												<p><span class="glyphicon glyphicon-phone-alt"></span> <strong>Phone</strong></p>
+											</div>
+
+										</div>
+										<div class=" info-panel	panel">
+											<div class="panel-body">
+												<p><span class="glyphicon glyphicon-briefcase"></span> <strong>Projects</strong></p>
+											</div>
+								</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class=" description row">
+						<col-lg-6>
+							<h2 class="text-capitalize">{{company.name}}</h2>
+							<p>{{company.description}}</p>
+						</col-lg-6>
+					</div>
+					<div class="row">
+
+					</div>
+				</div>
+			</div>
+		</div>
+        			</div>
+					<div id="Details" class="tab-pane fade">
+        			</div>
+        			<!--<div id="dropdown1" class="tab-pane fade">-->
+        			<!--</div>-->
+        			<!--<div id="dropdown2" class="tab-pane fade">-->
+        			<!--</div>-->
+    			</div>
+			</div>
+		</div>
+
+	</div>
+
+			<!--{% if company %}-->
+	   <!--<h2>{{ company.name }}</h2>-->
+	   	<!--<ul>-->
+			<!--<li> ID: {{company.nationalID}}</li>-->
+			<!--<li> Street: {{ company.street }}</li>-->
+			<!--<li> City: {{ company.city }}</li>-->
+			<!--<li> Country: {{ company.country.name }}</li>-->
+			<!--<li> Postcode: {{ company.postcode }}</li>-->
+			<!--<li> Phone: </li>-->
+			<!--<li> Email: {{ company.email }}</li>-->
+			<!--<li> Website: <a href="{{ company.website }}"> {{ company.website }}</a>-->
+		<!--</ul>-->
+		<!--&lt;!&ndash; If user is authenticated and user=company.user show edit button &ndash;&gt;-->
+		<!--{% if user.is_authenticated %}-->
+			<!--{% if user.company.id = company.id %}-->
+			<!--<button type="button">Edit</button>-->
+			<!--{% endif %}-->
+		<!--{% endif %}-->
+	   <!--&lt;!&ndash; Show company projects &ndash;&gt;-->
+	   <!--<h4> Projects </h4>-->
+		<!--{% if projects %}-->
+			<!--<ul>-->
+			<!--{% for project in projects %}-->
+				<!--<li> <a href = "/project/{{ project.pk }}">{{ project.title }} </a></li>-->
+			<!--{% endfor %}-->
+			<!--</ul>-->
+		<!--{% else %}-->
+			<!--<strong> No projects </strong>-->
+		<!--{% endif %}-->
+<!--{% else %}-->
+	<!--<strong>Specified company does not exist.</strong>-->
+<!--{% endif %}-->
+
+	</div>
 {% endblock %}
 

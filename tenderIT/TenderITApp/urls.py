@@ -1,4 +1,7 @@
 from django.conf.urls import url
+from django.conf import  settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth.views import (login, logout, password_change, password_change_done, password_reset, password_reset_done, password_reset_confirm, password_reset_complete)
 from .views import (content_views, rgstr_views)
 
@@ -37,3 +40,6 @@ urlpatterns += (
     url(r'^password-reset/complete/$', password_reset_complete,
         {'template_name': 'registration/password_rst_complete.html'}, name='password_reset_complete')
     )
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

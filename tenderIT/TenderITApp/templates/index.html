@@ -45,11 +45,15 @@
             </div>
 
     </div>
-    <div class="projects-content row">
-            <div class="project-panel">
-            {% include 'project_templates/project-list.html' %}
-            </div>
+    <div class="container-fluid">
+        <div class="projects-content row">
+
+                <h2 class="inset-text navy text-center">Some of the latest projects</h2>
+                {% include 'project_templates/project_view.html' %}
+
     </div>
+    </div>
+
 
 </div>
 {% endblock %}

@@ -9,7 +9,7 @@ def project_count():
 
 
 @register.assignment_tag
-def show_latest_projects(count = 5):
+def show_latest_projects(count = 8):
     latest_projects = Project.objects.order_by('-publishDate')[:count]
     return latest_projects
 

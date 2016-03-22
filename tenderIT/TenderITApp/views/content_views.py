@@ -17,22 +17,14 @@ def companies(request):
 
 # Single company view, handles request for a company based on company id (primary key)
 def company(request, company_id):
-
-    context_dict = {}
-    try:
 	company = get_object_or_404(Company, pk=company_id)
-    	context_dict['company_templates'] = company
-
-	context_dict = {}	
-	try:
-		company = Company.objects.get(pk=company_id) 		# Get company by company id
-   		context_dict['company'] = company		
-		projects = Project.objects.filter(company=company)  # Get company projects
-		context_dict['projects'] = projects	
-	# Company does not exist, do nothing
-	except Company.DoesNotExist:
-		pass
-    
+	context_dict = {}
+	company = Company.objects.get(pk=company_id)
+	# Get company by company id
+	context_dict['company'] = company
+	projects = Project.objects.filter(company=company)
+	# Get company projects
+	context_dict['projects'] = projects
 	return render(request, 'company_profile.html', context_dict)
 
 
@@ -42,6 +34,10 @@ def projects(request):
 	context_dict = {'projects' : project_list}	
 	return render(request, 'projects.html', context_dict)
 
+	projects = Project.objects.filter(company=company)
+	context_dict['projects'] = projects
+
+	return render(request, 'company_profile.html', context_dict)
 
 
 # Single project view, handles request for a project based on projects primary key
@@ -50,28 +46,29 @@ def project(request, project_pk):
 	context_dict = {}
 	own_project = False		# Variable to show does the project belong to authenticated user
 	try:	
-	 project = Project.objects.get(pk = project_pk)  # Get project by primary key
+		project = Project.objects.get(pk = project_pk)  # Get project by primary key
 	 
 	 # If user is authenticated check is he the owner of the project and check did he already applied for this project
-	 if request.user.is_authenticated(): 
-		company = Company.objects.get(user=request.user)
-		if company == project.company:
-			own_project = True
-		try:
-			apply_exist = ProjectApplication.objects.get(applicant=company, project=project)
-		except ProjectApplication.DoesNotExist:
-			apply_exist = None
-		# Get project application for this project
-		applications = ProjectApplication.objects.filter(project=project)
+		if request.user.is_authenticated():
+			company = Company.objects.get(user=request.user)
+			if company == project.company:
+				own_project = True
+			try:
+				apply_exist = ProjectApplication.objects.get(applicant=company, project=project)
+			except ProjectApplication.DoesNotExist:
+				apply_exist = None
+			# Get project application for this project
 
-	 context_dict['applications'] = applications
-	 context_dict['project'] = project
-	 context_dict['own_project'] = own_project
-	 context_dict['apply_exist'] = apply_exist
-	
-	# Project does not exist, do nothing
+			applications = ProjectApplication.objects.filter(project=project)
+
+		context_dict['applications'] = applications
+		context_dict['project'] = project
+		context_dict['own_project'] = own_project
+		context_dict['apply_exist'] = apply_exist
+
+		# Project does not exist, do nothing
 	except Project.DoesNotExist:
-	 pass
+		pass
 	
 	return render(request, 'project_templates/project_view.html', context_dict)
 
@@ -144,13 +141,13 @@ def apply_project(request, project_id):
 				application.applicant = Company.objects.get(user=request.user)
 				application.save()				
 				application_added=True	
-				project = application.project	
-	               
+				project = application.project
+
 	    	else:
 				print apply_form.errors
 	# Request not POST, show the form
 	else:
-         	apply_form = Apply_project()
+        	apply_form = Apply_project()
 
 	context = {
         'form' : apply_form,
