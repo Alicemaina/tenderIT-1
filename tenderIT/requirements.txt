@@ -6,7 +6,6 @@ pbr==1.8.1
 Pillow==3.1.0
 pytz==2016.1
 six==1.10.0
-South==1.0.2
 stevedore==1.10.0
 virtualenv==14.0.2
 virtualenv-clone==0.2.6
