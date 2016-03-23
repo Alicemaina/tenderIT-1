@@ -31,7 +31,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title text-capitalize" id="myModalLabel"><strong>{{ project.title }}</strong> <small class="text-lowercase">by</small>
-			<a  href="#">{{ project.company.name }}</a></h4>
+			<a  href="{% url 'company' project.company.id %}">{{ project.company.name }}</a></h4>
       </div>
       <div class="modal-body">
 		 <div class="row">

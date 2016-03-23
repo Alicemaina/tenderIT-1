@@ -13,6 +13,31 @@ margin-bottom: 50px;
 
 }
 
+#index .image-modal img{
+    width: 100%;
+}
+
+.footer .row {
+    margin-top: 20px;
+}
+
+.footer ul{
+   list-style-type: none;
+}
+
+.footer ul a{
+    color: white;
+}
+
+.footer .first a{
+    font-weight: bolder;
+
+    }
+
+.footer .first {
+    margin-bottom: 10px;
+}
+
 .background{
     background-color: #e3e3e3;
 }
