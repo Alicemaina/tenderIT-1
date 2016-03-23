@@ -88,14 +88,17 @@
 <script src="{% static "js/script.js" %}"></script>
 <script src="{% static "js/jquery.dotdotdot.min.js" %}"></script>
 <div class="base-content container-fluid">
-	{% block body_block %}{% endblock %}
+<div class="col-lg-12 col-md-12">
+{% block body_block %}{% endblock %}
+</div>
+
 </div>
     <div class="footer">
     <div class="container">
     <div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
+        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
             <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-5 col-md-5">
                 <ul>
                     <li class="first"><a href="">About us</a></li>
                     <li><a href="">What is TenderIt</a></li></li>
@@ -107,7 +110,7 @@
                     <li><a href="">Spotlight</a></li></li>
                    </ul>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-5 col-md-5">
             <ul>
                 <li class="first"><a href="">Help</a></li>
                 <li><a href="">FAQ</a></li>
