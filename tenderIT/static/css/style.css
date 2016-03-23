@@ -217,13 +217,57 @@ margin-left: 80px;
     padding: 0px;
 }
 
+.profile-main .sectionB{
+    margin-left: 40px;
+}
 
 .profile-main .description{
-    margin-left: 30px;
+
+    min-height: 200px;
 }
 
 .profile-main .description h2{
     margin-top: 0;
+}
+
+.profile-main #accordion .panel-heading {
+    border: white;
+    background: #17AEB0;
+
+}
+
+.profile-main .edit-button{
+    float: right;
+}
+
+#Info .info-details{
+    float: right;
+    clear: both;
+}
+
+
+.profile-main #accordion .panel-title>a{
+    test-decorator: none;
+    color : white;
+    font-weight: bold;
+}
+
+.profile-main .panel-group{
+padding-left: 0px;
+margin-left: 0px;
+}
+
+.profile-main #accordion .panel {
+    border: none;
+}
+
+
+.profile-main #update{
+    visibility : hidden;
+}
+
+.description textarea{
+    display: none;
 }
 
 .info{

@@ -17,18 +17,26 @@ def companies(request):
 
 # Single company view, handles request for a company based on company id (primary key)
 def company(request, company_id):
-<<<<<<< HEAD
+
+	own_profile = False
+	user = request.user
+
 	company = get_object_or_404(Company, pk=company_id)
+	if user.is_authenticated:
+		if user.company.pk == company.pk:
+			own_profile = True
+			print own_profile
 	context_dict = {}
-	company = Company.objects.get(pk=company_id)
+	application_list = ProjectApplication.objects.filter(applicant=request.user.company)
+
 	# Get company by company id
 	context_dict['company'] = company
 	projects = Project.objects.filter(company=company)
 	# Get company projects
-	context_dict['projects'] = projects
-=======
-	context_dict = {}	
+	context_dict = {}
 	try:
+		context_dict['applications']= application_list
+		context_dict['own_profile'] = own_profile
 		company = Company.objects.get(pk=company_id) 		# Get company by company id
 		context_dict['company'] = company		
 		projects = Project.objects.filter(company=company)  # Get company projects
@@ -36,8 +44,9 @@ def company(request, company_id):
 	# Company does not exist, do nothing
 	except Company.DoesNotExist:
 		pass
-    
->>>>>>> 88e65f77236683a7fd4b45b488ad46e6dd703ae7
+
+
+
 	return render(request, 'company_profile.html', context_dict)
 
 
@@ -57,16 +66,15 @@ def projects(request):
 
 def project(request, project_pk):
 	context_dict = {}
-	own_project = False		# Variable to show does the project belong to authenticated user
+	own_project = False
+	# Variable to show does the project belong to authenticated user
 	try:	
 		project = Project.objects.get(pk = project_pk)  # Get project by primary key
 	 
 	 # If user is authenticated check is he the owner of the project and check did he already applied for this project
-<<<<<<< HEAD
+
 		if request.user.is_authenticated():
-=======
-		if request.user.is_authenticated(): 
->>>>>>> 88e65f77236683a7fd4b45b488ad46e6dd703ae7
+
 			company = Company.objects.get(user=request.user)
 			if company == project.company:
 				own_project = True
@@ -74,26 +82,25 @@ def project(request, project_pk):
 				apply_exist = ProjectApplication.objects.get(applicant=company, project=project)
 			except ProjectApplication.DoesNotExist:
 				apply_exist = None
-<<<<<<< HEAD
+
 			# Get project application for this project
 
-			applications = ProjectApplication.objects.filter(project=project)
-=======
+
 		# Get project application for this project
 		applications = ProjectApplication.objects.filter(project=project)
->>>>>>> 88e65f77236683a7fd4b45b488ad46e6dd703ae7
+
 
 		context_dict['applications'] = applications
 		context_dict['project'] = project
 		context_dict['own_project'] = own_project
 		context_dict['apply_exist'] = apply_exist
-<<<<<<< HEAD
+
 
 		# Project does not exist, do nothing
-=======
+
 	
 	# Project does not exist, do nothing
->>>>>>> 88e65f77236683a7fd4b45b488ad46e6dd703ae7
+
 	except Project.DoesNotExist:
 		pass
 	
@@ -123,6 +130,18 @@ def post_project(request):
 		'project_added' : project_added
     }
 	return render(request, 'project_templates/new_project.html', context)
+
+# updates company description
+def update_company_desc(request, company_id):
+	if request.method == 'POST':
+		company = get_object_or_404(Company, pk= company_id)
+		new_description = request.POST.get('hiddeninput')
+		company.description = new_description
+		company.save(update_fields = ["description"])
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
 
 @login_required
 def project_edit(request, project_pk):
@@ -162,7 +181,7 @@ def apply_project(request, project_id):
 	# If request is POST check form validity and create new ProjectApplication
 	if request.method == 'POST':
 		apply_form = Apply_project(request.POST)
-<<<<<<< HEAD
+
         	if apply_form.is_valid():
 				application = apply_form.save(commit=False)
 				application.project = Project.objects.get(id=project_id)
@@ -176,7 +195,7 @@ def apply_project(request, project_id):
 	# Request not POST, show the form
 	else:
         	apply_form = Apply_project()
-=======
+
 		if apply_form.is_valid():
 			application = apply_form.save(commit=False)
 			application.project = Project.objects.get(id=project_id)
@@ -187,10 +206,7 @@ def apply_project(request, project_id):
 	               
 		else:
 			print apply_form.errors
-	# Request not POST, show the form
-	else:
-		apply_form = Apply_project()
->>>>>>> 88e65f77236683a7fd4b45b488ad46e6dd703ae7
+
 
 	context = {
         'form' : apply_form,
@@ -219,5 +235,7 @@ def application_edit(request, application_id):
 @login_required
 def rate_project(request, project_id):   
 	return 
+
+
 
 

@@ -34,8 +34,39 @@ $(document).ready(function(){
     });
 });
 
-//function imgError(image){
-//    image.onerror = "";
-//    image.src = "{% static "img/3-grey.jpg" %}";
-//    return true;
-//}
+//update company description
+$(function(){
+    $('#update').click(function () {
+        var mysave = $('#desc-content').html();
+        $('#hiddeninput').val(mysave);
+    });
+});
+
+//when decription has focus
+function isFocused() {
+  if (document.activeElement.id == "desc-content") {
+         $('#update').css({
+           'visibility' :'visible'
+        });
+    }
+}
+
+//when loses focus
+//$(function() {
+//  $('#desc-content').focusout(function() {
+//    $('#update').css({
+//        'visibility' : 'hidden'
+//    });
+//  });
+//})
+
+
+//edit button occurs when list item is focused out
+
+//$(".block").mouseover(function() { $('#edit').css({
+//           'visibility' :'visible'
+//        }); })
+//        .mouseout(function() { $('#edit').css({
+//           'visibility' :'hidden'
+//        }); }, 500); })
+//        });
