@@ -24,8 +24,12 @@ def company(request, company_id):
 
 	company = get_object_or_404(Company, pk=company_id)
 	if user.is_authenticated:
-		if user.company.pk == company.pk:
-			own_profile = True
+		try:
+			if user.company:
+				if user.company.pk == company.pk:
+					own_profile = True
+		except Exception:
+			pass
 	context_dict = {}
 	application_list = ProjectApplication.objects.filter(applicant=company)
 
@@ -36,7 +40,7 @@ def company(request, company_id):
 	context_dict = {}
 	try:
 		context_dict['applications']= application_list
-		context_dict['own_profile'] = own_profile
+		# context_dict['own_profile'] = own_profile
 		company = Company.objects.get(pk=company_id) 		# Get company by company id
 		context_dict['company'] = company		
 		projects = Project.objects.filter(company=company)  # Get company projects
