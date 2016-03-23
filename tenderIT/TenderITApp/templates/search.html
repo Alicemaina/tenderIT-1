@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block body_block %}
+{% load staticfiles %}
+<div id="search-list" class=" container">
+    <div class="row">
+			<div class="col-lg-5">
+				<div class="panel panel-info">
+				    <div class="panel-heading">
+				    	<div class="panel-title">
+					    	<h3 class="text-center">Matched Projects</h3>
+					    </div>
+				    </div>
+					<div class="panel-body">
+						<ul class="list-group">
+                            {% if projects %}
+							{% for project in projects %}
+								<div class="list-group">
+  									<a href="{% url 'project' project.id %}" class="list-group-item ">
+                                        <h4 class="navy list-group-item-heading"><strong>{{project.title}}</strong></h4>
+										<p class="margin-top-10 list-group-item-text">
+                                            <ul class="list-inline">
+										       <li class="list-item"><strong>Posted By:</strong> {{project.company.name}}</li>
+										       <li class="list-item"><strong>Budget:</strong> {{project.budget}} {{project.currency}}</li>
+										       <li class="last list-item"><strong>Deadline:</strong> {{project.endDate}}</li>
+									        </ul>
+										</p>
+  									</a>
+								</div>
+							{% endfor %}
+                            {% else %}
+                                <p>No matches found for projects</p>
+                            {% endif %}
+						</ul>
+					</div>
+			    </div>
+            </div>
+        <div class="col-lg-5 col-lg-offset-1">
+            <div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<h3 class="text-center">Matched Companies</h3>
+					</div>
+				</div>
+					<div class="panel-body">
+						<ul class="list-group">
+                            {% if companies %}
+							{% for company in companies %}
+								<div class="list-group">
+  									<a href="{% url 'company' company.id %}" class="list-group-item ">
+   										 <h4 class="navy list-group-item-heading"><strong>{{company.name}}</strong></h4>
+										<p class="margin-top-10 list-group-item-text">
+											<ul class="list-inline">
+										<li class="list-item"><strong>Projects:</strong> {{company.project_set.count}}</li>
+										<li class="last list-item"><strong>Country:</strong> {{company.country}}</li>
+									</ul>
+										</p>
+  									</a>
+								</div>
+							{% endfor %}
+                            {% else %}
+                            <p>No matches found for companies</p>
+                            {% endif %}
+						</ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

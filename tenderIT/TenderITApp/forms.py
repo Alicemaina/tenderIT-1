@@ -77,22 +77,23 @@ class Post_project(forms.ModelForm):
 		super(Post_project, self).__init__(*args, **kwargs)
 		self.helper = FormHelper(self)
 		self.helper.form_class= 'form-horizontal'
-		self.helper.label_class= 'project_label col-lg-3 project_container'
+		self.helper.label_class= 'project_label col-lg-4 project_container'
 		self.helper.field_class= 'project_field col-lg-8 project_container'
 		self.helper.layout = Layout(
 			Div(
-				Field('title', wrapper_class="project_jumbo jumbotron row project_container", css_class="project_container" ,),
-				Field('description', wrapper_class="description project_jumbo jumbotron row project_container", css_class="vresize"),
-				Field('budget', wrapper_class="project_jumbo jumbotron row project_container", css_class="project_container"),
-				Field('currency', wrapper_class="project_jumbo jumbotron row project_container", css_class="project_container"),
+
+				Field('avatar', wrapper_class="right-project_jumbo jumbotron row project_container",  css_class="project_container"),
+				Field('title', wrapper_class="right-project_jumbo jumbotron row project_container", css_class="project_container" ),
+				Field('description', wrapper_class="description right-project_jumbo jumbotron row project_container", css_class="vresize"),
+				Field('budget', wrapper_class="right-project_jumbo jumbotron row project_container", css_class="project_container"),
+				Field('currency', wrapper_class="right-project_jumbo jumbotron row project_container", css_class="project_container"),
 				css_class= "project_container col-lg-5 col-lg-offset-1 col-md-6 "
 			),
 
 			Div(
-				Field('startDate', wrapper_class="project_jumbo jumbotron row project_container", css_class="project_container"),
-				Field('endDate', wrapper_class="project_jumbo jumbotron row project_container",css_class="project_container"),
-				Field('avatar', css_class="greenbtn btn-block project_container"),
-				Field('document', css_class="greenbtn btn-block project_container"),
+				Field('startDate', wrapper_class="left-project_jumbo jumbotron row project_container", css_class="project_container"),
+				Field('endDate', wrapper_class="left-project_jumbo jumbotron row project_container",css_class="project_container"),
+				Field('document', wrapper_class="left-project_jumbo jumbotron row project_container",  css_class="project_container"),
 
 				Submit('Post Project', 'Post project', css_class="greenbtn btn-block project_container"),
 				css_class= "project_container col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1"
@@ -102,12 +103,52 @@ class Post_project(forms.ModelForm):
 
 		)
 
-
-
 	class Meta:
 		model = Project
 		fields = ('avatar','title', 'description', 'budget', 'currency', 'startDate', 'endDate', 'document')
 
+
+
+
+# edit project
+
+class Edit_project(forms.Form):
+	title = forms.CharField(required=False, min_length=8, max_length=128, error_messages={'min_length':'Project title must contain at least eight charachters.'}, widget=forms.TextInput(attrs={'placeholder': 'Project title...', }))
+	description = forms.CharField(required=False, min_length=32, max_length=2048, error_messages={'min_length':'Project description must contain at least 32 charachters.'}, widget=forms.Textarea(attrs={'placeholder': 'Enter project description...','rows': 6, 'cols': 10}))
+	budget = forms.IntegerField(required=False,min_value = 1, error_messages={ 'min_value':'Project budget cannot be less than one.'})
+	startDate = forms.DateField(required=False,initial = datetime.datetime.now().date())
+	endDate =  forms.DateField(required=False,initial = datetime.datetime.now().date())
+	avatar = forms.ImageField(label = 'Select project logo.',)
+	document = forms.FileField(required=False,label = 'Select project documentation.')
+	def __init__(self, *args, **kwargs):
+		super(Edit_project, self).__init__(*args, **kwargs)
+		self.helper = FormHelper(self)
+		self.helper.form_class= 'form-horizontal'
+		self.helper.label_class= 'project_label col-lg-4 project_container'
+		self.helper.field_class= 'project_field col-lg-8 project_container'
+		self.helper.layout = Layout(
+				Div(
+
+				Field('title', wrapper_class="right-project_jumbo jumbotron row project_container", css_class="project_container" ,),
+				Field('description', wrapper_class="description right-project_jumbo jumbotron row project_container", css_class="vresize"),
+				Field('budget', wrapper_class="right-project_jumbo jumbotron row project_container", css_class="project_container"),
+				Field('currency', wrapper_class="right-project_jumbo jumbotron row project_container", css_class="project_container"),
+				css_class= "project_container col-lg-5 col-lg-offset-1 col-md-6 "
+			),
+
+			Div(
+				Field('startDate', wrapper_class="left-project_jumbo jumbotron row project_container", css_class="project_container"),
+				Field('endDate', wrapper_class="left-project_jumbo jumbotron row project_container",css_class="project_container"),
+				Field('avatar', wrapper_class="left-project_jumbo jumbotron row project_container",css_class=" greenbtn btn-block project_container"),
+				Field('document', wrapper_class="left-project_jumbo jumbotron  row project_container",css_class="greenbtn btn-block project_container"),
+
+				Submit('Update', 'Update', css_class="greenbtn btn-block project_container"),
+				css_class= "project_container col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1"
+
+
+			),
+
+		)
 
 # Project application form		
 class Apply_project(forms.ModelForm):
@@ -117,6 +158,12 @@ class Apply_project(forms.ModelForm):
 	class Meta:
 		model = ProjectApplication
 		fields = ('price','description')
+
+	def __init__(self, *args, **kwargs):
+		super(Apply_project,self).__init__(*args, **kwargs)
+		self.helper = FormHelper(self)
+		self.helper.layout.append(Submit('Apply', 'Apply'))
+
 
 
 

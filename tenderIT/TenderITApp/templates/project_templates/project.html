@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+<div class="container" id="single-project">
+    <div class="row">
+
+			 <div class="col-lg-4">
+				<div class="panel">
+                    <div class="panel-body">
+                         {% if project.avatar %}
+					 <img class="project-image" src="{{project.avatar.url}}" style="width: 100%" alt="project image">
+					 {% else %}
+					 <img src="{% static "img/3-grey.jpg" %}" alt="">
+					 {% endif %}
+                        <ul class="list-group">
+                            <li class="list-group-item"><p class= "navy"><strong class="text-left">Budget: </strong><em>{{ project.budget }}</em> {{project.currency}}</p></li>
+                            <li class="list-group-item"><p class=" navy"><strong class="text-left">Start date: </strong>{{ project.startDate }}</p></li>
+                            <li class="list-group-item"><p class=" navy"><strong class="text-left">Deadline: </strong>{{ project.endDate }}</p></li>
+                            <li class="list-group-item"><p class=" navy"><strong class="text-left">Applicants: </strong>{{applications.count}}</p></li>
+                        </ul>
+                        {% if own_project %}
+
+                        <form action="{% url 'project-edit' project.id %}">
+                            <input class="btn btn-primary" type="submit" value="Edit">
+                        </form>
+
+                        {% else %}
+                            {% if not apply_exist %}
+                            <form action="{% url 'apply_project' project.id %}">
+                            <input class="btn btn-primary" type="submit" value="Apply">
+                            {% endif %}
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+
+			 </div>
+			 <div class="col-lg-7">
+				<div class="vertical-line">
+                    <h2 class="text-capitalize">{{project.title}} by <a href="{% url 'company' project.company.pk %}">{{project.company.name}}</a></h2>
+					<h4 >Project Description</h4>
+					<div class="panel">
+						<div class="panel-body">
+							<p class="description">{{project.description}}</p>
+						</div>
+					</div>
+
+
+				</div>
+			 </div>
+		 </div>
+</div>
+
+
+{% endblock %}

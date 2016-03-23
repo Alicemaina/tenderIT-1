@@ -1,33 +1,27 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block body_block %}
 	
 {% if application_added %}
-	<h3>Application added.</h3>
+
+	<div class="container">
+		<h3>Successfully applied to {{project.title}}</h3>
+	</div>
 
 {% else %}
-	{% if project %}
-   	<h4> Project details </h4>
-   	<ul>
-		<li> Title: {{ project.title }}</li>
-		<li> Company: {{ project.company.name }} </li>						
-		<li> Budget: {{ project.budget }} {{ project.currency}}</li>
-		<li> Start date: {{ project.startDate }} </li>
-		<li> End date: {{ project.endDate }} </li>
-		<li> Publish date: {{ project.publishDate }} </li> 
-	</ul>
+<div class="container">
+	<h2 class="text-center">Please fill application details</h2>
+	<hr>
+	<div class="col-lg-7 col-lg-offset-1">
+		<form id="apply_form" method="POST" action=".">
+		{% csrf_token %}
+		{% crispy form %}
 
-	<h2>Please fill application details</h2>	
-	<form id="apply_form" method="post" action="/project/{{ project.pk }}/apply/">
-
-	{% csrf_token %}
-	
-	{{ form.as_p }}
-		
-	<input type="submit" value="Add"/>
 	</form>
-	{% else %}
-		<strong>Specified project does not exist.</strong>			
-	{% endif %}
+	</div>
+
+</div>
+
 	
 {% endif %}	
 {% endblock %}

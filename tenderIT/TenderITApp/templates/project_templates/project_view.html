@@ -24,11 +24,6 @@
 	</div>
 </div>
 
-
-
-
-
-
 <!-- Modal -->
 <div class="project-modal modal fade" id="Modal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -42,7 +37,7 @@
 		 <div class="row">
 			 <div class="col-lg-4">
 				 <a data-toggle="modal" data-target="#image-modal{{ forloop.counter }}" href="#" class=" thumbnail">
-					 {% if company.avatar %}
+					 {% if project.avatar %}
 					 <img class="project-image" src="{{project.avatar.url}}" alt="project image">
 					 {% else %}
 					 <img src="{% static "img/3-grey.jpg" %}" alt="">
@@ -66,44 +61,17 @@
 				</div>
 			 </div>
 		 </div>
-		</ul>
-
-				<!--&lt;!&ndash; Show project applications &ndash;&gt;-->
-				<!--{% if applications %}-->
-					<!--<h5> Applications </h5>-->
-					<!--{% for application in applications %}-->
-						<!--<p>-->
-
-						<!--<ul>-->
-							<!--<li>Applicant: <a href="/company/{{ application.applicant.id }}"> {{ application.applicant.name }} </a></li>-->
-							<!--<li>Price: {{ application.price }} {{ project.currency }}</li>-->
-							<!--<li>Description: {{ application.description }}</li>-->
-							<!--<li>Date: {{ application.applicationDate }}</li>-->
-						<!--</ul>-->
-	 					 <!--</p>-->
-					<!--{% endfor %}-->
-				<!--{% endif %}-->
       </div>
       <div class="modal-footer">
         <ul class="list-inline">
 			<li><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></li>
-			{% if own_project %}
-				<li>
-					<form action="/project/{{ project.pk }}/edit/">
-   						<input class="btn btn-primary" type="submit" value="Edit">
-					</form>
-				</li>
-			{% else %}
-
-				<li>
-					<form action="/project/{{ project.pk }}/apply">
-   						<input class="btn btn-primary" type="submit" value="Apply">
+                <li>
+					<form action="{% url 'project' project.pk %}">
+   						<input class="btn btn-primary" type="submit" value="View">
 					</form>
 
 				</li>
 
-
-			{% endif %}
 		</ul>
 
       </div>
@@ -132,58 +100,5 @@
 </div>
 
 {% endfor %}
-
-
-<!--{% if project %}-->
-	   <!--<h2>{{ project.name }}</h2>-->
-	   	<!--<ul>-->
-			<!--<li> Company: {{ project.company.name }}</li>-->
-			<!--<li> Title: {{ project.title }}</li>-->
-			<!--<li> Description: {{ project.description }}</li>-->
-			<!--<li> Budget: {{ project.budget }} {{ project.currency}}</li>-->
-			<!--<li> Start: {{ project.startDate }} </li>-->
-			<!--<li> End: {{ project.endDate }} </li>-->
-			<!--<li> Publish date: {{ project.publishDate }} </li> -->
-		<!--</ul>-->
-		<!--&lt;!&ndash; If user is authenticated and user=project.company.user show edit button, and project applications&ndash;&gt;-->
-		<!--{% if user.is_authenticated %}-->
-			<!--{% if own_project %}-->
-			<!--<form action="/project/{{ project.pk }}/edit/">-->
-   					<!--<input type="submit" value="Edit">-->
-				<!--</form>	-->
-				<!--&lt;!&ndash; Show project applications &ndash;&gt;-->
-				<!--{% if applications %}-->
-					<!--<h5> Applications </h5>-->
-					<!--{% for application in applications %}-->
-						<!--<p>-->
-	  					<!---->
-						<!--<ul>-->
-							<!--<li>Applicant: <a href="/company/{{ application.applicant.id }}"> {{ application.applicant.name }} </a></li>-->
-							<!--<li>Price: {{ application.price }} {{ project.currency }}</li>-->
-							<!--<li>Description: {{ application.description }}</li>-->
-							<!--<li>Date: {{ application.applicationDate }}</li>-->
-						<!--</ul>-->
-	 					 <!--</p>-->
-					<!--{% endfor %}-->
-				<!--{% endif %}-->
-			<!--{% else %}-->
-				<!--{% if apply_exist %}-->
-				<!--<form action="/my_applications/">-->
-   					<!--<input type="submit" value="Apply">-->
-				<!--</form>	-->
-				<!--{% else %}-->
-				<!--<form action="/project/{{ project.id }}/apply">-->
-   					<!--<input type="submit" value="Apply">-->
-				<!--</form>	-->
-				<!--{% endif %}-->
-			<!--{% endif %}-->
-		<!--{% else %}-->
-			<!--<form action="/login">-->
-   				<!--<input type="submit" value="Apply">-->
-			<!--</form>			-->
-		<!--{% endif %}-->
-<!--{% else %}-->
-	<!--<strong>Specified project does not exist.</strong>			-->
-<!--{% endif %}-->
 
 

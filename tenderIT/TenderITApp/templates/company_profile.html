@@ -25,18 +25,23 @@
 												<div class="info">
 														<div class="info-panel panel">
 															<div class="panel-body">
-																<p><span class="glyphicon glyphicon-envelope"></span> <strong>Email</strong> {{ company.email }}</p>
+																<p><span class="glyphicon glyphicon-envelope"></span> <strong>Email </strong> {{ company.email }}</p>
 															</div>
 														</div>
 														<div class="info-panel panel">
 															<div class="panel-body">
-																<p><span class="glyphicon glyphicon-phone-alt"></span> <strong>Phone</strong> {{ company.phone }}</p>
+																<p><span class="glyphicon glyphicon-phone-alt"></span> <strong>Phone </strong> {{ company.phone }}</p>
 															</div>
 
 														</div>
 														<div class=" info-panel	panel">
 															<div class="panel-body">
-																<p><span class="glyphicon glyphicon-briefcase"></span> <strong>Projects</strong> {{projects.count}}</p>
+																<p><span class="glyphicon glyphicon-globe"></span> <strong>Website </strong> {{company.website}}</p>
+															</div>
+														</div>
+														<div class=" info-panel	panel">
+															<div class="panel-body">
+																<p><span class="glyphicon glyphicon-briefcase"></span> <strong>Projects </strong> {{projects.count}}</p>
 															</div>
 														</div>
 												</div>
@@ -45,178 +50,178 @@
 										</div>
 									</div>
 								</div>
-				<div class="sectionB col-lg-8">
-					<div class=" description row">
-						<div class="col-lg-7">
-							<h2 class="text-capitalize">{{company.name}}</h2>
+								<div class="sectionB col-lg-8">
+									<div class=" description row">
+										<div class="col-lg-7">
+											<h2 class="text-capitalize">{{company.name}}</h2>
 
-							<!--check if the user is the owner of this profile -->
-								{% if own_profile %}
-									<div  data-toggle="tooltip" data-placement="top" title="Click to edit" id="desc-content" class="comp-desc" contenteditable="true" onclick="isFocused()" on>
-										{% if company.description %}
-											{{company.description}}
-										{% else %}
-											Company Description
+											<!--check if the user is the owner of this profile -->
+											{% if own_profile %}
+												<div  data-toggle="tooltip" data-placement="top" title="Click to edit" id="desc-content" class="comp-desc" contenteditable="true" onclick="isFocused()" on>
+													{% if company.description %}
+														{{company.description}}
+													{% else %}
+														Company Description
+													{% endif %}
+												</div>
+
+
+											{% else %}
+												<div class="comp-desc">
+												{% if company.description %}
+													{{company.description}}
+												{% else %}
+												<p class="text-center">Company Description</p>
+												{% endif %}
+												</div>
+											{% endif %}
+
+										</div>
+										{% if own_profile %}
+											<form action="{% url 'update' company.id %}" method="POST">
+												{% csrf_token %}
+												<textarea name="hiddeninput" id="hiddeninput" cols="30" rows="10"></textarea>
+												<input class="btn btn-primary" type="submit" id="update" name="update" value="Update"/>
+											</form>
 										{% endif %}
-									</div>
+										</div>
+										<div class="row">
+											<div class=" col-lg-7 panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  												<div class="panel panel-default">
+   													 <div class="panel-heading" role="tab" id="headingOne">
+														 <h4 class="panel-title">
+															 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+																 Posted Projects
+															 </a>
+														 </h4>
+													 </div>
+													<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+														<div class="panel-body">
+															<ul class="list-group">
+																{% for project in projects %}
+																<li class="project-list list-group-item">
+																	<ul class="list-inline">
+																		<li><a data-toggle="modal" data-target="#Modal{{ forloop.counter }}" href="">{{project.title}}</a></li>
+																		{% if own_profile %}
+																		<li class="edit-button">
+																			<form  action="{% url 'delete-project' project.id %}" method="POST">
+																				{% csrf_token %}
+
+																				<button data-toggle="tooltip" data-placement="top" title="Click to edit" type="submit" class="btn btn-xs btn-default">
+																					<span class="glyphicon glyphicon-trash"></span>&nbsp;
+																				</button>
+																			</form>
+																		</li>
+																		{% endif %}
+																	</ul>
+																</li>
+
+																{% endfor %}
+															</ul>
+
+															<!-- Modal -->
+															{% for project in projects %}
+															<div class="project-modal modal fade" id="Modal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+																<div class="modal-dialog" role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																			<h4 class="modal-title text-capitalize" id="myModalLabel"><strong>{{ project.title }}</strong> <small class="text-lowercase">by</small>
+																				<a  href="#">{{ project.company.name }}</a></h4>
+																		</div>
+																		<div class="modal-body">
+																			<div class="row">
+																				<div class="col-lg-4">
+																					<a data-toggle="modal" data-target="#image-modal{{ forloop.counter }}" href="#" class=" thumbnail">
+																						{% if company.avatar %}
+																						<img class="project-image" src="{{project.avatar.url}}" alt="project image">
+																						{% else %}
+																						<img src="{% static "img/3-grey.jpg" %}" alt="">
+																						{% endif %}
+																					</a>
+																					<p class= "navy"><strong class="text-left">Budget: </strong><em>{{ project.budget }}</em> {{project.currency}}</p>
+																					<p class=" navy"><strong class="text-left">Start date: </strong>{{ project.startDate }}</p>
+																					<p class=" navy"><strong class="text-left">Deadline: </strong>{{ project.endDate }}</p>
+
+																				</div>
+																				<div class="col-lg-7">
+																					<div class="vertical-line">
+																						<h3>Project Description</h3>
+																						<div class="panel">
+																							<div class="panel-body">
+																								<p class="description">{{project.description}}</p>
+																							</div>
+																						</div>
 
 
-								{% else %}
-									<div class="comp-desc">
-										{% if company.description %}
-											{{company.description}}
-										{% else %}
-											<p class="text-center">Company Description</p>
-										{% endif %}
-									</div>
-								{% endif %}
+																					</div>
+																				</div>
+																			</div>
+																			</ul>
 
+																		</div>
+																		<div class="modal-footer">
+																			<ul class="list-inline">
+																				<li><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></li>
+																				{% if own_profile %}
+																				<li>
+																					<form action="{% url 'project-edit' project.id %}" method="POST">
+																						{% csrf_token %}
+																						<input class="btn btn-primary" type="submit" value="Edit">
+																					</form>
+																				</li>
+																				{% else %}
+
+																				<li>
+																					<form action="/project/{{ project.pk }}/apply">
+																						<input class="btn btn-primary" type="submit" value="Apply">
+																					</form>
+
+																				</li>
+
+
+																				{% endif %}
+																			</ul>
+
+																		</div>
+																	</div>
+																</div>
+															</div>
+															{% endfor %}
+															<!--modal end-->
+
+														</div>
+													</div>
+												</div>
+												<div class="panel panel-default">
+													<div class="panel-heading" role="tab" id="headingTwo">
+														<h4 class="panel-title">
+															<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+																Applied Projects
+															</a>
+														</h4>
+													</div>
+													<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+														<div class="panel-body">
+															<ul class="list-group">
+																{% for project in applications %}
+																<li class="list-group-item">
+																	<a href="{% url 'project' project.id %}">{{project.title}}</a>
+																</li>
+																{% endfor %}
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+								</div>
+							</div>
 						</div>
-						{% if own_profile %}
-						<form action="{% url 'update' company.id %}" method="POST">
-									{% csrf_token %}
-									<textarea name="hiddeninput" id="hiddeninput" cols="30" rows="10"></textarea>
-									<input class="btn btn-primary" type="submit" id="update" name="update" value="Update"/>
-								</form>
-						{% endif %}
-					</div>
-					<div class="row">
-						<div class=" col-lg-7 panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-         Posted Projects
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-		  <ul class="list-group">
-			  {% for project in projects %}
-			  	<li class="project-list list-group-item">
-					<ul class="list-inline">
-						<li><a data-toggle="modal" data-target="#Modal{{ forloop.counter }}" href="">{{project.title}}</a></li>
-						{% if own_profile %}
-						<li class="edit-button">
-							<form  action="{% url 'project-edit' project.id %}" method="POST">
-								{% csrf_token %}
-
-								<button data-toggle="tooltip" data-placement="top" title="Click to edit" type="submit" class="btn btn-xs btn-default">
-  									<span class="glyphicon glyphicon-trash"></span>&nbsp;
-								</button>
-
-
-							</form>
-
-						</li>
-						{% endif %}
-					</ul>
-				</li>
-
-			  {% endfor %}
-		  </ul>
-
-		  <!-- Modal -->
-		  {% for project in projects %}
-<div class="project-modal modal fade" id="Modal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title text-capitalize" id="myModalLabel"><strong>{{ project.title }}</strong> <small class="text-lowercase">by</small>
-			<a  href="#">{{ project.company.name }}</a></h4>
-      </div>
-      <div class="modal-body">
-		 <div class="row">
-			 <div class="col-lg-4">
-				 <a data-toggle="modal" data-target="#image-modal{{ forloop.counter }}" href="#" class=" thumbnail">
-					 {% if company.avatar %}
-					 <img class="project-image" src="{{project.avatar.url}}" alt="project image">
-					 {% else %}
-					 <img src="{% static "img/3-grey.jpg" %}" alt="">
-					 {% endif %}
-				 </a>
-				 <p class= "navy"><strong class="text-left">Budget: </strong><em>{{ project.budget }}</em> {{project.currency}}</p>
-				 <p class=" navy"><strong class="text-left">Start date: </strong>{{ project.startDate }}</p>
-				 <p class=" navy"><strong class="text-left">Deadline: </strong>{{ project.endDate }}</p>
-
-			 </div>
-			 <div class="col-lg-7">
-				<div class="vertical-line">
-					<h3>Project Description</h3>
-					<div class="panel">
-						<div class="panel-body">
-							<p class="description">{{project.description}}</p>
-						</div>
 					</div>
 
-
-				</div>
-			 </div>
-		 </div>
-		</ul>
-
-      </div>
-      <div class="modal-footer">
-        <ul class="list-inline">
-			<li><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></li>
-			{% if own_profile %}
-				<li>
-					<form action="{% url 'project-edit' project.id %}" method="POST">
-   						<input class="btn btn-primary" type="submit" value="Edit">
-					</form>
-				</li>
-			{% else %}
-
-				<li>
-					<form action="/project/{{ project.pk }}/apply">
-   						<input class="btn btn-primary" type="submit" value="Apply">
-					</form>
-
-				</li>
-
-
-			{% endif %}
-		</ul>
-
-      </div>
-    </div>
-  </div>
-</div>
-		  {% endfor %}
-		  <!--modal end-->
-
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Applied Projects
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-		  <ul class="list-group">
-			  {% for project in applications %}
-			  	<li class="list-group-item"><a href="">{{project.title}}</a>
-
-				</li>
-			  {% endfor %}
-		  </ul>
-      </div>
-    </div>
-  </div>
-</div>
-					</div>
-				</div>
-			</div>
-		</div>
-        			</div>
 					<div id="Info" class="tab-pane fade">
+
 
 						<div class="container">
 							<div class="row">
@@ -226,7 +231,7 @@
 												<p><strong>Name: </strong>{{company.name}}</p>
 										</li>
 										<li class="list-group-item">
-												<p contenteditable="true"><strong>National ID: </strong>{{company.nationalID}}</p>
+												<p ><strong>National ID: </strong>{{company.nationalID}}</p>
 										</li>
 										<li class="list-group-item">
 												<p><strong>Country: </strong>{{company.country}}</p>
@@ -247,56 +252,18 @@
 												<p ><strong>Phone: </strong>{{company.phone}}</p>
 										</li>
 										<li class="list-group-item">
-												<p ><strong>Website: </strong>{{company.website}}</p>
+												<p ><strong>Website: </strong>{{company.website}}</p
 										</li>
-
 									</ul>
 								</div>
 							</div>
 						</div>
-
         			</div>
-
     			</div>
 			</div>
 		</div>
-
 	</div>
-
-			<!--{% if company %}-->
-	   <!--<h2>{{ company.name }}</h2>-->
-	   	<!--<ul>-->
-			<!--<li> ID: {{company.nationalID}}</li>-->
-			<!--<li> Street: {{ company.street }}</li>-->
-			<!--<li> City: {{ company.city }}</li>-->
-			<!--<li> Country: {{ company.country.name }}</li>-->
-			<!--<li> Postcode: {{ company.postcode }}</li>-->
-			<!--<li> Phone: </li>-->
-			<!--<li> Email: {{ company.email }}</li>-->
-			<!--<li> Website: <a href="{{ company.website }}"> {{ company.website }}</a>-->
-		<!--</ul>-->
-		<!--&lt;!&ndash; If user is authenticated and user=company.user show edit button &ndash;&gt;-->
-		<!--{% if user.is_authenticated %}-->
-			<!--{% if user.company.id = company.id %}-->
-			<!--<button type="button">Edit</button>-->
-			<!--{% endif %}-->
-		<!--{% endif %}-->
-	   <!--&lt;!&ndash; Show company projects &ndash;&gt;-->
-	   <!--<h4> Projects </h4>-->
-		<!--{% if projects %}-->
-			<!--<ul>-->
-			<!--{% for project in projects %}-->
-				<!--<li> <a href = "/project/{{ project.pk }}">{{ project.title }} </a></li>-->
-			<!--{% endfor %}-->
-			<!--</ul>-->
-		<!--{% else %}-->
-			<!--<strong> No projects </strong>-->
-		<!--{% endif %}-->
-<!--{% else %}-->
-	<!--<strong>Specified company does not exist.</strong>-->
-<!--{% endif %}-->
-
-	</div>
+</div>
 <!--/*updating company description*/-->
 {% endblock %}
 

@@ -59,9 +59,9 @@ class Rating(models.Model):
 
 class ProjectApplication(models.Model):
 	project = models.ForeignKey(Project)
-	applicant = models.ForeignKey(Company)
+	applicant = models.ForeignKey(Company, unique=True)
 	price = models.IntegerField()
-	description = models.TextField()
+	description = models.TextField(blank=True, null=True)
 	applicationDate = models.DateField(auto_now_add=True, null=True)
 	
 	# One company can have only one application for one project

@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
 	<link rel="stylesheet" href="{% static "css/style.css" %}" />
 	<link rel="stylesheet" href="{% static "css/JQuery UI/jquery-ui.min.css" %}" />
-	<title>TenderIT</title>
+	<title>TenderIt</title>
 
 </head>
 
@@ -40,34 +40,19 @@
                 Browse <span class="caret"></span>
             </a>
     		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-              <li><a href="#">Projects</a></li>
+              <li><a href="{% url 'projects' %}">Projects</a></li>
               <li class="divider"></li>
-              <li><a href="#">Companies</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="#">Hover me for more options</a>
-                <ul class="dropdown-menu">
-                  <li><a tabindex="-1" href="#">Second level</a></li>
-                  <li class="dropdown-submenu">
-                    <a href="#">Even More..</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">3rd level</a></li>
-                    	<li><a href="#">3rd level</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Second level</a></li>
-                  <li><a href="#">Second level</a></li>
-                </ul>
-              </li>
+              <li><a href="{% url 'companies' %}">Companies</a></li>
             </ul>
         </li>
             </ul>
             <!--end of dropdown-->
 
             <div class="col-sm-3 col-md-3 ">
-        <form class="navbar-form" role="search">
+        <form class="navbar-form" role="search" action="{% url 'search' %}" method="POST">
+            {% csrf_token %}
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+            <input type="text" class="form-control" placeholder="Search" name="search-item" id="search-item">
             <div class="input-group-btn">
                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
             </div>
@@ -85,12 +70,7 @@
                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                  <li><a href="{% url 'company' user.company.id %}">Profile</a></li>
                  <li class="divider"></li>
-                 <li><a href="#">My projects</a></li>
-                 <li class="divider"></li>
-                 <li><a href="#">My applications</a></li>
-                 <li class="divider"></li>
                  <li><a href="{% url 'logout' %}">Log out</a></li>
-
                </ul>
              </li>
             {% else %}
@@ -111,6 +91,23 @@
 	{% block body_block %}{% endblock %}
 </div>
     <div class="footer">
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="row">
+            <div class="col-lg-3">
+                ul
+            </div>
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-3"></div>
+            </div>
+            <div class="row">
+            </div>
+        </div>
+    </div>
+
+    </div>
       </div>
 </body>
 </html>

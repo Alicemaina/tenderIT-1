@@ -1,58 +1,40 @@
 {% extends 'base.html' %}
 {% block body_block %}
 {% load staticfiles %}
-{% if projects %}
-    <div class="clearfix pt-container comtainer-fluid">
-
-	{% for project in projects %}
-	<div class="clearfix project col-lg-5 col-md-5 col-sm-5 col-xs-5">
+{% if projects_list %}
+    <div id="projects-list" class=" container">
 		<div class="row">
-			<div class=" clearfix pt-panel panel col-lg-12 col-md-12 col-sm-12">
-				<div class=" clearfix panel-body">
-					<div class="row">
-                        <!--Thecolumn for holding project image-->
-						<div class="col-lg-5 col-md-5">
-							<p class="small">Posted by: <strong class="text-capitalize">{{project.company}}</strong></p>
-							<hr>
-                            <img class="project-image" src="{% static "img/3-grey.jpg" %}" alt="">
-							<hr>
-							<p class="navy"><strong>Budget: </strong>{{ project.budget }} {{project.currency}}</p>
-							<p class="navy"><strong>Deadline: </strong>{{ project.endDate }}</p>
-
-						</div>
-
-						<div class="col-lg-7 col-md-7 " >
-							<ul class="list-inline">
-								<li><p class="small text-muted">Posted: {{project.publishDate}}</p></li>
-								<li><p class="small text-muted"> Rating:  </p></li>
-							</ul>
-
-                            <h3 class="project-title" >
-                                <p class="text-capitalize "><a class="navy" href="#">{{project.title}}</a></p>
-							</h3>
-                            <hr>
-                            <div class=" project-desc-panel panel">
-                                <div class="panel-body">
-                                    <p class="project-desc-text navy">
-										{{project.currency}}
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisides anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisides anim id est laborumUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisides anim id est laborum"
-                            </p>
-
-                                </div>
-                            </div>
-
-
-
-						</div>
+			<div class="col-lg-8 col-lg-offset-2">
+				<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<h3 class="text-center">List of All Projects</h3>
 					</div>
 				</div>
+					<div class="panel-body">
+						<ul class="list-group">
+							{% for project in projects_list %}
+								<div class="list-group">
+  									<a href="{% url 'project' project.id %}" class="list-group-item ">
+   										 <h4 class="navy list-group-item-heading"><strong>{{project.title}}</strong></h4>
+										<p class="margin-top-10 list-group-item-text">
+											<ul class="list-inline">
+										<li class="list-item"><strong>Posted By:</strong> {{project.company.name}}</li>
+										<li class="list-item"><strong>Budget:</strong> {{project.budget}} {{project.currency}}</li>
+										<li class="last list-item"><strong>Deadline:</strong> {{project.endDate}}</li>
+									</ul>
+										</p>
+  									</a>
+								</div>
+							{% endfor %}
+						</ul>
+					</div>
+			</div>
+
 			</div>
 
 		</div>
-	</div>
-	   {% endfor %}
+
 	
 {% else %}
 	No published projects.

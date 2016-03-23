@@ -12,14 +12,16 @@ urlpatterns = [
     url(r'^company/(?P<company_id>[\w\-]+)/$', content_views.company, name="company"),
 	url(r'^project/(?P<project_pk>[\w\-]+)/$', content_views.project, name="project"),
 	url(r'^project/(?P<project_pk>[\w\-]+)/edit/$', content_views.project_edit, name="project-edit"),
+    url(r'^project/(?P<project_pk>[\w\-]+)/delete/$',content_views.delete_project, name="delete-project"),
+    url(r'^projects/all/$', content_views.project_list, name="projects"),
     url(r'^companies/$', content_views.companies, name="companies"),
-	url(r'^projects/$', content_views.projects, name="projects"),
     url(r'^post_project/$', content_views.post_project, name="post_project"),
     url(r'^project/(?P<project_id>[0-9]+)/apply/$', content_views.apply_project, name="apply_project"),
 	url(r'^my_projects/$', content_views.my_projects, name="my_projects"),
 	url(r'^my_applications/$', content_views.my_applications, name="my_applications"),
 	url(r'^my_applications/(?P<application_id>[0-9]+)/edit/$', content_views.application_edit, name="application_edit"),
-    url(r'^update_decription/(?P<company_id>[\w\-]+)/$', content_views.update_company_desc, name="update")
+    url(r'^update_decription/(?P<company_id>[\w\-]+)/$', content_views.update_company_desc, name="update"),
+    url(r'^search/$', content_views.search, name='search')
 	]
 
 # account related urls
