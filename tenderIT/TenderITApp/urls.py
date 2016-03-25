@@ -21,7 +21,11 @@ urlpatterns = [
 	url(r'^my_applications/$', content_views.my_applications, name="my_applications"),
 	url(r'^my_applications/(?P<application_id>[0-9]+)/edit/$', content_views.application_edit, name="application_edit"),
     url(r'^update_decription/(?P<company_id>[\w\-]+)/$', content_views.update_company_desc, name="update"),
-    url(r'^search/$', content_views.search, name='search')
+    url(r'^ajax/save/$', content_views.save, name="save"),
+    url(r'^project/(?P<project_pk>[\w\-]+)/delete/$', content_views.delete_application, name="delete-application"),
+    url(r'^search/$', content_views.search, name='search'),
+    url(r'^about/$', content_views.about, name="about"),
+    url(r'conatact/$', content_views.contact, name="contact")
 	]
 
 # account related urls

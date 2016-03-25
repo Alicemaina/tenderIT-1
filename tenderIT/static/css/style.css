@@ -283,7 +283,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 .index .projects-content{
 height: 100%;
 margin-bottom: 0px;
- background-color: #D6F7CB;
+ background-color: rgb(203, 216, 247);
 }
 
 .index .project{
@@ -327,8 +327,14 @@ margin-left: 80px;
 
 }
 
-.profile-main .edit-button{
+.profile-main .delete-button{
     float: right;
+}
+
+.profile-main .right_click_edit_desc textarea{
+	border: 3px solid #cccccc;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
 }
 
 #Info .info-details{
@@ -336,6 +342,33 @@ margin-left: 80px;
     clear: both;
 }
 
+#Info p{
+    margin-bottom: 0px;
+}
+
+#info .editable .btn{
+    margin-left: 10px;
+}
+
+#info .edit_jumbo {
+  padding
+}
+
+.info-panel{
+    border: none;
+    background: #e7e7e7;
+    border-radius: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    height: 40px;
+}
+
+.info-panel .panel-body{
+padding: 2px;
+}
+.info-panel p{
+    margin: 5px 10px;;
+}
 
 .profile-main #accordion .panel-title>a{
     test-decorator: none;
@@ -357,29 +390,18 @@ margin-left: 0px;
     visibility : hidden;
 }
 
-.profile-main .description textarea{
-    display: none;
-}
 
 .info{
    margin: 6px 2px;
 
 }
-.info-panel{
-    border: none;
-    background: #e7e7e7;
-    border-radius: 2px;
-    margin-top: 2px;
-    margin-bottom: 2px;
-}
 
-.info-panel .panel-body{
-padding: 2px;
-}
-.info-panel p{
-    margin: 5px 10px;;
-}
 
+
+#about h1{
+margin-top: 30px;
+margin-bottom: 30px;
+}
 
 /*clears text margin*/
 .clean-text{

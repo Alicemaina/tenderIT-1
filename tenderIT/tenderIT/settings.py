@@ -25,6 +25,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {'debug' : DEBUG,
+                    'string_if_invalid': 'Invalid: "%s"',
             'context_processors': [
                 # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
                 # list if you haven't customized them:
@@ -65,8 +66,7 @@ INSTALLED_APPS = (
     'django_countries',
     'bootstrap3',
     'crispy_forms',
-    'TenderITApp',
-    'inplaceeditform'
+    'TenderITApp'
 
 )
 

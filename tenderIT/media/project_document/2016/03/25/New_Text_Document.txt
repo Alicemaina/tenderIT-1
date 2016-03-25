@@ -1,0 +1,47 @@
+
+	<!--<div class=" project col-lg-5 col-md-5 col-sm-10 col-xs-10">-->
+		<!--<div class="row">-->
+			<!--<div class="  pt-panel panel col-lg-12 col-md-12 col-sm-12">-->
+				<!--<div class="panel-body">-->
+					<!--<div class="row">-->
+						<!--&lt;!&ndash;Thecolumn for holding project image&ndash;&gt;-->
+						<!--<div class="col-lg-5 col-md-5">-->
+							<!--<p class="small">Posted by: <strong class="text-capitalize">{{ project.company }}</strong></p>-->
+							<!--<hr>-->
+							<!--<div  id="project-thumbnail" class="thumbnail">-->
+								<!--<img class="project-image" src="{{project.avatar.url}}" alt="" style="max-height: 125px;">-->
+							<!--</div>-->
+
+							<!--<hr>-->
+							<!--<p class="navy"><strong>Budget: </strong>{{ project.budget }} {{project.currency}}</p>-->
+							<!--<p class="navy"><strong>Deadline: </strong>{{ project.endDate }}</p>-->
+
+						<!--</div>-->
+							<!--<div class="col-lg-7 col-md-7 " >-->
+								<!--<ul class="list-inline">-->
+									<!--<li><p class="small text-muted">Posted: {{project.publishDate}}</p></li>-->
+									<!--<li><p class="small text-muted"> Rating:  </p></li>-->
+								<!--</ul>-->
+
+								<!--<h3 class="project-title" >-->
+									<!--<p class="text-capitalize "><a data-toggle="modal" data-target="#Modal{{ forloop.counter }}" class="navy" href="#">{{project.title}}</a></p>-->
+								<!--</h3>-->
+								<!--<hr>-->
+								<!--<div class=" project-desc-panel panel">-->
+									<!--<div class="panel-body">-->
+										<!--<p class="project-desc-text navy">-->
+											<!--{{project.description}}-->
+								        <!--</p>-->
+
+									<!--</div>-->
+								<!--</div>-->
+
+
+
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+
+			<!--</div>-->
+	<!--</div>-->

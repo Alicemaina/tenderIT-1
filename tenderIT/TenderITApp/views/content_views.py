@@ -1,10 +1,13 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from ..models import (Project,Company, ProjectApplication, Rating, )
 from django.db.models import Q
-from ..forms import Post_project, Apply_project, Edit_project
+from ..forms import Post_project, Apply_project
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-
+from ..functions import ajax_login_required
+from django.template.defaultfilters import escape
+from django.http import HttpResponse
+import re
 # Home page view
 def index(request):
 	c = {}
@@ -39,7 +42,9 @@ def company(request, company_id):
 	# Get company projects
 	context_dict = {}
 	try:
+		context_dict['own_profile'] = own_profile
 		context_dict['applications']= application_list
+
 		# context_dict['own_profile'] = own_profile
 		company = Company.objects.get(pk=company_id) 		# Get company by company id
 		context_dict['company'] = company		
@@ -140,25 +145,17 @@ def update_company_desc(request, company_id):
 
 
 @login_required
+@login_required
 def project_edit(request, project_pk):
 	project = get_object_or_404(Project, pk = project_pk)
 	if request.method == 'POST':
-		project_form = Edit_project(request.POST, request.FILES)
-
+		project_form = Post_project(request.POST, instance = project)
 		if project_form.is_valid():
-			project.budget = request.POST.get('budget', '')
-			project.title = request.POST.get('title','')
-			project.description = request.POST.get('description','')
-			project.startDate = request.POST.get('startDate','')
-			project.endDate = request.POST.get('endDate','')
-			project.avatar = request.FILES['avatar']
-			project.document = request.FILES['document']
-			project.save(update_fields= ['budget', 'title', 'description', 'startDate', 'endDate', 'avatar', 'document'])
+			project = project_form.save()
 	else:
 		project_form = Post_project(instance=project)
-		context = {'form': project_form,}
+	context = {'form': project_form,}
 	return render(request, 'project_templates/edit_project.html', context)
-
 
 # deletes a project
 def delete_project(request, project_pk):
@@ -219,7 +216,17 @@ def apply_project(request, project_id):
 	return render(request, 'application.html', context)
 
 
+# delete application
+def delete_application(request, application_id):
+	application = get_object_or_404(ProjectApplication, pk = application_id)
+	if request.method == "POST":
+		application.delete()
 
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+# edit application
 @login_required
 def application_edit(request, application_id):
 	application = get_object_or_404(ProjectApplication, pk = application_id)
@@ -268,3 +275,58 @@ def search(request):
 		}
 
 	return render(request, 'search.html', context)
+
+
+# Ajax in place editing
+def save(request):
+	print "hello world"
+	if request.is_ajax:
+		if request.method == "POST":
+			value = None
+			user = request.user
+			company = user.company
+			if request.POST.get('id') == "company_name":
+				value = request.POST.get('value')
+				print value
+				company.name = value
+			elif request.POST.get('id') == "company_natid":
+				value = request.POST.get('value')
+				company.nationalID = value
+			elif request.POST.get('id') == "company_country":
+				value = request.POST.get('value')
+				company.country = value
+			elif request.POST.get('id') == "company_city":
+				value = request.POST.get('value')
+				company.city = value
+			elif request.POST.get('id') == "company_street":
+				value = request.POST.get('value')
+				company.street = value
+			elif request.POST.get('id') == "company_postcode":
+				value = request.POST.get('value')
+				company.postcode = value
+			elif request.POST.get('id') == "company_email":
+				value = request.POST.get('value')
+				company.email = value
+			elif request.POST.get('id') == "company_phone":
+				value = request.POST.get('value')
+				company.phone = value
+			elif request.POST.get('id') == "company_website":
+				value = request.POST.get('value')
+				company.website = value
+			elif request.POST.get('id') == "company_description":
+				value = request.POST.get('value')
+				company.description = value
+		company.save();
+        return HttpResponse(escape(value))
+
+
+# About us view
+def about(request):
+	return render(request, 'about.html')
+
+
+# contact view
+
+
+def contact(request):
+	return render(request, 'contact.html')

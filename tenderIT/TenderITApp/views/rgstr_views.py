@@ -1,10 +1,12 @@
+import json
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from ..forms import UserForm, CompanyForm
 from django.template.context_processors import csrf
 from ..models import Company
-
+from django.core import serializers
+from ..functions import ajax_login_required
 # Add new user and company
 def register_user(request):
     # A boolean value for telling the template whether the registration was successful.  
@@ -48,6 +50,29 @@ def register_user(request):
     return render(request,'registration/register.html',context)
 
 
+#
+# def ajax_login_request(request):
+# 	try:
+# 		request.POST[u'login']
+# 		dictionary = request.POST
+#
+# 	except:
+# 		dictionary = request.GET
+#
+# 	user = authenticate(username = dictionary[u'login'],
+# 						password = dictionary[u'password'])
+# 	if user and user.is_active:
+# 		login(request, user)
+# 		result = True
+# 	else:
+# 		result =False
+# 	response = HttpResponse(json.dumps(result),
+# 							content_type= u'application/json')
+# 	return response
+
+
+
+
 # After login get user details and redirect user to his company page
 def logged_in(request):
 	user = request.user
@@ -59,5 +84,4 @@ def logged_in(request):
 def inactive_user(request):
 	user = request.user
 	return render(request, 'registration/deativated.html', {'user':user})
-
 

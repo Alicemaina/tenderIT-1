@@ -16,12 +16,13 @@
 								<div class=" sectionA col-lg-3">
 									<div class="panel">
 										<div class="panel-body">
-											<div class="thumbnail">
+											<a data-toggle="modal" data-target="#image-modal" class="thumbnail">
 												{% if company.logo %}
 												<img src="{{ company.logo.url }}" alt=""/>
 												{% else %}
 												<img src="{% static "img/3-grey.jpg" %}" alt=""/>
 												{% endif %}
+                                                	</a>
 												<div class="info">
 														<div class="info-panel panel">
 															<div class="panel-body">
@@ -46,7 +47,7 @@
 														</div>
 												</div>
 
-											</div>
+
 										</div>
 									</div>
 								</div>
@@ -56,34 +57,20 @@
 											<h2 class="text-capitalize">{{company.name}}</h2>
 
 											<!--check if the user is the owner of this profile -->
-											{% if own_profile %}
-												<div  data-toggle="tooltip" data-placement="top" title="Click to edit" id="desc-content" class="comp-desc" contenteditable="true" onclick="isFocused()" on>
-													{% if company.description %}
-														{{company.description}}
+                                                    <span id="company_description"  class="{% if own_profile %} right_click_edit_desc {% endif %}">
+                                                        {% if company.description %}
 													{% else %}
 														Company Description
 													{% endif %}
-												</div>
-
-
-											{% else %}
-												<div class="comp-desc">
-												{% if company.description %}
-													{{company.description}}
-												{% else %}
-												<p class="text-center">Company Description</p>
-												{% endif %}
-												</div>
-											{% endif %}
-
+                                                    </span>
 										</div>
-										{% if own_profile %}
-											<form action="{% url 'update' company.id %}" method="POST">
-												{% csrf_token %}
-												<textarea name="hiddeninput" id="hiddeninput" cols="30" rows="10"></textarea>
-												<input class="btn btn-primary" type="submit" id="update" name="update" value="Update"/>
-											</form>
-										{% endif %}
+                                        {% if own_profile %}
+                                        <div class="col-lg-4 col-lg-offset-1">
+									<div class="edit_jumbo jumbotron">
+										<p class="text-center"> <span class="glyphicon glyphicon-cog"></span> <small>Right click on description section to edit</small> </p>
+									</div>
+								</div>
+                                        {% endif %}
 										</div>
 										<div class="row">
 											<div class=" col-lg-7 panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -103,11 +90,11 @@
 																	<ul class="list-inline">
 																		<li><a data-toggle="modal" data-target="#Modal{{ forloop.counter }}" href="">{{project.title}}</a></li>
 																		{% if own_profile %}
-																		<li class="edit-button">
+																		<li class="delete-button">
 																			<form  action="{% url 'delete-project' project.id %}" method="POST">
 																				{% csrf_token %}
 
-																				<button data-toggle="tooltip" data-placement="top" title="Click to edit" type="submit" class="btn btn-xs btn-default">
+																				<button data-toggle="tooltip" data-placement="top" title="Click to delete" type="submit" class="btn btn-xs btn-default">
 																					<span class="glyphicon glyphicon-trash"></span>&nbsp;
 																				</button>
 																			</form>
@@ -149,7 +136,7 @@
 																						<h3>Project Description</h3>
 																						<div class="panel">
 																							<div class="panel-body">
-																								<p class="description">{{project.description}}</p>
+																								<p class="edit description">{{project.description}}</p>
 																							</div>
 																						</div>
 
@@ -204,10 +191,25 @@
 													<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 														<div class="panel-body">
 															<ul class="list-group">
-																{% for project in applications %}
-																<li class="list-group-item">
-																	<a href="{% url 'project' project.id %}">{{project.title}}</a>
-																</li>
+																{% for application in applications %}
+                                                                <li class="project-list list-group-item">
+																	<ul class="list-inline">
+																        <li>
+																        	<a href="{% url 'project' application.project.id %}">{{application.project.title}}</a>
+																        </li>
+                                                                        {% if own_profile %}
+                                                                        <li class="delete-button">
+																			<form  action="{% url 'delete-application' application.id %}" method="POST">
+																				{% csrf_token %}
+
+																				<button data-toggle="tooltip" data-placement="top" title="Click to delete" type="submit" class="btn btn-xs btn-default">
+																					<span class="glyphicon glyphicon-trash"></span>&nbsp;
+																				</button>
+																			</form>
+																		</li>
+                                                                        {% endif %}
+                                                                    </ul>
+                                                                </li>
 																{% endfor %}
 															</ul>
 														</div>
@@ -221,41 +223,46 @@
 					</div>
 
 					<div id="Info" class="tab-pane fade">
-
-
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-6">
 									<ul class=" info-list list-group">
 										<li class="list-group-item">
-												<p><strong>Name: </strong>{{company.name}}</p>
+												<p><strong>Name: </strong> <span id="company_name"  {% if own_profile %} class="right_click_edit" {% endif %}>{{company.name}}</span></p>
 										</li>
 										<li class="list-group-item">
-												<p ><strong>National ID: </strong>{{company.nationalID}}</p>
+												<p ><strong>National ID: </strong><span id="company_natid" {% if own_profile %} class="right_click_edit" {% endif %}>{{company.nationalID}}</span></p>
 										</li>
 										<li class="list-group-item">
-												<p><strong>Country: </strong>{{company.country}}</p>
+												<p><strong>Country: </strong><span id="company_country" {% if own_profile %} class="right_click_edit" {% endif %}>{{company.country}}</span></p>
 										</li>
 										<li class="list-group-item">
-											<p><strong>City: </strong>{{company.city}}</p>
+											<p><strong>City: </strong><span id="company_city" {% if own_profile %} class="right_click_edit" {% endif %}>{{company.city}}</span></p>
 										</li>
 										<li class="list-group-item">
-												<p><strong>Street: </strong>{{company.street}}</p>
+												<p><strong>Street: </strong><span id="company_street" {% if own_profile %} class="right_click_edit" {% endif %}>{{company.street}}</span></p>
 										</li>
 										<li class="list-group-item">
-												<p ><strong>Postcode: </strong>{{company.postcode}}</p>
+												<p ><strong>Postcode: </strong><span id="company_postcode" {% if own_profile %} class="right_click_edit" {% endif %}>{{company.postcode}}</span></p>
 										</li>
 										<li class="list-group-item">
-												<p ><strong>Email: </strong>{{company.email}}</p>
+												<p ><strong>Email: </strong><span id="company_email" {% if own_profile %} class="right_click_edit" {% endif %}>{{company.email}}</span></p>
 										</li>
 										<li class="list-group-item">
-												<p ><strong>Phone: </strong>{{company.phone}}</p>
+												<p ><strong>Phone: </strong><span id="company_phone" {% if own_profile %} class="right_click_edit" {% endif %}>{{company.phone}}</span></p>
 										</li>
 										<li class="list-group-item">
-												<p ><strong>Website: </strong>{{company.website}}</p
+												<p ><strong>Website: </strong><span id="company_website" {% if own_profile %} class="right_click_edit" {% endif %}>{{company.website}}</span></p
 										</li>
 									</ul>
 								</div>
+								{% if own_profile %}
+								<div class="col-lg-3 col-lg-offset-1">
+									<div class="edit_jumbo jumbotron">
+										<p class="text-center"> <span class="glyphicon glyphicon-cog"></span> <small>Right click on details to edit</small> </p>
+									</div>
+								</div>
+								{% endif %}
 							</div>
 						</div>
         			</div>
@@ -264,6 +271,31 @@
 		</div>
 	</div>
 </div>
-<!--/*updating company description*/-->
+
+<!--Modal for company logo-->
+<div class="image-modal modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="myimageModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-capitalize" id="myimageModalLabel">Company logo</h4>
+      	<div class="modal-body">
+			{% if company.logo %}
+			<img class="project-big-image" src="{{company.logo.url}}" alt="">
+			{% else %}
+			<img src="{% static "img/3-grey.jpg" %}" alt="">
+			{% endif %}
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>
+
+
+<!-- acquire csrf token to use in external js file -->
+<script>
+	var CSRF = "{{ csrf_token }}";
+</script>
+
 {% endblock %}
 

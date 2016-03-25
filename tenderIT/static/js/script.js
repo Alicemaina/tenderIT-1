@@ -51,22 +51,40 @@ function isFocused() {
     }
 }
 
-//when loses focus
-//$(function() {
-//  $('#desc-content').focusout(function() {
-//    $('#update').css({
-//        'visibility' : 'hidden'
-//    });
-//  });
-//})
+/*Ajx editing with Jeditable*/
+function register_editables()
+    {
+    $(".right_click_edit").editable("/ajax/save/",
+    {
+    cssclass: "editable",
+    width:($("span").width() + 200) + "px", // THIS DOES THE TRICK
+    height:($("span#edit").height() + 25) + "px", //THIS DOES THE TRICK
+    style: 'display: inline; margin-left: 10px;',
+    cancel: '<button class="btn btn-default" type="cancel" >Cancel</button>',
+    submit: '<button class="btn btn-primary" type="submit" >Ok</button>',
+    tooltip: "Right click to edit.",
+    event: "contextmenu",
+    /*passing csrf_token*/
+    submitdata : { csrfmiddlewaretoken : CSRF},
+    });
 
+    $(".right_click_edit_desc").editable("/ajax/save/",
+    {
+    type: 'textarea',
+    placeholder: 'Empty description, right click to edit.',
+    width:($("span").width() + 500) + "px",
+    height:($("span").height() + 120) + "px",
+    cssclass: 'edit_area',
+    cancel: '<button class="btn btn-default" type="cancel" >Cancel</button>',
+    submit: '<button class="btn btn-primary" type="submit" >Ok</button>',
+    tooltip: "Right click to edit.",
+    event: "contextmenu",
+    /*passing csrf_token*/
+    submitdata : { csrfmiddlewaretoken : CSRF},
 
-//edit button occurs when list item is focused out
+    })
+    }
 
-//$(".block").mouseover(function() { $('#edit').css({
-//           'visibility' :'visible'
-//        }); })
-//        .mouseout(function() { $('#edit').css({
-//           'visibility' :'hidden'
-//        }); }, 500); })
-//        });
+$(function(){
+    register_editables();
+});
